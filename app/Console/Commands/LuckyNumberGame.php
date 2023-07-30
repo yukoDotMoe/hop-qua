@@ -16,11 +16,9 @@ class LuckyNumberGame extends Command
 
     public function handle()
     {
-        $lockFilePath = storage_path('app/cron_lock_game.lock');
-
-        if (!touch($lockFilePath)) {
-            echo "Cron job is already running.";
-            exit();
+        $hLock=fopen(base_path("cronLuckyGame.lock"), "w+");
+        if(!flock($hLock, LOCK_EX | LOCK_NB)){
+            die("Already running. Exiting...");
         }
         while (true) {
             $lastRecord = LuckyNumber::latest()->first();
@@ -67,5 +65,8 @@ class LuckyNumberGame extends Command
 
             $lastRecord = LuckyNumber::latest()->first();
         }
+        flock($hLock, LOCK_UN);
+        fclose($hLock);
+        unlink(base_path("cronLuckyGame.lock"));
     }
 }
