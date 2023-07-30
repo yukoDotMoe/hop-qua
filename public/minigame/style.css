@@ -91,7 +91,15 @@ body {
     /* Accommodate the height of the sticky navigation */
 }
 
+@media (max-width: 376px) {
+    .sticky-nav {
+        padding-right: 3rem!important;
+        padding-left: 3rem!important;
+    }
+}
+
 .sticky-nav {
+    z-index: 999999;
     position: fixed;
     bottom: 0;
     left: 50%;
@@ -2683,4 +2691,10 @@ a {
 
 .flex {
     display: flex !important;
+}
+
+.px-4_5
+{
+    padding-right: 2rem!important;
+    padding-left: 2rem!important;
 }

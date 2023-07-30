@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="p-4">
+    <div class="py-4">
         <div class="text-navbar rounded-[12px] pl-10 pr-8 py-6"
              style="background: url('{{ asset('/minigame/img/Cover.Balance.c214a0c87a9c3b605282.png') }}') center center / cover no-repeat;">
             <div class="text-[#073152]">Số dư tài khoản</div>

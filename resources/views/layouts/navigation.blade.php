@@ -1,5 +1,5 @@
 <nav class="sticky-nav">
-    <div class="container-fluid mb-2 p-0">
+    <div class="container-fluid mb-2 px-md-0 px-4">
         <div class="row d-flex justify-content-between g-0">
             <div class="col-2 d-md-inline mb-1">
                 <a class="flex-1" href="{{ route('gift') }}">

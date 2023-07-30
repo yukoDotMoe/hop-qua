@@ -23,17 +23,17 @@
         <div class="-container sm:h-[180px] h-[140px]"
              style="background: url('{{ asset('/minigame/img/headers/Cover.Gift.5324685ce5f255310738.png') }}') center top / contain no-repeat;">
         </div>
-        <div class="container-fluid moving-ann mt-3 p-1 justify-content-center  d-flex align-items-center">
+        <div class="container-fluid moving-ann mt-3 p-0 justify-content-center  d-flex align-items-center">
             <div class="row d-flex" style="max-width: 444px;">
                 <div class="col-1 pb-0">
                     <img src="{{ asset('/minigame/img/Icon.Loa.017de1e2c6936a742433301c2b3011bb.svg') }}">
                 </div>
-                <div class="col-8" style="width: 20rem !important; padding-right:unset">
+                <div class="col-8" style="padding-right:unset">
                     <p class="mb-0">
                         <marquee>{{ \App\Http\Controllers\ApiController::getSetting('moving_ann') }}</marquee>
                     </p>
                 </div>
-                <div class="col-1 pl-0  ">
+                <div class="col-1">
                   <span class="badge rounded-pill bg-navbar badgecounter">
                      <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuvw" focusable="false" aria-hidden="true"
                           viewBox="0 0 24 24" data-testid="GroupsIcon">

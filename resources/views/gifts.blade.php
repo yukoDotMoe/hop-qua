@@ -1,5 +1,5 @@
 <x-app-layout>
-<div class="m-3">
+<div class="">
     <!-- START CONTENT -->
     <div class="mt-3">
         <div

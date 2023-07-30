@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="m-3">
+    <div class="">
         <div class="-container flex flex-col items-center p-3">
             <div class="bg-color-primary text-white text-2xl font-bold px-6 py-2 rounded-[8px] tracking-widest z-10 mt-0">
                 Đánh Giá Tổng
@@ -196,9 +196,7 @@
                         </svg>
                         <span class="MuiTouchRipple-root css-w0pj6f"></span>
                     </button>
-                    <h2 class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-3cs75a" id=":rf:">NHẬP ĐÁNH
-                        GIÁ TỔNG
-                    </h2>
+                    <h2 class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-3cs75a" id="modaltitle"></h2>
 
                     <div class="MuiDialogContent-root css-1ty026z">
                         <div class="flex justify-center items-center space-x-2">
@@ -295,7 +293,24 @@
             });
 
             $('.css-1n02ex7').click(function () {
-                $('#side').val($(this).attr('data-type'))
+                const type = $(this).attr('data-type')
+                var title = 'Nhập đánh giá ';
+                $('#side').val(type)
+                switch (type) {
+                    case 'like':
+                        title += 'Like'
+                        break;
+                    case 'vote':
+                        title += 'Vote'
+                        break;
+                    case '5sao':
+                        title += '5 sao'
+                        break;
+                    case '3sao':
+                        title += '3 sao'
+                        break;
+                }
+                $('#modaltitle').html(title)
             })
 
             $('.css-4lk0i2').click(function () {
