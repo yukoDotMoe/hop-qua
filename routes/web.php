@@ -23,11 +23,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-
+    Route::post('/balance', [ProfileController::class, 'userBalance'])->name('account.balance');
     Route::get('/gift', [\App\Http\Controllers\GiftController::class, 'view'])->name('gift');
     Route::post('/mo-qua', [\App\Http\Controllers\GiftController::class, 'open_gift'])->name('gift.open');
 
     Route::get('/lucky-number', [\App\Http\Controllers\LuckyNumberController::class, 'view'])->name('lucky');
+    Route::post('/lucky-number/send', [\App\Http\Controllers\LuckyNumberController::class, 'doBet'])->name('lucky.bet');
 
     Route::get('/account', [ProfileController::class, 'edit'])->name('account');
 
@@ -36,6 +37,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/banking', [ProfileController::class, 'bankingView'])->name('account.banking');
     Route::post('/banking', [ProfileController::class, 'bankUpdate'])->name('account.banking.post');
+
 });
 
 Route::get('/pusher', function() {

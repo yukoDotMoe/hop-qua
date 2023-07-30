@@ -54,6 +54,26 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://js.pusher.com/3.1/pusher.min.js"></script>
+<script>
+function updateBalance()
+{
+    $.ajax({
+        url: "{{route('account.balance')}}",
+        type: 'POST',
+        dataType: "json",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        processData: false,
+        success: function (data) {
+            $('#balanceSpan').html(data.message)
+        },
+        error: function (data) {
+            toast.error('Đã có lỗi xảy ra trong lúc xử lí.')
+        }
+    });
+}
+</script>
 @yield('js')
 </body>
 </html>

@@ -114,4 +114,9 @@ class ProfileController extends Controller
             'bankAccountHolder' => 'required|string',
         ]);
     }
+
+    public function userBalance()
+    {
+        return ApiController::response(200, [], Auth::user()->balanceFormated());
+    }
 }
