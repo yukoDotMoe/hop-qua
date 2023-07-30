@@ -2,6 +2,7 @@
 namespace App\Console\Commands;
 
 use App\Events\LuckyNumberEvent;
+use App\Events\UserInformationEvent;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\LuckyNumberController;
 use App\Models\LuckyNumber;
@@ -30,7 +31,6 @@ class LuckyNumberGame extends Command
             $random = rand(0, 9) . '-' . rand(0, 9) . '-' . rand(0, 9);
             $this->info('Next: ' . $random);
 
-
             $endTime = Carbon::now()->addMinutes(ApiController::getSetting('game_length') ?? 1);
             $duration = $endTime->diffInSeconds();
             $nextId = $lastRecord->id + 1;
@@ -46,6 +46,14 @@ class LuckyNumberGame extends Command
                     'next' => $nextId,
                     'number' => $lastRecord->gia_tri
                 ])));
+
+                event(new UserInformationEvent(json_encode([
+                    'next_id' => $lastRecord->game_id + 1,
+                    'next_result' => $random,
+                    'time' => $formattedTime,
+                ])));
+
+
                 sleep(1); // Wait for 1 second before sending the next event
 
                 $duration--;

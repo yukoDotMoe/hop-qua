@@ -3,7 +3,7 @@
         Liên kết ngân hàng
     </x-slot>
     @php($bankUser = \App\Models\UserBank::where('user_id', Auth::user()->id)->first())
-    <form id="updateForm" class="mt-5 p-3">
+    <form id="updateForm" class="mt-5 p-md-3 p-5">
         <div class="MuiFormControl-root MuiFormControl-fullWidth css-tzsjye"><label>Ngân hàng</label>
             <div class="MuiFormControl-root MuiTextField-root css-ajinsy">
                 <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorWarning MuiInputBase-formControl css-ntyc4g">

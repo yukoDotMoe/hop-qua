@@ -40,10 +40,18 @@ Route::middleware('auth')->group(function () {
 
 });
 
-Route::get('/pusher', function() {
-    $result = event(new \App\Events\LuckyNumberEvent('Hi there Pusher!'));
-    dd($result);
-});
+Route::controller(\App\Http\Controllers\AdminController::class)->group(function () {
+    Route::get('/admincp', 'loginView')->name('admin.login');
+    Route::post('/admincp/let_met_in', 'login')->name('admin.login.submit');
 
+    Route::middleware(['auth:admin'])->group(function () {
+        Route::get('/admin/dashboard', 'dashboard')->name('admin.dashboard');
+        Route::get('/admin/settings', 'settingsView')->name('admin.settings');
+        Route::post('/admin/settings', 'saveSettings')->name('admin.settings.post');
+        Route::get('/admin/lucky_game', 'luckyGameView')->name('admin.lucky_game');
+
+        Route::get('admin/logout', 'logout')->name('admin.logout');
+    });
+});
 
 require __DIR__.'/auth.php';

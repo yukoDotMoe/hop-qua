@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
     ],
 
     /*
@@ -65,6 +69,11 @@ return [
             'model' => App\Models\User::class,
             'table' => 'users',
             'username' => 'username', // Use the 'username' field as the login field
+        ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\AdminUser::class, // Replace with your admin user model
         ],
 
         // 'users' => [

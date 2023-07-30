@@ -3,7 +3,7 @@
         Xác thực tài khoản
     </x-slot>
 
-    <div class="mt-5 p-3">
+    <div class="mt-5 p-md-3 p-5">
         <div class="mb-5">
             <div class="mb-1">Ảnh mặt trước CMT/CCCD</div>
             <input hidden="" type="file" id="frontID" name="mat_truoc" accept="image/*" class="imgInput"><label for="frontID"

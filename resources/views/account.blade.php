@@ -59,7 +59,7 @@
                     <path d="m10.09 13.75-2.32-2.33-1.48 1.49 3.8 3.81 7.34-7.36-1.48-1.49z"></path>
                 </svg>
                 <div class="MuiListItemText-root css-1tsvksn"><span
-                            class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-lz9xor">Xác thực tài khoản</span>
+                            class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-lz9xor">Trạng thái</span>
                 </div>
                 <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false" aria-hidden="true"
                      viewBox="0 0 24 24" data-testid="NavigateNextIcon">

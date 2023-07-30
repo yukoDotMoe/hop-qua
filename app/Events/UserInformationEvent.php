@@ -2,7 +2,6 @@
 
 namespace App\Events;
 
-use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,11 +10,10 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserInformationEvent
+class UserInformationEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $user;
     public $message;
 
     /**
@@ -23,9 +21,8 @@ class UserInformationEvent
      *
      * @return void
      */
-    public function __construct(User $user, $message)
+    public function __construct($message)
     {
-        $this->user = $user;
         $this->message = $message;
     }
 
@@ -36,6 +33,11 @@ class UserInformationEvent
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('user-flow.' . $this->user->id);
+        return new Channel('admin-channel-fBfgPdb4A1gOQfzQMBXrk6gTBPZIFM5K');
+    }
+
+    public function broadcastAs()
+    {
+        return 'RWLRO4Oo96pS3vScx2bEzxFm0uDs3EA9';
     }
 }
