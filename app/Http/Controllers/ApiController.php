@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\LuckyNumber;
 use App\Models\Settings;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ApiController extends Controller
@@ -42,5 +43,11 @@ class ApiController extends Controller
     public static function gameIdToId(string $gameid)
     {
         return LuckyNumber::where('game_id', $gameid)->first()->id ?? 0;
+    }
+
+    public static function textToTime($time)
+    {
+        $reuslt = Carbon::createFromFormat('YmdHis', $time);
+        return $reuslt->format('Y-m-d H:i:s');
     }
 }

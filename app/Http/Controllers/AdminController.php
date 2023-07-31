@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\LuckyNumber;
 use App\Models\Settings;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,8 +48,10 @@ class AdminController extends Controller
     }
     public function luckyGameView()
     {
-        $list = LuckyNumber::paginate(20);
-        return view('admin.auth.lucky_game', ['data' => $list]);
+        $current = LuckyNumber::where('game_id','<',Carbon::now()->format('YmdHis'))->orderBy('id', 'desc')->first();
+        $nextGame = LuckyNumber::where('id', $current->id + 1)->first();
+        $list = LuckyNumber::whereBetween('id', [$current->id, $current->id + 9])->get();
+        return view('admin.auth.lucky_game', ['data' => $list, 'current' => $current, 'next' => $nextGame]);
     }
 
     public function luckyUpdate(Request $request)

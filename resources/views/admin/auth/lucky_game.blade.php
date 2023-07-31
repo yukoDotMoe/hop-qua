@@ -3,11 +3,9 @@
 
 @section('content')
     <div class="card text-center mb-3">
-        <div class="card-header" id="gameId">
-
-        </div>
+        <div class="card-header" id="gameId">ID hiện tại: {{ $current->id }}. Tiếp theo: {{ $next->id     }}</div>
         <div class="card-body">
-            <h5 class="card-title" id="gameResult">/-/-/</h5>
+            <h5 class="card-title" id="gameResult">{{ $current->gia_tri }}</h5>
         </div>
         <div class="card-footer text-muted" id="timer">
             00:00
@@ -19,6 +17,7 @@
             <thead>
             <tr>
                 <th scope="col">ID</th>
+                <th scope="col">Thời gian</th>
                 <th scope="col">Kết quả</th>
                 <th scope="col">Thao tác</th>
             </tr>
@@ -27,7 +26,8 @@
 
             @foreach($data as $round)
                 <tr>
-                    <th scope="row">{{ $round->game_id }}</th>
+                    <th scope="row">{{ $round->id }}</th>
+                    <th scope="row">{{ \App\Http\Controllers\ApiController::textToTime($round->game_id) }}</th>
                     <td class="numbers id-{{ $round->id }}">{{ $round->gia_tri }}</td>
                     @php($numbers = explode('-', $round->gia_tri))
                     <td>
@@ -77,7 +77,6 @@
         </table>
     </div>
 
-    {{ $data->links() }}
 @endsection
 
 @section('js')
@@ -103,6 +102,18 @@
             newOne.prop('checked', false);
             $(this).prop('checked', true);
         })
+
+        setInterval(function () {
+            const format = 'YYYYMMDDHHmmss';
+            const next = moment({{ $next->game_id }}, format);
+            const currentTime = moment();
+            const duration = moment.duration(next.diff(currentTime));
+            const minutes = duration.minutes();
+            const seconds = (duration.seconds() < 0) ? 0 : duration.seconds();
+            if (minutes == 0 && seconds == 0) location.reload()
+            const formattedDuration = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+            $('#timer').html(formattedDuration)
+        }, 1000);
 
         function change(id, row, oldType, newType) {
             var numbers = $(`.numbers.id-${id}`).text().split('-')

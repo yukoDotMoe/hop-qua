@@ -99,6 +99,7 @@
 <!-- Add these script tags at the end of your HTML body -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/laravel-echo/1.12.1/echo.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
 @yield('js')
 </body>
