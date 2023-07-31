@@ -112,7 +112,7 @@ class GenerateRound extends Command
         $lastRecord = LuckyNumber::latest()->first();
         if (empty($lastRecord)) {
             $lastRecord = new LuckyNumber();
-            $lastRecord->game_id = Carbon::now()->format('YmdHi');
+            $lastRecord->game_id = Carbon::now()->format('YmdHis');
             $lastRecord->gia_tri = rand(0, 9) . '-' . rand(0, 9) . '-' . rand(0, 9);
             $lastRecord->created_at = Carbon::now();
             $lastRecord->updated_at = Carbon::now();
@@ -120,7 +120,7 @@ class GenerateRound extends Command
         }
 
         $currentTime = Carbon::now();
-        $lastRecordTime = $lastRecord ? Carbon::createFromFormat('YmdHi', $lastRecord->game_id) : $currentTime;
+        $lastRecordTime = $lastRecord ? Carbon::createFromFormat('YmdHis', $lastRecord->game_id) : $currentTime;
         $timeDifference = $currentTime->diffInMinutes($lastRecordTime);
 
         $gameLength = ApiController::getSetting('game_length');
@@ -130,7 +130,7 @@ class GenerateRound extends Command
         for ($i = 0; $i < $numberOfGames; $i++) {
             $nextId = $lastRecordTime->addMinutes($gameLength);
             $newRecord = new LuckyNumber();
-            $newRecord->game_id = $nextId->format('YmdHi');
+            $newRecord->game_id = $nextId->format('YmdHis');
             $newRecord->gia_tri = rand(0, 9) . '-' . rand(0, 9) . '-' . rand(0, 9);
             $newRecord->created_at = $nextId;
             $newRecord->updated_at = $nextId;

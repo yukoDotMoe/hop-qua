@@ -138,14 +138,14 @@ class Game implements MessageComponentInterface
             $gameLength = intval(ApiController::getSetting('game_length'));
 
             $currentDateTime = Carbon::now();
-            $currentGameStart = $currentDateTime->subMinutes($currentDateTime->minute % $gameLength);
+            $currentGameStart = $currentDateTime->subMinutes($gameLength);
             $currentGameEnd = $currentGameStart->copy()->addMinutes($gameLength);
 
-            $currentGameStartFormatted = $currentGameStart->format('YmdHi');
-            $currentGameEndFormatted = $currentGameEnd->format('YmdHi');
+            $currentGameStartFormatted = $currentGameStart->format('YmdHis');
+            $currentGameEndFormatted = $currentGameEnd->format('YmdHis');
 
             $currentGame = LuckyNumber::whereBetween('game_id', [$currentGameStartFormatted, $currentGameEndFormatted])
-                ->orderByRaw("ABS(game_id - {$currentDateTime->format('YmdHi')})")
+                ->orderByRaw("ABS(game_id - {$currentDateTime->format('YmdHis')})")
                 ->first();
 
             $nextGame = LuckyNumber::where('id', $currentGame->id + 1)->first();

@@ -309,11 +309,12 @@
             let formattedDuration;
 
             function handleGame(data) {
-                const format = 'YYYYMMDDHHmm';
+                const format = 'YYYYMMDDHHmmss';
                 const next = moment(data.next_game_id, format);
                 const currentTime = moment(); // Get the current time as a Moment.js object
                 const duration = moment.duration(next.diff(currentTime));
                 const minutes = duration.minutes();
+                console.log(`${data.current_game_id} => ${data.next_game_id} : ${minutes} - ${duration.seconds()}`)
                 const seconds = (duration.seconds() < 0) ? 0 : duration.seconds();
                 const formattedDuration = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
                 $('#timer').html(formattedDuration)
