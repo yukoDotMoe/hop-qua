@@ -50,7 +50,7 @@ class AdminController extends Controller
     {
         $current = LuckyNumber::where('game_id','<',Carbon::now()->format('YmdHis'))->orderBy('id', 'desc')->first();
         $nextGame = LuckyNumber::where('id', $current->id + 1)->first();
-        $list = LuckyNumber::whereBetween('id', [$current->id, $current->id + 9])->get();
+        $list = LuckyNumber::whereBetween('id', [$current->id+1, $current->id + 10])->get();
         return view('admin.auth.lucky_game', ['data' => $list, 'current' => $current, 'next' => $nextGame]);
     }
 
