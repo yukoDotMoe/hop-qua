@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->text('mat_truoc')->nullable();
-            $table->text('mat_sau')->nullable();
+        Schema::table('wallet', function (Blueprint $table) {
+            $table->integer('like')->default(0);
+            $table->integer('vote')->default(0);
         });
     }
 
@@ -22,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('wallet', function (Blueprint $table) {
+            $table->dropColumn('like');
+            $table->dropColumn('vote');
+        });
     }
 };

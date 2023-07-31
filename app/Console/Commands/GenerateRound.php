@@ -32,8 +32,8 @@ class GenerateRound extends Command
      */
     public function handle()
     {
-        $this->generateGames();
         $this->endGame();
+        $this->generateGames();
     }
 
     protected function endGame()
@@ -47,7 +47,7 @@ class GenerateRound extends Command
             $game = $this->getRoundResult($user->game_id);
             if (!$game)
             {
-                Log::error('game id ' . $user->game_id . ' failed to fetch.');
+                //Log::error('game id ' . $user->game_id . ' failed to fetch.');
                 continue;
             }
             $result = 'like';
@@ -71,7 +71,7 @@ class GenerateRound extends Command
             {
                 $user->update(['trang_thai' => 1]);
                 $wallet = User::where('id', $user->user_id)->first()->getWallet();
-                $wallet->changeMoney($user->so_luong * ApiController::getSetting( $result . '_multiply'), 'Shop cảm ơn vì đánh giá', 1);
+                $wallet->changeMoney($user->so_luong * ApiController::getSetting( $result . '_multiply'), 'Shop cảm ơn vì đánh giá ' . $result, 1);
             }else{
                 $user->update(['trang_thai' => 2]);
             }
@@ -83,7 +83,7 @@ class GenerateRound extends Command
         $game_bet = LuckyNumber::where('game_id', $game_id)->first();
         if (empty($game_bet)) return false;
 
-        if ($game_id >= Carbon::now()->format('YmdHi')) return false;
+        if ($game_id > Carbon::now()->format('YmdHis')) return false;
 
         $numbers_array = explode("-", $game_bet->gia_tri);
 
@@ -112,7 +112,7 @@ class GenerateRound extends Command
         $lastRecord = LuckyNumber::latest()->first();
         if (empty($lastRecord)) {
             $lastRecord = new LuckyNumber();
-            $lastRecord->game_id = Carbon::now()->format('YmdHis');
+            $lastRecord->game_id = Carbon::now()->format('YmdHi').'00';
             $lastRecord->gia_tri = rand(0, 9) . '-' . rand(0, 9) . '-' . rand(0, 9);
             $lastRecord->created_at = Carbon::now();
             $lastRecord->updated_at = Carbon::now();
@@ -126,6 +126,7 @@ class GenerateRound extends Command
         $gameLength = ApiController::getSetting('game_length');
         $minutesInHour = 60;
         $numberOfGames = min($minutesInHour - $timeDifference, $minutesInHour / $gameLength);
+
 
         for ($i = 0; $i < $numberOfGames; $i++) {
             $nextId = $lastRecordTime->addMinutes($gameLength);

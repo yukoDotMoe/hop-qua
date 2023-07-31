@@ -134,27 +134,17 @@ class Game implements MessageComponentInterface
 
     protected function game_round()
     {
-        return Cache::remember('game_info', 10, function (){
-            $gameLength = intval(ApiController::getSetting('game_length'));
+        return Cache::remember('game_info', 2, function (){
 
-            $currentDateTime = Carbon::now();
-            $currentGameStart = $currentDateTime->subMinutes($gameLength);
-            $currentGameEnd = $currentGameStart->copy()->addMinutes($gameLength);
+            $oldGame = LuckyNumber::where('game_id','<',Carbon::now()->format('YmdHis'))->orderBy('id', 'desc')->first();
 
-            $currentGameStartFormatted = $currentGameStart->format('YmdHis');
-            $currentGameEndFormatted = $currentGameEnd->format('YmdHis');
-
-            $currentGame = LuckyNumber::whereBetween('game_id', [$currentGameStartFormatted, $currentGameEndFormatted])
-                ->orderByRaw("ABS(game_id - {$currentDateTime->format('YmdHis')})")
-                ->first();
-
-            $nextGame = LuckyNumber::where('id', $currentGame->id + 1)->first();
+            $nextGame = LuckyNumber::where('id', $oldGame->id + 1)->first();
 
             return [
-                'current_game_id' => $currentGame->game_id,
-                'next_game_id' => $nextGame ? $nextGame->game_id : null,
-                'id' => $currentGame->id + 1,
-                'value' => $currentGame->gia_tri,
+                'old_game_id' => $oldGame->game_id,
+                'next_game_id' => $nextGame->game_id,
+                'next_id' => $oldGame->id + 1,
+                'old_value' => $oldGame->gia_tri
             ];
         });
     }

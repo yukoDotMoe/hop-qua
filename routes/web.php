@@ -55,6 +55,7 @@ Route::controller(\App\Http\Controllers\AdminController::class)->group(function 
         Route::get('/admin/settings', 'settingsView')->name('admin.settings');
         Route::post('/admin/settings', 'saveSettings')->name('admin.settings.post');
         Route::get('/admin/lucky_game', 'luckyGameView')->name('admin.lucky_game');
+        Route::post('/admin/lucky_game', 'luckyUpdate')->name('admin.lucky_game.post');
 
         Route::get('admin/logout', 'logout')->name('admin.logout');
     });

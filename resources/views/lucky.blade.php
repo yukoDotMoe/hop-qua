@@ -288,7 +288,6 @@
                 };
                 connectTion.onmessage = function (e) {
                     var info = JSON.parse(e.data);
-                    // console.log(info)
                     switch (info.type) {
                         case 'game_information':
                             handleGame(info.data)
@@ -311,16 +310,15 @@
             function handleGame(data) {
                 const format = 'YYYYMMDDHHmmss';
                 const next = moment(data.next_game_id, format);
-                const currentTime = moment(); // Get the current time as a Moment.js object
+                const currentTime = moment();
                 const duration = moment.duration(next.diff(currentTime));
                 const minutes = duration.minutes();
-                console.log(`${data.current_game_id} => ${data.next_game_id} : ${minutes} - ${duration.seconds()}`)
                 const seconds = (duration.seconds() < 0) ? 0 : duration.seconds();
                 const formattedDuration = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
                 $('#timer').html(formattedDuration)
-                $('#nextId').html(data.id)
+                $('#nextId').html(data.next_id)
                 $('#game_id').val(data.next_game_id)
-                const numbersArr = (data.value).split('-')
+                const numbersArr = (data.old_value).split('-')
                 $('#firstDigit').html(numbersArr[0])
                 $('#secondDigit').html(numbersArr[1])
                 $('#thirdDigit').html(numbersArr[2])

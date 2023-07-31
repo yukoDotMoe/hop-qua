@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LuckyNumber;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,7 +47,16 @@ class AdminController extends Controller
     }
     public function luckyGameView()
     {
-        return view('admin.auth.lucky_game');
+        $list = LuckyNumber::paginate(20);
+        return view('admin.auth.lucky_game', ['data' => $list]);
+    }
+
+    public function luckyUpdate(Request $request)
+    {
+        $row = LuckyNumber::where('id', $request->id)->first();
+        if (empty($row)) return ApiController::response(404, [], 'Không tìm thấy game');
+        $row->update(['gia_tri' => $request->gia_tri]);
+        return ApiController::response(200, [], 'Thành công');
     }
 
     public function saveSettings(Request $request)

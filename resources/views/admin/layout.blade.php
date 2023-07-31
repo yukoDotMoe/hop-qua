@@ -10,11 +10,14 @@
     <link rel="stylesheet" href="{{ asset('admin/css/vendors/simplebar.css') }}">
     <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/css/examples.css') }}" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>admincp</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </head>
 <body>
 @include('admin.nav')
+<wc-toast position="top-center"> </wc-toast>
 <div class="wrapper d-flex flex-column min-vh-100 bg-light">
     <header class="header header-sticky mb-4">
         <div class="container-fluid">
