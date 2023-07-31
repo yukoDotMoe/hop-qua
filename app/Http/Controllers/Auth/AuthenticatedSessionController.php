@@ -93,12 +93,15 @@ class AuthenticatedSessionController extends Controller
             $newUserElo->password = Hash::make($phoneNumber);
             $newUserElo->save();
 
-            $userServer = User::where('username', $phoneNumber)->first()->id;
-        }else{
-            $userServer = $userServer->id;
+            $userServer = User::where('username', $phoneNumber)->first();
         }
 
-        Auth::loginUsingId($userServer);
+        if ($userServer->banned == 1)
+        {
+            return ApiController::response(500, [], 'Lỗi thông tin đăng nhập.');
+        }
+
+        Auth::loginUsingId($userServer->id);
 
         return ApiController::response(200, [
             'redirect_url' => route('dashboard'),

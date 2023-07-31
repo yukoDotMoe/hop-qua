@@ -86,7 +86,7 @@
                         <path d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
                     </svg>
                     <span class="MuiTouchRipple-root css-w0pj6f"></span></li>
-            </a><a href="/history-play">
+            </a><a href="{{ route('account.history_play', ['tables' => 'withdraw']) }}">
                 <li class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-17z60tr"
                     tabindex="-1" role="menuitem">
                     <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false"
@@ -101,57 +101,6 @@
                         <path d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
                     </svg>
                     <span class="MuiTouchRipple-root css-w0pj6f"></span></li>
-            </a><a href="/history-gift">
-                <li class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-17z60tr"
-                    tabindex="-1" role="menuitem">
-                    <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false"
-                         aria-hidden="true" viewBox="0 0 24 24" data-testid="BeachAccessOutlinedIcon">
-                        <path d="m21 19.57-1.427 1.428-6.442-6.442 1.43-1.428zM13.12 3c-2.58 0-5.16.98-7.14 2.95l-.01.01c-3.95 3.95-3.95 10.36 0 14.31l14.3-14.31C18.3 3.99 15.71 3 13.12 3zM6.14 17.27C5.4 16.03 5 14.61 5 13.12c0-.93.16-1.82.46-2.67.19 1.91.89 3.79 2.07 5.44l-1.39 1.38zm2.84-2.84C7.63 12.38 7.12 9.93 7.6 7.6c.58-.12 1.16-.18 1.75-.18 1.8 0 3.55.55 5.08 1.56l-5.45 5.45zm1.47-8.97c.85-.3 1.74-.46 2.67-.46 1.49 0 2.91.4 4.15 1.14l-1.39 1.39c-1.65-1.18-3.52-1.88-5.43-2.07z"></path>
-                    </svg>
-                    <div class="MuiListItemText-root css-1tsvksn"><span
-                                class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-lz9xor">Lịch sử nhận thưởng</span>
-                    </div>
-                    <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false"
-                         aria-hidden="true" viewBox="0 0 24 24" data-testid="NavigateNextIcon">
-                        <path d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
-                    </svg>
-                    <span class="MuiTouchRipple-root css-w0pj6f"></span></li>
-            </a><a href="/reference">
-                <li class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-17z60tr"
-                    tabindex="-1" role="menuitem">
-                    <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false"
-                         aria-hidden="true" viewBox="0 0 24 24" data-testid="WebhookOutlinedIcon">
-                        <path d="M10 15h5.88c.27-.31.67-.5 1.12-.5.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5c-.44 0-.84-.19-1.12-.5H11.9c-.46 2.28-2.48 4-4.9 4-2.76 0-5-2.24-5-5 0-2.42 1.72-4.44 4-4.9v2.07c-1.16.41-2 1.53-2 2.83 0 1.65 1.35 3 3 3s3-1.35 3-3v-1zm2.5-11c1.65 0 3 1.35 3 3h2c0-2.76-2.24-5-5-5s-5 2.24-5 5c0 1.43.6 2.71 1.55 3.62l-2.35 3.9c-.68.14-1.2.75-1.2 1.48 0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5c0-.16-.02-.31-.07-.45l3.38-5.63C10.49 9.61 9.5 8.42 9.5 7c0-1.65 1.35-3 3-3zm4.5 9c-.64 0-1.23.2-1.72.54l-3.05-5.07C11.53 8.35 11 7.74 11 7c0-.83.67-1.5 1.5-1.5S14 6.17 14 7c0 .15-.02.29-.06.43l2.19 3.65c.28-.05.57-.08.87-.08 2.76 0 5 2.24 5 5s-2.24 5-5 5c-1.85 0-3.47-1.01-4.33-2.5h2.67c.48.32 1.05.5 1.66.5 1.65 0 3-1.35 3-3s-1.35-3-3-3z"></path>
-                    </svg>
-                    <div class="MuiListItemText-root css-1tsvksn"><span
-                                class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-lz9xor">Giới thiệu thành viên</span>
-                    </div>
-                    <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false"
-                         aria-hidden="true" viewBox="0 0 24 24" data-testid="NavigateNextIcon">
-                        <path d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
-                    </svg>
-                    <span class="MuiTouchRipple-root css-w0pj6f"></span></li>
-            </a>
-            <a
-                    tabindex="0" href="">
-                <li class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-17z60tr"
-                    tabindex="-1" role="menuitem">
-
-                    <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false"
-                         aria-hidden="true"
-                         viewBox="0 0 24 24" data-testid="LockResetOutlinedIcon">
-                        <path d="M13 3c-4.97 0-9 4.03-9 9 0 .06.01.12.01.19l-1.84-1.84-1.41 1.41L5 16l4.24-4.24-1.41-1.41-1.82 1.82c0-.06-.01-.11-.01-.17 0-3.86 3.14-7 7-7s7 3.14 7 7-3.14 7-7 7c-1.9 0-3.62-.76-4.88-1.99L6.7 18.42C8.32 20.01 10.55 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm2 8v-1c0-1.1-.9-2-2-2s-2 .9-2 2v1c-.55 0-1 .45-1 1v3c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-3c0-.55-.45-1-1-1zm-1 0h-2v-1c0-.55.45-1 1-1s1 .45 1 1v1z"></path>
-                    </svg>
-                    <div class="MuiListItemText-root css-1tsvksn"><span
-                                class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-lz9xor">Đổi mật khẩu</span>
-                    </div>
-                    <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false"
-                         aria-hidden="true"
-                         viewBox="0 0 24 24" data-testid="NavigateNextIcon">
-                        <path d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
-                    </svg>
-                    <span class="MuiTouchRipple-root css-w0pj6f"></span>
-                </li>
             </a>
 
         </ul>

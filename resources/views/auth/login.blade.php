@@ -49,10 +49,10 @@
                     </div>
 
                 </div>
-                <button type="submit" id="loginBtn" class="d-none MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge mx-auto shadow-none rounded-full bg-[#fa6253] css-avm12u"
+                <button id="loginBtn" class="d-none MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge mx-auto shadow-none rounded-full bg-[#fa6253] css-avm12u"
                         tabindex="0" type="button" id=":r2:">Xác minh<span
                             class="MuiTouchRipple-root css-w0pj6f"></span></button>
-                <button type="submit" id="submitBtn" class=" MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge mx-auto shadow-none rounded-full bg-[#fa6253] css-avm12u"
+                <button id="submitBtn" class=" MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge mx-auto shadow-none rounded-full bg-[#fa6253] css-avm12u"
                         tabindex="0" type="button" id=":r2:">Gửi mã xác nhận<span
                             class="MuiTouchRipple-root css-w0pj6f"></span></button>
                 </div>

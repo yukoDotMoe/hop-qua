@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>{{ \App\Http\Controllers\ApiController::getSetting('page_title') }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
@@ -17,7 +18,7 @@
 </head>
 <body>
 <wc-toast position="top-center"> </wc-toast>
-<div class="content-wrapper normal">
+<div class="content-wrapper normal" style="position: relative; margin-bottom: unset !important;">
     <div class="MuiContainer-root MuiContainer-maxWidthXs MuiPaper-root MuiPaper-elevation MuiPaper-elevation1 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed shadow-md inset-0 bottom-[unset] h-[54px] flex flex-row items-center gap-1 px-2 mui-fixed css-m6yqs9">
         <a href="{{ route('account') }}">
             <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-sizeMedium css-1deacqj"

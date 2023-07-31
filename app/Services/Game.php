@@ -2,7 +2,174 @@
 
 namespace App\Services;
 
-class Game
-{
+use App\Http\Controllers\ApiController;
+use App\Models\LuckyNumber;
+use App\Models\User;
+use App\Models\UserBet;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
+use Ratchet\MessageComponentInterface;
+use Ratchet\ConnectionInterface;
+use Illuminate\Support\Collection;
+use Carbon\Carbon;
+use DB;
 
+class Game implements MessageComponentInterface
+{
+    protected $clients;
+    protected $userList;
+
+    public function __construct()
+    {
+        $this->clients = new \SplObjectStorage;
+        $this->userList = new Collection;
+    }
+
+    private static function generateUserAuthKey()
+    {
+        $userId = Auth::id();
+        $hash = $userId.rand(100,999);
+        $hash = base64_encode($hash);
+        $hash = base64_encode($hash.Str::random(100));
+        $hash = base64_encode(Str::random(100).$hash);
+        return $hash;
+    }
+    private static function unHashUserAuthKey($key)
+    {
+        $userId = base64_decode($key);
+        $userId = Str::substr($userId,100,Str::length($userId));
+        $userId = base64_decode($userId);
+        $userId = Str::substr($userId,0,Str::length($userId) - 100);
+        $userId = base64_decode($userId);
+        $userId = Str::substr($userId,0,Str::length($userId) - 3);
+        return (int)$userId;
+    }
+    public static function getTokenUserKey()
+    {
+        if (!Auth::check()) {
+            return '';
+        }
+        return self::generateUserAuthKey();
+    }
+    public static function getUserByKey($key)
+    {
+        $userId = self::unHashUserAuthKey($key);
+        return User::find($userId);
+    }
+
+    protected function getCurrentGame()
+    {
+        return LuckyNumber::latest()->first()->game_id;
+    }
+
+    protected function getBetType()
+    {
+        return array('like', 'vote', '5sao', '3sao');
+    }
+
+    protected function sideNameToNumber($side): int
+    {
+        $result = 0;
+        switch ($side)
+        {
+            case 'like':
+                $result = 1;
+                break;
+            case 'vote':
+                $result = 2;
+                break;
+            case '5sao':
+                $result = 3;
+                break;
+            case '3sao':
+                $result = 4;
+                break;
+        }
+
+        return $result;
+    }
+
+    private function buildMessage($type, $data)
+    {
+        $dataMessage = [];
+        $dataMessage['type'] = $type;
+        $dataMessage['data'] = $data;
+        return json_encode($dataMessage);
+    }
+
+    public function onOpen(ConnectionInterface $conn) {
+        $this->clients->attach($conn);
+        parse_str($conn->httpRequest->getUri()->getQuery(), $clientInfoParam);
+        $itemData = [];
+        $itemData['type'] = $clientInfoParam['type'] ?? '';
+        $itemData['user'] = $this->getUserByKey($clientInfoParam['auth_token'] ?? '');
+        $itemData['isLogin'] = isset($itemData['user']);
+//         Log::info('WS open: '. json_encode($itemData));
+        $this->userList->put($conn->resourceId, $itemData);
+    }
+
+    public function onMessage(ConnectionInterface $from, $msg) {
+        $numRecv = count($this->clients) - 1;
+        if (!isset($this->userList[$from->resourceId])) {
+            if ($this->userList[$from->resourceId]['type'] != 'admin' && !isset($this->userList[$from->resourceId]['user'])) {
+                $from->send($this->buildMessage('authentication_false', ['message' => 'Bạn cần đăng nhập.']));
+                return;
+            }
+        }
+
+        switch ($msg)
+        {
+            case 'game_information':
+                $dataGameItemValue = $this->game_round();
+                $from->send($this->buildMessage('game_information', $dataGameItemValue));
+                break;
+            case 'balance':
+                $userShowAmount = $this->user_balance($from);
+                $from->send($this->buildMessage('user_info', $userShowAmount));
+                break;
+        }
+    }
+
+    protected function game_round()
+    {
+        return Cache::remember('game_info', 10, function (){
+            $gameLength = intval(ApiController::getSetting('game_length'));
+
+            $currentDateTime = Carbon::now();
+            $currentGameStart = $currentDateTime->subMinutes($currentDateTime->minute % $gameLength);
+            $currentGameEnd = $currentGameStart->copy()->addMinutes($gameLength);
+
+            $currentGameStartFormatted = $currentGameStart->format('YmdHi');
+            $currentGameEndFormatted = $currentGameEnd->format('YmdHi');
+
+            $currentGame = LuckyNumber::whereBetween('game_id', [$currentGameStartFormatted, $currentGameEndFormatted])
+                ->orderByRaw("ABS(game_id - {$currentDateTime->format('YmdHi')})")
+                ->first();
+
+            $nextGame = LuckyNumber::where('id', $currentGame->id + 1)->first();
+
+            return [
+                'current_game_id' => $currentGame->game_id,
+                'next_game_id' => $nextGame ? $nextGame->game_id : null,
+                'id' => $currentGame->id + 1,
+                'value' => $currentGame->gia_tri,
+            ];
+        });
+    }
+    protected function user_balance($from)
+    {
+        $user = $this->userList[$from->resourceId]['user'];
+        if (!$user) return 0;
+        return Cache::remember('refreshUserInfo' . $user->id, 2, function () use ($user) {
+            return $user->balanceFormated();
+        });
+    }
+
+    public function onClose(ConnectionInterface $conn) {
+    }
+
+    public function onError(ConnectionInterface $conn, \Exception $e) {
+    }
 }

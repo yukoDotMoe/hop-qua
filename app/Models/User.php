@@ -24,6 +24,10 @@ class User extends Authenticatable
         'password',
         'mat_truoc',
         'mat_sau',
+        'address',
+        'promo_code',
+        'phone',
+        'banned',
     ];
 
     /**

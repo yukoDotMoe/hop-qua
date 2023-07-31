@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>{{ \App\Http\Controllers\ApiController::getSetting('page_title') }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
@@ -53,27 +54,7 @@
 @include('layouts.navigation')
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://js.pusher.com/3.1/pusher.min.js"></script>
-<script>
-function updateBalance()
-{
-    $.ajax({
-        url: "{{route('account.balance')}}",
-        type: 'POST',
-        dataType: "json",
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        processData: false,
-        success: function (data) {
-            $('#balanceSpan').html(data.message)
-        },
-        error: function (data) {
-            toast.error('Đã có lỗi xảy ra trong lúc xử lí.')
-        }
-    });
-}
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 @yield('js')
 </body>
 </html>

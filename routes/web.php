@@ -38,6 +38,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/banking', [ProfileController::class, 'bankingView'])->name('account.banking');
     Route::post('/banking', [ProfileController::class, 'bankUpdate'])->name('account.banking.post');
 
+    Route::get('/profile', [ProfileController::class, 'editProfileView'])->name('account.profile');
+    Route::post('/profile', [ProfileController::class, 'editProfile'])->name('account.profile.post');
+
+
+    Route::get('/history-play/{tables}', [ProfileController::class, 'historyPlay'])->name('account.history_play');
+
 });
 
 Route::controller(\App\Http\Controllers\AdminController::class)->group(function () {

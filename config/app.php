@@ -56,6 +56,7 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+
     'asset_url' => env('ASSET_URL'),
 
     /*
@@ -69,7 +70,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Ho_Chi_Minh',
 
     /*
     |--------------------------------------------------------------------------

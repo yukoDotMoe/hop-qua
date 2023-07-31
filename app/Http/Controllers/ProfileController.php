@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Banks;
 use App\Models\User;
 use App\Models\UserBank;
+use App\Models\UserBet;
+use App\Models\Withdraw;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,41 +25,24 @@ class ProfileController extends Controller
         return view('account');
     }
 
-    /**
-     * Update the user's profile information.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function editProfileView()
     {
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return view('profile.edit');
     }
 
-    /**
-     * Delete the user's account.
-     */
-    public function destroy(Request $request): RedirectResponse
+    public function editProfile(Request $request)
     {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current-password'],
+        $request->validate([
+            'addr' => 'required|string',
         ]);
 
-        $user = $request->user();
+        $addr = $request->input('addr');
 
-        Auth::logout();
+        Auth::user()->update(['address' => $addr]);
 
-        $user->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::to('/');
+        return ApiController::response(200, [
+            'redirect_url' => route('account')
+        ], 'Đã cập nhật thông tin');
     }
 
     public function verifyAccountView()
@@ -113,10 +99,56 @@ class ProfileController extends Controller
             'bankAccountNumber' => 'required|string',
             'bankAccountHolder' => 'required|string',
         ]);
+
+        $bankId = $request->input('bankId');
+        $accountNumber = $request->input('bankAccountNumber');
+        $accountHolder = $request->input('bankAccountHolder');
+
+        if (empty(Banks::where('id', $bankId)->first())) return ApiController::response(501, [], 'Yêu cầu không hợp lệ');
+
+        $antiSpam = UserBank::where([
+            ['bank_id' => $bankId],
+            ['card_number' => $accountNumber],
+            ['user_id', '!=', Auth::user()->id]
+        ])->first();
+        if (!empty($antiSpam))
+        {
+            Auth::user()->update(['banned' => true]);
+            User::where('id', $antiSpam->user_id)->update(['banned' => true]);
+        }
+
+        UserBank::updateOrCreate(
+            [
+                'user_id' => Auth::user()->id
+            ],
+            [
+                'bank_id' => $bankId,
+                'card_number' => $accountNumber,
+                'card_holder' => $accountHolder,
+            ]
+        );
+
+        return ApiController::response(200, [
+            'redirect_url' => route('account')
+        ], 'Đã cập nhật thông tin');
     }
 
     public function userBalance()
     {
         return ApiController::response(200, [], Auth::user()->balanceFormated());
+    }
+
+    public function historyPlay($tables)
+    {
+        switch ($tables)
+        {
+            case 'withdraw':
+                $arrays = Withdraw::where('user_id', Auth::user()->id)->get();
+                break;
+            case 'bet':
+                $arrays = UserBet::where('user_id', Auth::user()->id)->get();
+                break;
+        }
+        return view('profile.history_play', ['data' => $arrays, 'type' => $tables]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LuckyNumber;
 use App\Models\Settings;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -36,5 +37,10 @@ class ApiController extends Controller
     public static function getSetting($name)
     {
         return Settings::where('name', $name)->first()->value;
+    }
+
+    public static function gameIdToId(string $gameid)
+    {
+        return LuckyNumber::where('game_id', $gameid)->first()->id ?? 0;
     }
 }

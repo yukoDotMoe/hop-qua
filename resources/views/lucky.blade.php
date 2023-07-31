@@ -41,7 +41,8 @@
         <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 py-10 rounded-none relative overflow-hidden css-aoeo82">
             <div class="absolute right-3 top-2">
                 <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall mr-[-5px] css-1j7qk7u"
-                        tabindex="0" type="button" aria-label="Xem chi tiết">
+                        tabindex="0" type="button" aria-label="Xem chi tiết" data-toggle="modal"
+                        data-target="#explain">
                     <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium text-transparent css-vubbuv" focusable="false"
                          aria-hidden="true" viewBox="0 0 24 24">
                         <path d="M11.9899 15.7961V11.3771" stroke="#1E2843" stroke-width="1.5" stroke-linecap="round"
@@ -86,91 +87,14 @@
             </div>
         </div>
 
-        <div class="mt-3">
-            <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 h-[40px] flex items-center justify-between px-3 border-l-2 border-primary-dark css-aoeo82">
-                <div class="font-medium text-color-primary">Đối tác lớn
-                </div>
-            </div>
-        </div>
-
-        <div class="mt-3">
-            <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 mb-[-40px] bg-transparent css-aoeo82">
-                <img src="{{ asset('/minigame/img/Group.Partners.B1.28fd71059bbab3a1fee3.png') }}">
-            </div>
-        </div>
-
-        <div>
-            <div
-                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 h-[40px] flex items-center justify-between px-3 border-l-2 border-primary-dark css-aoeo82">
-                <div class="font-medium text-color-primary">Về chúng tôi</div>
-            </div>
-            <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 mt-2 px-3 py-2 css-aoeo82">
-                {{ \App\Http\Controllers\ApiController::getSetting('home_about') }}
-            </div>
-        </div>
-
-        <div class="mt-3">
-            <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 h-[40px] flex items-center justify-between px-3 border-l-2 border-primary-dark css-aoeo82">
-                <div class="font-medium text-color-primary">Trụ sở chính
-                </div>
-            </div>
-        </div>
-
-        <div class="mt-3">
-            <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 my-2 p-3 css-aoeo82">
-
-                @php($addInfo = json_decode(\App\Http\Controllers\ApiController::getSetting('home_add'), true))
-
-                @foreach($addInfo['list'] as $addr)
-                    @if($loop->first)
-                        <div>Người nhận: {{ $addr['receiver'] }}</div>
-                        <div>{{ $addr['add'] }}</div>
-                    @else
-                        <div class="mt-3">Người nhận: {{ $addr['receiver'] }}</div>
-                        <div>{{ $addr['add'] }}</div>
-                    @endif
-                @endforeach
-
-                <div class="mt-3">Chi nhánh: {{ $addInfo['branch'] }}</div>
-
-                <div class="flex justify-center gap-1 mt-3 -mb-1 pt-1 border-t border-black/20">
-                    <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1yxmbwk"
-                            tabindex="0" type="button">
-                        <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false"
-                             aria-hidden="true" viewBox="0 0 24 24" data-testid="FacebookIcon">
-                            <path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m13 2h-2.5A3.5 3.5 0 0 0 12 8.5V11h-2v3h2v7h3v-7h3v-3h-3V9a1 1 0 0 1 1-1h2V5z"></path>
-                        </svg>
-                        <span class="MuiTouchRipple-root css-w0pj6f"></span></button>
-                    <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1yxmbwk"
-                            tabindex="0" type="button">
-                        <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false"
-                             aria-hidden="true" viewBox="0 0 24 24" data-testid="InstagramIcon">
-                            <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"></path>
-                        </svg>
-                        <span class="MuiTouchRipple-root css-w0pj6f"></span></button>
-                    <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1yxmbwk"
-                            tabindex="0" type="button">
-                        <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false"
-                             aria-hidden="true" viewBox="0 0 24 24" data-testid="TelegramIcon">
-                            <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"></path>
-                        </svg>
-                        <span class="MuiTouchRipple-root css-w0pj6f"></span></button>
-                    <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1yxmbwk"
-                            tabindex="0" type="button">
-                        <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false"
-                             aria-hidden="true" viewBox="0 0 24 24" data-testid="YouTubeIcon">
-                            <path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"></path>
-                        </svg>
-                        <span class="MuiTouchRipple-root css-w0pj6f"></span></button>
-                </div>
-            </div>
-        </div>
+        @include('layouts.footer')
     </div>
 
     <div class="MuiContainer-root MuiContainer-maxWidthXs fixed inset-0 top-[unset] bottom-[68px] px-3 z-20 rounded-lg css-hltdia">
         <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 flex items-center justify-between bg-secondary-main border text-white border-none p-2 css-aoeo82">
             <span>ID: <span class="text-lg">{{ Auth::user()->id }}</span></span>
-            <div class="flex items-center"><span class="font-bold max-line-1"><span id="balanceSpan">{{ Auth::user()->balanceFormated() }}</span></span>
+            <div class="flex items-center"><span class="font-bold max-line-1"><span
+                            id="balanceSpan">{{ Auth::user()->balanceFormated() }}</span></span>
                 <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium text-white css-1yxmbwk"
                         tabindex="0" type="button">
                     <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false"
@@ -178,6 +102,82 @@
                         <path d="M12 6c3.79 0 7.17 2.13 8.82 5.5-.59 1.22-1.42 2.27-2.41 3.12l1.41 1.41c1.39-1.23 2.49-2.77 3.18-4.53C21.27 7.11 17 4 12 4c-1.27 0-2.49.2-3.64.57l1.65 1.65C10.66 6.09 11.32 6 12 6zm-1.07 1.14L13 9.21c.57.25 1.03.71 1.28 1.28l2.07 2.07c.08-.34.14-.7.14-1.07C16.5 9.01 14.48 7 12 7c-.37 0-.72.05-1.07.14zM2.01 3.87l2.68 2.68C3.06 7.83 1.77 9.53 1 11.5 2.73 15.89 7 19 12 19c1.52 0 2.98-.29 4.32-.82l3.42 3.42 1.41-1.41L3.42 2.45 2.01 3.87zm7.5 7.5 2.61 2.61c-.04.01-.08.02-.12.02-1.38 0-2.5-1.12-2.5-2.5 0-.05.01-.08.01-.13zm-3.4-3.4 1.75 1.75c-.23.55-.36 1.15-.36 1.78 0 2.48 2.02 4.5 4.5 4.5.63 0 1.23-.13 1.77-.36l.98.98c-.88.24-1.8.38-2.75.38-3.79 0-7.17-2.13-8.82-5.5.7-1.43 1.72-2.61 2.93-3.53z"></path>
                     </svg>
                     <span class="MuiTouchRipple-root css-w0pj6f"></span></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="explain" tabindex="1">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content css-mbdu2s">
+                <div class="modal-body MuiDialog-paperFullScreen css-1hyl1h2">
+                    <div class="absolute inset-0 top-[72px]"><img
+                                src="{{ asset('minigame/img/Frame.Tax.5918f4394b94358de880.png') }}" class="h-full">
+                    </div>
+                    <div class="fixed top-[30%] left-[50%] translate-x-[-50%] opacity-30"><img
+                                src="{{ asset('minigame/img/Frame.Star.51850350651321e35085.png') }}"
+                                class="rounded-full w-[180px]"></div>
+                    <button data-dismiss="modal"
+                            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-o1bub9"
+                            tabindex="0" type="button">
+                        <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false"
+                             style="fill: white !important;"
+                             aria-hidden="true" viewBox="0 0 24 24" data-testid="CloseIcon">
+                            <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                        </svg>
+                        <span class="MuiTouchRipple-root css-w0pj6f"></span>
+                    </button>
+                    <h2 class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-3cs75a" id=":rf:">Điều khoản
+                        và quy định
+                    </h2>
+                    <div class="MuiDialogContent-root px-12 mb-16 mt-20 z-10 css-1ty026z">
+                        <p class="mb-3">
+                            <b>Điều khoản và Quy định:</b> Like hoặc Vote theo thứ tự từ trái qua phải bắt đầu từ:
+                        </p>
+                        <p class="text-justify mb-3"><b>Nhấp chọn LIKE - VOTE:</b> Căn cứ theo đơn đặt vào các vị
+                            trí, ví dụ: Ô số đầu tiên lớn hơn số 5 là LIKE, Ô số đầu tiên nhỏ hơn hoặc bằng 4 là
+                            VOTE.
+                        </p>
+                        <p class="text-justify mb-3"><b>Chọn hạng mục 5 Sao - 3 Sao:</b> Căn cứ theo đơn đặt vào các
+                            vị trí, ví dụ: Ô số cuối cùng hiển thị số 0-2-4-6-8 là 5 Sao, Ô số cuối cùng hiển thị số
+                            1-3-5-7-9 là 3 Sao.
+                        </p>
+                        <p class="text-justify mb-3">FATION MALL nghiêm cấm các hành vi gian lận có hành vi đặt số
+                            điểm cùng một lúc 2 ô sẽ được tính là vi phạm, và phải hoàn thành x5 tổng số điểm được
+                            tính trên mỗi lượt đặt điểm sẽ hoàn thành vòng cược. FATION MALL có quyền thu hồi tất cả
+                            số điểm và tiền thưởng từ mã số ID của Quý khách khi có hành vi gian dối đặt điểm và sử
+                            dụng phần mềm hỗ trợ.
+                        </p>
+                        <p class="text-justify mb-3">Nếu Quý khách có bất kì kiến nghị nào vui lòng chọn mục CSKH để
+                            được nhân viên kịp thời hỗ trợ tư vấn.
+                        </p>
+                        <p class="font-bold mb-3">Thuế:</p>
+                        <p class="text-justify mb-3">Để đảm bảo được FATION MALL hoạt động lâu dài, gắn bó cùng Quý
+                            khách hàng cũng như đóng thuế cho Bộ Công Thương, đồng hành cùng các đơn vị tài trợ, khi
+                            Quý khách được nhận hộp quà huyền bí từ hệ thống vui lòng thực hiện nghĩa vụ đóng thuế
+                            như sau:
+                        </p>
+                        <p class="text-justify mb-3">- Đối với Quý khách hàng rút hạn mức từ <span
+                                    class="text-navbar">199.000 điểm tương ứng 199.000.000 VNĐ</span> vui lòng đóng
+                            mức thuế 15% / tổng số điểm Quý khách rút ra.
+                        </p>
+                        <p class="text-justify mb-3">- Đối với Quý khách hàng rút hạn mức từ <span
+                                    class="text-navbar">200.000 điểm - 399.000 điểm</span> vui lòng đóng mức thuế
+                            20% / tổng số điểm Quý khách rút ra.
+                        </p>
+                        <p class="text-justify mb-3">- Đối với Quý khách hàng rút hạn mức trên <span
+                                    class="text-navbar">400.000 điểm tương ứng 400.000.000 VNĐ</span> vui lòng đóng
+                            mức thuế 30% / tổng số điểm Quý khách rút ra.
+                        </p>
+                        <p class="text-justify mb-3">- Đối với Quý khách hàng rút hạn mức trên <span
+                                    class="text-navbar">1.199.000 điểm tương ứng 1.199.000.000 VNĐ</span> cần đóng
+                            thuế TNCN 7 - 10% / tổng số điểm Quý khách rút ra.
+                        </p>
+                        <p class="text-justify mb-3">Sau khi Quý khách hoàn thành nghĩa vụ đóng thuế cho Doanh
+                            nghiệp tài khoản của Quý khách sẽ đủ điều kiện xuất khoản.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -246,6 +246,8 @@
 
     <input id="side" value="" hidden>
     <input id="amount" value="" hidden>
+    <input id="game_id" value="" hidden>
+    <input type="hidden" id="auth_token" value="{{App\Services\Game::getTokenUserKey()}}">
 
     {{--    <div role="tooltip" id=":r4:"--}}
     {{--         class="MuiTooltip-popper MuiTooltip-popperInteractive MuiTooltip-popperArrow css-1woa8fr MuiPopper-root"--}}
@@ -272,25 +274,56 @@
 
         <script type="module">
             import {toast} from 'https://cdn.skypack.dev/wc-toast';
-            let currentId;
+
+            let wsReady = false;
+            let connectTion;
             window.addEventListener('DOMContentLoaded', function () {
-                const pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
-                    cluster: '{{ env('PUSHER_APP_CLUSTER') }}',
-                    encrypted: true,
-                });
-                const channel = pusher.subscribe('lucky_number');
-                channel.bind('lucky_number', (data) => {
-                    const dataDecrypt = JSON.parse(data.message);
-                    $('#timer').html(dataDecrypt.time)
-                    $('#nextId').html(dataDecrypt.next)
-                    if (currentId !== null && currentId !== dataDecrypt.next) updateBalance()
-                    currentId = dataDecrypt.next
-                    const numbersArr = (dataDecrypt.number).split('-')
-                    $('#firstDigit').html(numbersArr[0])
-                    $('#secondDigit').html(numbersArr[1])
-                    $('#thirdDigit').html(numbersArr[2])
-                });
+                connectTion = new WebSocket('{{ env('APP_DEBUG') ? 'ws' : 'wss' }}://' + window.location.hostname + '{{ env('APP_DEBUG') ? ':' . env('GAME_PORT') : ''}}/wsstrade/?auth_token=' + $('#auth_token').val());
+                connectTion.onopen = function (e) {
+                    wsReady = true;
+                    setInterval(function () {
+                        connectTion.send('game_information');
+                        connectTion.send('balance');
+                    }, 1000);
+                };
+                connectTion.onmessage = function (e) {
+                    var info = JSON.parse(e.data);
+                    // console.log(info)
+                    switch (info.type) {
+                        case 'game_information':
+                            handleGame(info.data)
+                            break;
+                        case 'user_info':
+                            $('#balanceSpan').html(info.data)
+                            break;
+                    }
+                };
+                connectTion.onclose = function (e) {
+                    wsReady = false;
+                    toast.error('Kết nối đến server không thành công, bạn vui lòng thử lại sau..')
+                };
+                connectTion.onerror = function (e) {
+                    wsReady = false;
+                }
             });
+            let formattedDuration;
+
+            function handleGame(data) {
+                const format = 'YYYYMMDDHHmm';
+                const next = moment(data.next_game_id, format);
+                const currentTime = moment(); // Get the current time as a Moment.js object
+                const duration = moment.duration(next.diff(currentTime));
+                const minutes = duration.minutes();
+                const seconds = (duration.seconds() < 0) ? 0 : duration.seconds();
+                const formattedDuration = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+                $('#timer').html(formattedDuration)
+                $('#nextId').html(data.id)
+                $('#game_id').val(data.next_game_id)
+                const numbersArr = (data.value).split('-')
+                $('#firstDigit').html(numbersArr[0])
+                $('#secondDigit').html(numbersArr[1])
+                $('#thirdDigit').html(numbersArr[2])
+            }
 
             $('.css-1n02ex7').click(function () {
                 const type = $(this).attr('data-type')
@@ -337,6 +370,7 @@
             $('.css-1n8uu98').click(function () {
                 const sideChoosed = $('#side').val();
                 const amount = $('#amountRate').val();
+                const game_id = $('#game_id').val();
                 var _this = $('.submit');
                 setTimeout(function () {
                     _this.html('<i class="fa-solid fa-circle-notch fa-spin"></i>');
@@ -352,13 +386,14 @@
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({
                         sideChoosed: sideChoosed,
-                        amount: amount
+                        amount: amount,
+                        gameid: game_id
                     }),
                     processData: false,
                     success: function (data) {
                         if (data.success) {
                             toast.success(data.message)
-                            updateBalance()
+                            connectTion.send('balance');
                         } else {
                             toast.error(data.message)
                         }
