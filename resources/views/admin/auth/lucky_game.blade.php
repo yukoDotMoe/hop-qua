@@ -3,9 +3,9 @@
 
 @section('content')
     <div class="card text-center mb-3">
-        <div class="card-header" id="gameId">ID hiện tại: {{ $current->id }}. Tiếp theo: {{ $next->id     }}</div>
+        <div class="card-header" id="gameId">ID tiếp theo: {{ $next->id     }}</div>
         <div class="card-body">
-            <h5 class="card-title" id="gameResult" data-id="{{ $current->id }}">{{ $current->gia_tri }}</h5>
+            <h5 class="card-title" id="gameResult" data-id="{{ $next->id }}">{{ $next->gia_tri }}</h5>
         </div>
         <div class="card-footer text-muted" id="timer">
             00:00
