@@ -20,6 +20,10 @@
                 <svg class="nav-icon">
                     <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-drop"></use>
                 </svg> Game</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('admin.bai_viet') }}">
+                <svg class="nav-icon">
+                    <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-drop"></use>
+                </svg> Thêm bài viết</a></li>
 
     </ul>
     <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>

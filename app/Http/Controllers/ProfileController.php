@@ -65,9 +65,6 @@ class ProfileController extends Controller
             $file1 = $request->file('mat_truoc');
             $file2 = $request->file('mat_sau');
 
-            $file1Name = time() . '_' . Auth::user()->id . '_truoc';
-            $file2Name = time() . '_' . Auth::user()->id . '_sau';
-
             $file1Path = $file1->store('uploads/users');
             $file2Path = $file2->store('uploads/users');
 

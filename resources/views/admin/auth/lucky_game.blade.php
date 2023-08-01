@@ -38,7 +38,7 @@
                                     @if(in_array($numbers[0], [5,6,7,8,9])) checked @endif
                                     >
                                     <label class="form-check-label">
-                                        Vote
+                                        Like
                                     </label>
                                 </div>
                                 <div class="form-check">
@@ -46,7 +46,7 @@
                                    @if(in_array($numbers[0], [0,1,2,3,4])) checked @endif
                                     >
                                     <label class="form-check-label">
-                                        Like
+                                        Vote
                                     </label>
                                 </div>
                             </div>

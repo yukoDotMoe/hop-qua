@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BaiViet;
 use App\Models\LuckyNumber;
 use App\Models\Settings;
 use Carbon\Carbon;
@@ -23,10 +24,8 @@ class AdminController extends Controller
         $credentials = $request->only('username', 'password');
 
         if (Auth::guard('admin')->attempt($credentials)) {
-            // Authentication successful
             return redirect()->route('admin.dashboard');
         } else {
-            // Authentication failed
             return back()->withErrors(['login_error' => 'Invalid credentials']);
         }
     }
@@ -73,5 +72,38 @@ class AdminController extends Controller
         }
 
         return redirect()->route('admin.settings');
+    }
+
+    public function postview()
+    {
+        return view('admin.auth.post');
+    }
+
+    public function createPost(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string',
+            'price' => 'required',
+            'danh_muc' => 'required|numeric',
+            'thumbnail' => 'required|file|mimes:jpg,png,pdf|max:2048', // Adjust the allowed file types and size as needed
+            'inside_content' => 'required',
+        ]);
+
+        $file = $request->file('thumbnail');
+        $fileName = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('uploads/posts/'), $fileName);
+        $filePath = '/uploads/posts/' . $fileName;
+
+        $post = new BaiViet();
+        $post->price = ApiController::extractNumbersFromString($request->price);
+        $post->post_id = ApiController::generate_random_md5();
+        $post->title = $request->title;
+        $post->small_title = $request->inside_content;
+        $post->danh_muc = $request->danh_muc;
+        $post->thumbnail = $filePath;
+        $post->content = $request->inside_content;
+        $post->save();
+
+        return ApiController::response(200, ['redirect_url' => route('admin.bai_viet')], 'Thêm bài viết thành công, ID: ' . $post->id);
     }
 }

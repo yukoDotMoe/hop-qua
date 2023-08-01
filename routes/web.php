@@ -32,6 +32,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/account', [ProfileController::class, 'edit'])->name('account');
 
+    Route::get('/news', [\App\Http\Controllers\NewsController::class, 'homeView'])->name('news');
+    Route::get('/news/{id}', [\App\Http\Controllers\NewsController::class, 'viewPost'])->name('news.view');
+
     Route::get('/account-verify', [ProfileController::class, 'verifyAccountView'])->name('account.verify');
     Route::post('/account-verify', [ProfileController::class, 'verifyAccount'])->name('account.verify.post');
 
@@ -56,6 +59,8 @@ Route::controller(\App\Http\Controllers\AdminController::class)->group(function 
         Route::post('/admin/settings', 'saveSettings')->name('admin.settings.post');
         Route::get('/admin/lucky_game', 'luckyGameView')->name('admin.lucky_game');
         Route::post('/admin/lucky_game', 'luckyUpdate')->name('admin.lucky_game.post');
+        Route::get('/admin/bai_viet', 'postview')->name('admin.bai_viet');
+        Route::post('/admin/bai_viet', 'createPost')->name('admin.bai_viet.post');
 
         Route::get('admin/logout', 'logout')->name('admin.logout');
     });

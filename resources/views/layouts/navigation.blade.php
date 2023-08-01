@@ -17,9 +17,9 @@
                 </a>
             </div>
             <div class="col-2 d-md-inline mb-1">
-                <a class="flex-1" href="#">
+                <a class="flex-1" href="{{ route('news') }}">
                     <div
-                            class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-lfn1mu"
+                            class="{{ Request::is('news') ? 'active' : '' }} MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-lfn1mu"
                             tabindex="0" role="button">
                         <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium text-transparent css-vubbuv" focusable="false"
                              aria-hidden="true" viewBox="0 0 24 24">

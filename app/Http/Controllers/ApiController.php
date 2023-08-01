@@ -50,4 +50,16 @@ class ApiController extends Controller
         $reuslt = Carbon::createFromFormat('YmdHis', $time);
         return $reuslt->format('Y-m-d H:i:s');
     }
+
+    public static function generate_random_md5() {
+        $random_string = uniqid(mt_rand(), true);
+        $md5_hash = md5($random_string);
+        $stripped_md5 = substr($md5_hash, 0, 24);
+        return $stripped_md5;
+    }
+
+    public static function extractNumbersFromString($str) {
+        preg_match_all('/\d+/', $str, $matches);
+        return implode('', $matches[0]);
+    }
 }

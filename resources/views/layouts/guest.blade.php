@@ -45,14 +45,14 @@
 <script>
     // Your web app's Firebase configuration
     const firebaseConfig = {
-        apiKey: "AIzaSyCiNbk3tJIBVYJQ22aZb2XSSqfZwGuRaOc",
-        authDomain: "leuleu-12458.firebaseapp.com",
-        databaseURL: "https://leuleu-12458-default-rtdb.asia-southeast1.firebasedatabase.app",
-        projectId: "leuleu-12458",
-        storageBucket: "leuleu-12458.appspot.com",
-        messagingSenderId: "814485314103",
-        appId: "1:814485314103:web:d7be8dc6a33bd600ea7db2",
-        measurementId: "G-VNXB96PLBX"
+        apiKey: "AIzaSyDyuBpbncFLcKTgKtNIjnGohBaWML8CYJM",
+        authDomain: "coex-mall-1a6b0.firebaseapp.com",
+        databaseURL: "https://coex-mall-1a6b0-default-rtdb.firebaseio.com",
+        projectId: "coex-mall-1a6b0",
+        storageBucket: "coex-mall-1a6b0.appspot.com",
+        messagingSenderId: "502495382604",
+        appId: "1:502495382604:web:05fc9ea105aa82818f38e9",
+        measurementId: "G-P1LCWX13QG"
     };
 
     // Initialize Firebase
