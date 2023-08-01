@@ -9,5 +9,5 @@ class BaiViet extends Model
 {
     use HasFactory;
     protected $table = 'bai_viet';
-    protected $fillable = ['thumbnail', 'title', 'content', 'danh_muc', 'post_id', 'vote', 'like', 'small_title'];
+    protected $fillable = ['thumbnail', 'title', 'content', 'danh_muc', 'post_id', 'vote', 'like', 'small_title', 'order'];
 }

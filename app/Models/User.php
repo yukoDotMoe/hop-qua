@@ -87,4 +87,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserBank::class);
     }
+
+    public function getReact($type)
+    {
+        $wallet = $this->getWallet();
+        return ($type == 1) ? $wallet->vote : $wallet->like;
+    }
 }

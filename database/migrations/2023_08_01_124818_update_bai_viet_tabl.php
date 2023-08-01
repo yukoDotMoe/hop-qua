@@ -31,7 +31,6 @@ return new class extends Migration
             $table->integer('after');
             $table->integer('type');
             $table->string('reason')->nullable();
-            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

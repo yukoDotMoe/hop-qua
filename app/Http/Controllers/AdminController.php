@@ -98,7 +98,7 @@ class AdminController extends Controller
         $post->price = ApiController::extractNumbersFromString($request->price);
         $post->post_id = ApiController::generate_random_md5();
         $post->title = $request->title;
-        $post->small_title = $request->inside_content;
+        $post->small_title = '..';
         $post->danh_muc = $request->danh_muc;
         $post->thumbnail = $filePath;
         $post->content = $request->inside_content;

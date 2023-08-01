@@ -34,6 +34,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/news', [\App\Http\Controllers\NewsController::class, 'homeView'])->name('news');
     Route::get('/news/{id}', [\App\Http\Controllers\NewsController::class, 'viewPost'])->name('news.view');
+    Route::post('/news/react/{id}', [\App\Http\Controllers\NewsController::class, 'react'])->name('news.react');
+    Route::post('/react/buy', [\App\Http\Controllers\NewsController::class, 'buyReact'])->name('news.buyReact');
 
     Route::get('/account-verify', [ProfileController::class, 'verifyAccountView'])->name('account.verify');
     Route::post('/account-verify', [ProfileController::class, 'verifyAccount'])->name('account.verify.post');

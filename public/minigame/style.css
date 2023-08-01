@@ -3323,3 +3323,76 @@ slick-track {
 .bg-color-secondary {
     background-color: var(--color-text-secondary)!important;
 }
+
+.css-1xh6k8t {
+    display: flex;
+    transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    color: rgba(0, 0, 0, 0.26);
+}
+
+.css-1cw4hi4 {
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    fill: currentcolor;
+    flex-shrink: 0;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    font-size: inherit;
+}
+
+.css-13m1if9 {
+    display: flex;
+    transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.MuiCardContent-root .css-vubbuv {
+    user-select: none;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    fill: currentcolor;
+    flex-shrink: 0;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    font-size: 1.5rem;
+}
+
+.css-yfb7ui:hover {
+    box-shadow: none;
+}
+
+ .css-yfb7ui:hover {
+     text-decoration: none;
+     background-color: rgba(238, 56, 64, 0.04);
+     border: 1px solid rgb(238, 56, 64);
+ }
+ .css-yfb7ui {
+     display: inline-flex;
+     -webkit-box-align: center;
+     align-items: center;
+     -webkit-box-pack: center;
+     justify-content: center;
+     position: relative;
+     box-sizing: border-box;
+     -webkit-tap-highlight-color: transparent;
+     background-color: transparent;
+     outline: 0px;
+     margin: 0px;
+     cursor: pointer;
+     user-select: none;
+     vertical-align: middle;
+     appearance: none;
+     text-decoration: none;
+     font-weight: 700;
+     text-transform: none;
+     font-family: "Lexend Deca";
+     font-size: 0.9375rem;
+     line-height: 1.75;
+     padding: 7px 21px;
+     border-radius: 4px;
+     transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+     border: 1px solid rgba(238, 56, 64, 0.5);
+     color: rgb(238, 56, 64);
+     box-shadow: none;
+     min-height: 48px;
+     min-width: 48px;
+ }
