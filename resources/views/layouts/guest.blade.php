@@ -43,19 +43,17 @@
 <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase.js"></script>
 <script>
-    // Your web app's Firebase configuration
     const firebaseConfig = {
-        apiKey: "AIzaSyDyuBpbncFLcKTgKtNIjnGohBaWML8CYJM",
-        authDomain: "coex-mall-1a6b0.firebaseapp.com",
-        databaseURL: "https://coex-mall-1a6b0-default-rtdb.firebaseio.com",
-        projectId: "coex-mall-1a6b0",
-        storageBucket: "coex-mall-1a6b0.appspot.com",
-        messagingSenderId: "502495382604",
-        appId: "1:502495382604:web:05fc9ea105aa82818f38e9",
-        measurementId: "G-P1LCWX13QG"
+        apiKey: "{{ env('FB_KEY') }}",
+        authDomain: "{{ env('FB_AUTH') }}",
+        databaseURL: "{{ env('FB_DB') }}",
+        projectId: "{{ env('FB_PROJECT') }}",
+        storageBucket: "{{ env('FB_STORAGE') }}",
+        messagingSenderId: "{{ env('FB_MSG') }}",
+        appId: "{{ env('FB_APP') }}",
+        measurementId: "{{ env('FB_ANALYTICS') }}"
     };
 
-    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
 </script>

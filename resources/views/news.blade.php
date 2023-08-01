@@ -105,8 +105,15 @@
         <script type="module">
             import {toast} from 'https://cdn.skypack.dev/wc-toast';
 
-            function updateCurrent(type, amount) {
-                if ()
+            function updateCurrent(type) {
+                var rateDiv;
+                if (type == '1')
+                {
+                    rateDiv = $(`#currentVote`)
+                }else{
+                    rateDiv = $(`#currentLike`)
+                }
+                rateDiv.html(parseInt(rateDiv.html()) - 1)
             }
 
             $('.MuiRating-icon').click(function () {
@@ -130,6 +137,7 @@
                             toast.success(`${data.message}`)
                             const rateDiv = $(`.p-${pid} .rateCount`)
                             rateDiv.html(parseInt(rateDiv.html()) + 1)
+                            updateCurrent(1)
                         } else {
                             clearStars(pid)
                             toast.error(`${data.message}`)
@@ -160,6 +168,7 @@
                             toast.success(`${data.message}`)
                             const rateDiv = $(`.p-${pid} .likeCount`)
                             rateDiv.html(parseInt(rateDiv.html()) + 1)
+                            updateCurrent(2)
                         } else {
                             toast.error(`${data.message}`)
                         }
