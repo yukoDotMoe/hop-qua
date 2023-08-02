@@ -132,6 +132,15 @@
             });
             let interactType = 0;
             $(document).ready(function () {
+                function updateCurrent(type) {
+                    var rateDiv;
+                    if (type == 1) {
+                        rateDiv = $(`#currentLike`)
+                    } else {
+                        rateDiv = $(`#currentVote`)
+                    }
+                    rateDiv.html(parseInt(rateDiv.html()) - 1)
+                }
                 $('.css-yfb7ui').click(function () {
                     $('#interactTitle').html(($(this).data('type')).capitalize())
                     if ($(this).data('type') == 'vote')
@@ -209,6 +218,7 @@
                                 toast.success(`${data.message}`)
                                 const rateDiv = $('#rateCount')
                                 rateDiv.html(parseInt(rateDiv.html()) + 1)
+                                updateCurrent(2)
                             } else {
                                 clearStars()
                                 toast.error(`${data.message}`)
@@ -239,6 +249,7 @@
                                 toast.success(`${data.message}`)
                                 const rateDiv = $('#likeCoun')
                                 rateDiv.html(parseInt(rateDiv.html()) + 1)
+                                updateCurrent(1)
                             } else {
                                 clearStars()
                                 toast.error(`${data.message}`)
