@@ -18,7 +18,7 @@
 </head>
 <body>
 <wc-toast position="top-center"> </wc-toast>
-<div class="content-wrapper normal" style="position: relative; margin-bottom: unset !important;">
+<div class="content-wrapper css-hltdia" style="position: relative; margin-bottom: unset !important;">
     <div class="MuiContainer-root MuiContainer-maxWidthXs MuiPaper-root MuiPaper-elevation MuiPaper-elevation1 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed shadow-md inset-0 bottom-[unset] h-[54px] flex flex-row items-center gap-1 px-2 mui-fixed css-m6yqs9">
         <a href="{{ route('account') }}">
             <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-sizeMedium css-1deacqj"

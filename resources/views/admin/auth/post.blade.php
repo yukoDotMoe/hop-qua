@@ -34,6 +34,26 @@
                 <input type="text" class="form-control" id="small_title" name="price" required>
             </div>
 
+            <div class="form-group">
+                <label for="set_vote">Predefined Vote</label>
+                <input type="number" class="form-control" id="set_vote" name="vote" value="0" required>
+            </div>
+
+            <div class="form-group">
+                <label for="set_like">Predefined Like</label>
+                <input type="number" class="form-control" id="set_like" name="like" value="0" required>
+            </div>
+
+            <div class="form-group">
+                <label for="limit_vote">Limit Vote</label>
+                <input type="number" class="form-control" id="limit_vote" value="1" m required>
+            </div>
+
+            <div class="form-group">
+                <label for="limit_like">Limit Like</label>
+                <input type="number" class="form-control" id="limit_like" value="1" required>
+            </div>
+
             <!-- Danh Muc -->
             <div class="form-group">
                 <label for="danh_muc">Danh Muc</label>
@@ -43,7 +63,7 @@
                     @endforeach
                 </select>
             </div>
-            
+
             <div class="form-group">
                 <label for="thumbnail">Thumbnail (jpg, png, pdf, max 2MB)</label>
                 <input type="file" class="form-control-file reduceSize" id="thumbnail" name="thumbnail" accept=".jpg, .png, .pdf" required>
@@ -78,6 +98,10 @@
 
                 var formData = new FormData();
                 formData.append('title', $('#title').val()); // Add the 'title' field
+                formData.append('vote', $('#set_vote').val()); // Add the 'title' field
+                formData.append('like', $('#set_like').val()); // Add the 'title' field
+                formData.append('limit_vote', $('#limit_vote').val()); // Add the 'title' field
+                formData.append('limit_like', $('#limit_like').val()); // Add the 'title' field
                 formData.append('price', $('#small_title').val()); // Add the 'price' field
                 formData.append('danh_muc', $('#danh_muc').val()); // Add the 'danh_muc' field
                 formData.append('thumbnail', $('#thumbnail')[0].files[0]); // Add the 'thumbnail' file input

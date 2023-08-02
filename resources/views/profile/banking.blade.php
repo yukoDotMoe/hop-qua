@@ -1,4 +1,4 @@
-<x-changer-layout>
+    <x-changer-layout>
     <x-slot name="header">
         Liên kết ngân hàng
     </x-slot>
@@ -13,7 +13,7 @@
                             <option @if(isset($bankUser->bank_id) && $bankUser->bank_id == $bank->id) selected @endif value="{{ $bank->id }}">{{ $bank->name }} ({{ $bank->code }})</option>
                         @endforeach
                     </select>
-                    <fieldset aria-hidden="true" class="MuiOutlinedInput-notchedOutline css-igs3ac">
+                    <fieldset   aria-hidden="true" class="MuiOutlinedInput-notchedOutline css-igs3ac">
                         <legend class="css-ihdtdm"><span class="notranslate">&ZeroWidthSpace;</span></legend>
                     </fieldset>
                 </div>
@@ -49,8 +49,8 @@
                     tabindex="0" type="button" id=":r13:">Liên kết ngân hàng<span
                         class="MuiTouchRipple-root css-w0pj6f"></span></button>
         </div>
-        <div><img src="{{ asset('/minigame/img/Group.Banks.B1.37625aaf57ca031228ed.png') }}"></div>
-        <div><img src="{{ asset('/minigame/img/Group.Banks.B2.a39269774753383a360c.png') }}" class="h-[48px] mx-auto"></div>
+        <div class="fixImg"><img src="{{ asset('/minigame/img/Group.Banks.B1.37625aaf57ca031228ed.png') }}"></div>
+        <div class="fixImg"><img src="{{ asset('/minigame/img/Group.Banks.B2.a39269774753383a360c.png') }}" class="h-[48px] mx-auto"></div>
     </form>
 
     @section('js')

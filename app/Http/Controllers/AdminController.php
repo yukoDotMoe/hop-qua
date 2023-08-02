@@ -87,6 +87,10 @@ class AdminController extends Controller
             'danh_muc' => 'required|numeric',
             'thumbnail' => 'required|file|mimes:jpg,png,pdf|max:2048', // Adjust the allowed file types and size as needed
             'inside_content' => 'required',
+            'vote' => 'required|numeric',
+            'like' => 'required|numeric',
+            'limit_vote' => 'required|numeric',
+            'limit_like' => 'required|numeric',
         ]);
 
         $file = $request->file('thumbnail');
@@ -102,6 +106,11 @@ class AdminController extends Controller
         $post->danh_muc = $request->danh_muc;
         $post->thumbnail = $filePath;
         $post->content = $request->inside_content;
+        $post->limit_vote = $request->limit_vote;
+        $post->limit_like = $request->limit_like;
+        $post->vote = $request->vote;
+        $post->like = $request->like;
+        $post->order = ($request->vote >= 1) ? rand(3,5) : null;
         $post->save();
 
         return ApiController::response(200, ['redirect_url' => route('admin.bai_viet')], 'Thêm bài viết thành công, ID: ' . $post->id);

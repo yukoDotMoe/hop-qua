@@ -9,9 +9,9 @@
                     <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorWarning MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart css-vjls2h">
                         <div class="MuiInputAdornment-root MuiInputAdornment-positionStart MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1a6giau">
                             <span class="notranslate">&ZeroWidthSpace;</span>
-                            +84
+
                         </div>
-                        <input aria-invalid="false" id=":r0:" name="phone_number" placeholder="Số điện thoại của bạn.." type="text"
+                        <input aria-invalid="false" id=":r0:" name="phone_number" placeholder="Số điện thoại của bạn.." type="number"
                                class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart css-1ixds2g"
                                value="">
                         <fieldset aria-hidden="true" class="MuiOutlinedInput-notchedOutline css-igs3ac">
@@ -19,7 +19,6 @@
                         </fieldset>
                     </div>
                 </div>
-                <div id="recaptcha-container" class="mx-auto"></div>
                 <div class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-feqhe6 d-none" id="verifyCode">
                     <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorWarning MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiInputBase-adornedEnd css-1x41kx5">
                         <div class="MuiInputAdornment-root MuiInputAdornment-positionStart MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1a6giau">
@@ -31,7 +30,7 @@
                                       fill="#9E9E9E"></path>
                             </svg>
                         </div>
-                        <input aria-invalid="false" id=":r1:" name="verification_code" placeholder="Mã xác nhận" type="text"
+                        <input aria-invalid="false" id=":r1:" name="verification_code" placeholder="Mã xác nhận" type="number"
                                class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart MuiInputBase-inputAdornedEnd css-1gnht4k"
                                value="">
                         <div class="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1nvf7g0">
@@ -55,6 +54,8 @@
                 <button id="submitBtn" class=" MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge mx-auto shadow-none rounded-full bg-[#fa6253] css-avm12u"
                         tabindex="0" type="button" id=":r2:">Gửi mã xác nhận<span
                             class="MuiTouchRipple-root css-w0pj6f"></span></button>
+                <div id="recaptcha-container" class="mx-auto"></div>
+
                 </div>
             </div>
         </div>
@@ -68,16 +69,35 @@
                 recaptchaVerifier.render();
             }
             function isVietnamesePhoneNumber(number) {
-                if (number.trim() === '') return false
+                var numberTemp;
+                let numString = number.toString();
+                if (numString.charAt(0) === '0') {
+                    numberTemp = parseInt(numString.slice(1));
+                } else {
+                    numberTemp =  number;
+                }
+                numberTemp = numberTemp.toString();
+                if (numberTemp.trim() === '') return false
                 const vietnamesePhoneNumberRegex = /^[0-9]{9}$/;
-                return vietnamesePhoneNumberRegex.test(number);
+                return vietnamesePhoneNumberRegex.test(numberTemp);
             }
             $(document).ready(function () {
                 render();
                 $('#submitBtn').click(function (e) {
                     e.preventDefault()
+                    var _this = $('#submitBtn');
+                    setTimeout(function () {
+                        _this.html('<i class="fa-solid fa-circle-notch fa-spin"></i>');
+                        _this.prop('disabled', true);
+                    }, 300);
                     const phoneNum = $('input[name="phone_number"]').val()
-                    if(!isVietnamesePhoneNumber(phoneNum)) return toast.error('Số điện thoại của bạn không hợp lệ')
+                    if(!isVietnamesePhoneNumber(phoneNum)) {
+                        setTimeout(function () {
+                            _this.html('Gửi mã xác minh');
+                            _this.prop('disabled', false);
+                        }, 300);
+                        return toast.error('Số điện thoại của bạn không hợp lệ')
+                    }
                     firebase.auth().signInWithPhoneNumber(`+84${phoneNum}`, window.recaptchaVerifier).then(function(confirmationResult) {
                         window.confirmationResult = confirmationResult;
                         toast.success("Đã gửi mã xác nhận tới SDT của bạn.")
@@ -93,6 +113,10 @@
                                 errMsg = 'SDT của bạn đã bị chặn.';
                                 break;
                         }
+                        setTimeout(function () {
+                            _this.html('Gửi mã xác minh');
+                            _this.prop('disabled', false);
+                        }, 300);
                         toast.error(errMsg)
                     });
                 })
@@ -102,7 +126,7 @@
                     var _this = $('#loginBtn');
                     setTimeout(function () {
                         _this.html('<i class="fa-solid fa-circle-notch fa-spin"></i>');
-                        _this.prop('disabled', false);
+                        _this.prop('disabled', true);
                     }, 300);
                     const veriCode = $('input[name="verification_code"]').val()
                     const credential = firebase.auth.PhoneAuthProvider.credential(confirmationResult.verificationId, veriCode);

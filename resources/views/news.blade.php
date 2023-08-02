@@ -1,27 +1,30 @@
 <x-news-layout>
     <div class="accordion" id="post_accor">
-
         @foreach(\App\Models\DanhMuc::all() as $dm)
-            <div class="accordion-item border-0" >
-                <button class="w-100" type="button" data-bs-toggle="collapse" data-bs-target="#{{$dm->id}}">
-                    <div class="mb-3" >
+            <div class="accordion-item border-0">
+                <button class="w-100" type="button" data-bs-toggle="collapse" data-bs-target="#post_accor_{{$dm->id}}">
+                    <div class="mb-3">
                         <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 h-[48px] rounded-none flex items-center px-3 border-l-4 border-primary-dark shadow-md sticky top-0 z-10 cursor-pointer hover:brightness-90 css-aoeo82">
                             <div class="text-lg font-bold">{{$dm->name}}</div>
                         </div>
                     </div>
                 </button>
                 @php($posts = \App\Http\Controllers\NewsController::findPost($dm->id)->paginate(10))
-                @foreach($posts as $post)
-                    <div class="p-{{ $post->post_id }} accordion-collapse collapse @if($loop->parent->iteration == 1) show @endif" data-bs-parent="#post_accor">
+                <div data-bs-parent="#post_accor" id="post_accor_{{ $dm->id }}"
+                     class="accordion-collapse collapse @if($loop->iteration == 1) show @endif"
+                     data-bs-parent="#post_accor">
+                    @foreach($posts as $post)
+
                         <div class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-c4sutr"
                              style="min-height: 0px;">
 
-                            <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root rounded-none mb-3 relative css-s18byi">
+                            <div class="p-{{ $post->post_id }} MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root rounded-none mb-3 relative css-s18byi">
                                 <div class="slick-slider w-full flex justify-center h-[240px] slick-initialized">
                                     <div class="slick-list">
                                         <div class="slick-track"
                                              style="width: 444px; opacity: 1; transform: translate3d(0px, 0px, 0px);">
-                                            <div data-index="0" class="slick-slide slick-active slick-current" tabindex="-1"
+                                            <div data-index="0" class="slick-slide slick-active slick-current"
+                                                 tabindex="-1"
                                                  aria-hidden="false" style="outline: none; width: 444px;">
                                                 <div>
                                                     <div class="MuiCardMedia-root h-[240px] flex flex-col justify-end css-pqdqbj"
@@ -43,10 +46,11 @@
                                                 class="font-bold hover:text-navbar">{{ number_format($post->price , 0, '.', '.') }}</span></a>
                                     <div class="flex justify-between">
                                         <div class="flex items-center gap-1">
-                                            <span class="MuiRating-root MuiRating-sizeMedium css-1ipqyij" data-post="{{ $post->post_id }}">
+                                            <span class="MuiRating-root MuiRating-sizeMedium css-1ipqyij"
+                                                  data-post="{{ $post->post_id }}">
                                                 <x-newsRate rating="{{ $post->order ?? 0 }}"/>
                                             </span>
-                                            <div><span class="rateCount" >{{ $post->vote }}</span> Đánh giá</div>
+                                            <div><span class="rateCount">{{ $post->vote }}</span> Đánh giá</div>
                                         </div>
                                         <div class="flex items-center gap-1">
                                             <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium text-[orangered] cursor-pointer css-vubbuv likePost"
@@ -94,9 +98,11 @@
                                 </div>
                             </div>
 
+
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+
+                </div>
                 {{ $posts->links() }}
             </div>
         @endforeach
@@ -107,10 +113,9 @@
 
             function updateCurrent(type) {
                 var rateDiv;
-                if (type == '1')
-                {
+                if (type == 1) {
                     rateDiv = $(`#currentVote`)
-                }else{
+                } else {
                     rateDiv = $(`#currentLike`)
                 }
                 rateDiv.html(parseInt(rateDiv.html()) - 1)
@@ -118,15 +123,17 @@
 
             $('.MuiRating-icon').click(function () {
                 const pid = $(this).parent().data('post')
-                const rating = $(this).data('rating');
+                const rating = $(this).data('rating')
                 editStar($(this), pid)
                 $.ajax({
-                    url: "/news/react/"+pid,
+                    url: "/news/react/" + pid,
                     type: 'POST',
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({
-                        react: 1
+                        react: 1,
+                        post_id: pid,
+                        rating: rating
                     }),
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -137,11 +144,11 @@
                             toast.success(`${data.message}`)
                             const rateDiv = $(`.p-${pid} .rateCount`)
                             rateDiv.html(parseInt(rateDiv.html()) + 1)
-                            updateCurrent(1)
+                            updateCurrent(2)
                         } else {
-                            clearStars(pid)
                             toast.error(`${data.message}`)
                         }
+                        clearStars(pid)
                     },
                     error: function (data) {
                         toast.error(data.responseJSON.message ?? data.message);
@@ -152,12 +159,13 @@
             $('.likePost').click(function () {
                 const pid = $(this).data('post');
                 $.ajax({
-                    url: "/news/react/"+pid,
+                    url: "/news/react/" + pid,
                     type: 'POST',
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({
-                        react: 2
+                        react: 2,
+                        post_id: pid
                     }),
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -168,7 +176,7 @@
                             toast.success(`${data.message}`)
                             const rateDiv = $(`.p-${pid} .likeCount`)
                             rateDiv.html(parseInt(rateDiv.html()) + 1)
-                            updateCurrent(2)
+                            updateCurrent(1)
                         } else {
                             toast.error(`${data.message}`)
                         }
@@ -178,6 +186,7 @@
                     }
                 });
             })
+
             function editStar(_this, id) {
                 $(`.p-${id} .MuiRating-icon`).removeClass('MuiRating-iconFilled css-13m1if9');
                 $(`.p-${id} .MuiRating-icon`).addClass('MuiRating-iconEmpty css-1xh6k8t');
