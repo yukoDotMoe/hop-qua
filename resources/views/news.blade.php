@@ -9,7 +9,7 @@
                         </div>
                     </div>
                 </button>
-                @php($posts = \App\Http\Controllers\NewsController::findPost($dm->id)->paginate(10))
+                @php($posts = \App\Http\Controllers\NewsController::findPost($dm->id)->paginate(5))
                 <div data-bs-parent="#post_accor" id="post_accor_{{ $dm->id }}"
                      class="accordion-collapse collapse @if($loop->iteration == 1) show @endif"
                      data-bs-parent="#post_accor">
@@ -31,9 +31,9 @@
                                                          role="img"
                                                          tabindex="-1"
                                                          style="background-image: url(&quot;{{ asset($post->thumbnail) }}&quot;); width: 100%; display: inline-block;">
-                                                        <div class="w-full text-center px-3 pb-6">
+                                                        <div style="width: 90%!important" class="d-flex justify-content-center">
                                                             <div class="text-lg font-bold text-white"
-                                                                 style="text-shadow: rgb(0, 0, 0) 0px 0px 4px;">{{ mb_strimwidth($post->title, 0, 35, '...') }}</div>
+                                                                 style="text-shadow: rgb(0, 0, 0) 0px 0px 4px;">{{ mb_strimwidth($post->title, 0, 20, '...') }}</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -62,7 +62,7 @@
                                         </div>
                                     </div>
                                     <div class="text-sm">
-                                        {{ $post->content }}
+                                        {{ mb_strimwidth($post->content, 0, 200, '...') }}
                                     </div>
                                     <div class="flex justify-between">
                                         <div class="MuiChip-root MuiChip-filled MuiChip-sizeSmall MuiChip-colorDefault MuiChip-filledDefault bg-color-secondary text-white css-31ic4c">
@@ -94,7 +94,9 @@
                     @endforeach
 
                 </div>
-                {{ $posts->links() }}
+                <div class="d-flex justify-content-center">
+                    {{ $posts->links() }}
+                </div>
             </div>
         @endforeach
     </div>
@@ -105,9 +107,9 @@
             function updateCurrent(type) {
                 var rateDiv;
                 if (type == 1) {
-                    rateDiv = $(`#currentVote`)
-                } else {
                     rateDiv = $(`#currentLike`)
+                } else {
+                    rateDiv = $(`#currentVote`)
                 }
                 rateDiv.html(parseInt(rateDiv.html()) - 1)
             }

@@ -1,5 +1,5 @@
 <x-news-layout>
-    @section('header') {{ $post->title }} @endsection
+    @section('header') {{ mb_strimwidth($post->title, 0, 20, '...') }} @endsection
     <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root rounded-none mb-3 bg-transparent css-s18byi mt-5">
         <div class="slick-slider w-full flex justify-center h-[240px] slick-initialized">
             <div class="slick-list">
@@ -34,7 +34,7 @@
             </div>
             <div class="flex items-center gap-1 text-primary-light">
                 <span class="h5">{{ number_format($post->price , 0, '.', '.') }} đ</span></div>
-            <div>{{ $post->content  }}
+            <div>{{ mb_strimwidth($post->content, 0, 200, '...') }}
             </div>
         </div>
     </div>
