@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('admin/vendors/simplebar/css/simplebar.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/css/vendors/simplebar.css') }}">
     <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
@@ -91,16 +91,12 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="{{ asset('admin/vendors/@coreui/coreui/js/coreui.bundle.min.js') }}"></script>
 <script src="{{ asset('admin/vendors/simplebar/js/simplebar.min.js') }}"></script>
-<script src="{{ asset('admin/vendors/chart.js/js/chart.min.js') }}"></script>
-<script src="{{ asset('admin/vendors/@coreui/chartjs/js/coreui-chartjs.js') }}"></script>
 <script src="{{ asset('admin/vendors/@coreui/utils/js/coreui-utils.js') }}"></script>
 <script src="{{ asset('admin/js/main.js') }}"></script>
-<script src="https://js.pusher.com/3.1/pusher.min.js"></script>
-<!-- Add these script tags at the end of your HTML body -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/laravel-echo/1.12.1/echo.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
 @yield('js')

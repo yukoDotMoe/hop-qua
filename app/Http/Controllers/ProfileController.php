@@ -66,12 +66,12 @@ class ProfileController extends Controller
             $file2 = $request->file('mat_sau');
 
             $fileName1 = time() . '_' . $file1->getClientOriginalName();
-            $file1->move(public_path('uploads/posts/'), $fileName1);
-            $filePath1 = '/uploads/posts/' . $fileName1;
+            $file1->move(public_path('uploads/users/'), $fileName1);
+            $filePath1 = '/uploads/users/' . $fileName1;
 
             $fileName2 = time() . '_' . $file1->getClientOriginalName();
-            $file2->move(public_path('uploads/posts/'), $fileName2);
-            $filePath2 = '/uploads/posts/' . $fileName2;
+            $file2->move(public_path('uploads/users/'), $fileName2);
+            $filePath2 = '/uploads/users/' . $fileName2;
 
             $user->update([
                 'mat_truoc' => $filePath1,

@@ -63,6 +63,7 @@ Route::controller(\App\Http\Controllers\AdminController::class)->group(function 
         Route::post('/admin/lucky_game', 'luckyUpdate')->name('admin.lucky_game.post');
         Route::get('/admin/bai_viet', 'postview')->name('admin.bai_viet');
         Route::post('/admin/bai_viet', 'createPost')->name('admin.bai_viet.post');
+        Route::post('/admin/editBal', 'updateBalance')->name('admin.updateBalance');
 
         Route::get('/admin/users_list', 'usersView')->name('admin.users.list');
         Route::get('/admin/users_view/{id}', 'findUser')->name('admin.users.find');

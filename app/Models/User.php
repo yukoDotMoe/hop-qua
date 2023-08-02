@@ -91,6 +91,6 @@ class User extends Authenticatable
     public function getReact($type)
     {
         $wallet = $this->getWallet();
-        return ($type == 1) ? $wallet->vote : $wallet->like;
+            return ($type == 1) ? $wallet->vote : $wallet->like;
     }
 }

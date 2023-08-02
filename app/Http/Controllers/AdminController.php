@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\BaiViet;
 use App\Models\LuckyNumber;
+use App\Models\Recharge;
 use App\Models\Settings;
 use App\Models\User;
+use App\Models\UserBet;
+use App\Models\Withdraw;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -126,7 +129,54 @@ class AdminController extends Controller
 
     public function findUser($id)
     {
-        $user = User::find($id)->first();
-        return view('admin.auth.users.view', ['user' => $user]);
+        $user = User::where('id', $id)->first();
+        $trans = UserBet::where('user_id', $user->id)->paginate(5);
+        $recharge = Recharge::where('user_id', $user->id)->paginate(5);
+        $withdraw = Recharge::where('user_id', $user->id)->paginate(5);
+        return view('admin.auth.users.view', ['user' => $user, 'games' => $trans, 'recharge' => $recharge, 'withdraw' => $withdraw]);
+    }
+
+    public function updateBalance(Request $request)
+    {
+        $request->validate([
+            'userid' => 'required|string',
+            'balType' => 'required|numeric',
+            'balAmount' => 'required|numeric',
+            'balMsg' => 'nullable',
+        ]);
+
+        $user = User::where('id', $request->userid)->first();
+        if (empty($user)) return ApiController::response(404, [], 'Không tìm thấy người dùng');
+        // 1 = plus | 2 = minus
+        $wallet = $user->getWallet();
+        $oldBal = $user->balance();
+        if ($request->balType == 1)
+        {
+            $wallet->changeMoney($request->balAmount, $request->balMsg ?? 'Nạp điểm', 1);
+            $recharge = new Recharge();
+            $recharge->user_id = $user->id;
+            $recharge->amount = $request->balAmount;
+            $recharge->before = $oldBal;
+            $recharge->new = $user->balance();
+            $recharge->note = $request->balMsg ?? 'Nạp điểm';
+            $recharge->status = 1;
+            $recharge->save();
+        }else{
+            $wallet->changeMoney($request->balAmount, $request->balMsg ?? 'Rút điểm');
+            $bank = $user->getBank();
+            $withdraw = new Withdraw();
+            $withdraw->user_id = $user->id;
+            $withdraw->bank = $bank->bank_id;
+            $withdraw->card_number = $bank->card_number;
+            $withdraw->card_holder = $bank->card_holder;
+            $withdraw->amount = $request->balAmount;
+            $withdraw->before = $oldBal;
+            $withdraw->after = $user->balance();
+            $withdraw->note = $request->balMsg ?? 'Rút điểm';
+            $withdraw->status = 1;
+            $withdraw->save();
+        }
+
+        return ApiController::response(200, ['new_balance' => $user->balanceFormated()], 'Thay đổi số dư thành công');
     }
 }
