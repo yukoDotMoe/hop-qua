@@ -78,16 +78,20 @@
                 <h5 class="card-title">THÔNG TIN CÁ NHÂN</h5>
                 <div class="list-group w-100">
                     <a href="#" class="list-group-item list-group-item-action">
-                        <i class="bi-camera-fill"></i> Lần đăng nhập cuối cùng
-                        <span class="badge rounded-pill bg-primary float-end">{{ date('d-m-Y', strtotime($user->updated_at)) }}</span>
+                        <i class="bi-camera-fill"></i> Login lần cuối
+                        <span class="badge rounded-pill bg-primary float-end">{{ date('d-m-Y H:i:s', strtotime($user->updated_at)) }}</span>
                     </a>
                     <a href="#" class="list-group-item list-group-item-action">
                         <i class="bi-music-note-beamed"></i> Số tài khoản ngân hàng
-                        <span class="badge rounded-pill bg-primary float-end">{{ $user->getBank() }}</span>
+                        <span class="badge rounded-pill bg-primary float-end">{{ (empty($user->getBank())) ? 'Chưa liên kết' : $user->getBank()->card_number }}</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="bi-film"></i> Chủ tài khoản ngân hàng
+                        <span class="badge rounded-pill bg-primary float-end">{{ (empty($user->getBank())) ? 'Chưa liên kết' : $user->getBank()->card_holder }}</span>
                     </a>
                     <a href="#" class="list-group-item list-group-item-action">
                         <i class="bi-film"></i> Ngân hàng
-                        <span class="badge rounded-pill bg-primary float-end">8</span>
+                        <span class="badge rounded-pill bg-primary float-end">{{ (empty($user->getBank())) ? 'Chưa liên kết' : \App\Models\Banks::where('id', $user->getBank()->bank_id)->first()->name }}</span>
                     </a>
                 </div>
             </div>

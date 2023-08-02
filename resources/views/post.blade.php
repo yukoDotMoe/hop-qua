@@ -203,7 +203,8 @@
                         dataType: "json",
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify({
-                            react: 1
+                            react: 1,
+                            post_id: '{{ $post->post_id }}'
                         }),
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -232,7 +233,8 @@
                         dataType: "json",
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify({
-                            react: 2
+                            react: 2,
+                            post_id: '{{ $post->post_id }}'
                         }),
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
