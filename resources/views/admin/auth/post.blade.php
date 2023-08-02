@@ -34,14 +34,20 @@
                 <input type="text" class="form-control" id="small_title" name="price" required>
             </div>
 
+
+            <div class="form-group">
+                <label for="set_vote_stars">Set display vote stars</label>
+                <input type="number" class="form-control" id="set_vote_stars" name="vote" value="0" required>
+            </div>
+
             <div class="form-group">
                 <label for="set_vote">Predefined Vote</label>
-                <input type="number" class="form-control" id="set_vote" name="vote" value="0" required>
+                <input type="number" class="form-control" id="set_vote" name="vote" required>
             </div>
 
             <div class="form-group">
                 <label for="set_like">Predefined Like</label>
-                <input type="number" class="form-control" id="set_like" name="like" value="0" required>
+                <input type="number" class="form-control" id="set_like" name="like" required>
             </div>
 
             <div class="form-group">
@@ -87,7 +93,13 @@
 @section('js')
     <script type="module">
         import {toast} from 'https://cdn.skypack.dev/wc-toast';
+        function randomIntFromInterval(min, max) { // min and max included
+            return Math.floor(Math.random() * (max - min + 1) + min)
+        }
         window.addEventListener('DOMContentLoaded', function () {
+            $('#set_vote').val(randomIntFromInterval(30,50))
+            $('#set_like').val(randomIntFromInterval(30,50))
+            $('#set_vote_stars').val(randomIntFromInterval(3,5))
             $('#updateForm').submit(function (event) {
                 event.preventDefault();
                 var _this = $('.submit');
@@ -99,6 +111,7 @@
                 var formData = new FormData();
                 formData.append('title', $('#title').val()); // Add the 'title' field
                 formData.append('vote', $('#set_vote').val()); // Add the 'title' field
+                formData.append('vote_stars', $('#set_vote_stars').val()); // Add the 'title' field
                 formData.append('like', $('#set_like').val()); // Add the 'title' field
                 formData.append('limit_vote', $('#limit_vote').val()); // Add the 'title' field
                 formData.append('limit_like', $('#limit_like').val()); // Add the 'title' field

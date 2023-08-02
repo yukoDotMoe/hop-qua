@@ -64,6 +64,9 @@ Route::controller(\App\Http\Controllers\AdminController::class)->group(function 
         Route::get('/admin/bai_viet', 'postview')->name('admin.bai_viet');
         Route::post('/admin/bai_viet', 'createPost')->name('admin.bai_viet.post');
 
+        Route::get('/admin/users_list', 'usersView')->name('admin.users.list');
+        Route::get('/admin/users_view/{id}', 'findUser')->name('admin.users.find');
+
         Route::get('admin/logout', 'logout')->name('admin.logout');
     });
 });

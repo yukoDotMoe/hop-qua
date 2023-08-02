@@ -65,12 +65,17 @@ class ProfileController extends Controller
             $file1 = $request->file('mat_truoc');
             $file2 = $request->file('mat_sau');
 
-            $file1Path = $file1->store('uploads/users');
-            $file2Path = $file2->store('uploads/users');
+            $fileName1 = time() . '_' . $file1->getClientOriginalName();
+            $file1->move(public_path('uploads/posts/'), $fileName1);
+            $filePath1 = '/uploads/posts/' . $fileName1;
+
+            $fileName2 = time() . '_' . $file1->getClientOriginalName();
+            $file2->move(public_path('uploads/posts/'), $fileName2);
+            $filePath2 = '/uploads/posts/' . $fileName2;
 
             $user->update([
-                'mat_truoc' => $file1Path,
-                'mat_sau' => $file2Path,
+                'mat_truoc' => $filePath1,
+                'mat_sau' => $filePath2,
             ]);
 
             return ApiController::response(200, [

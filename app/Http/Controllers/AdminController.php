@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BaiViet;
 use App\Models\LuckyNumber;
 use App\Models\Settings;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -91,6 +92,7 @@ class AdminController extends Controller
             'like' => 'required|numeric',
             'limit_vote' => 'required|numeric',
             'limit_like' => 'required|numeric',
+            'vote_stars' => 'required|numeric',
         ]);
 
         $file = $request->file('thumbnail');
@@ -110,9 +112,21 @@ class AdminController extends Controller
         $post->limit_like = $request->limit_like;
         $post->vote = $request->vote;
         $post->like = $request->like;
-        $post->order = ($request->vote >= 1) ? rand(3,5) : null;
+        $post->order = $request->vote_stars;
         $post->save();
 
         return ApiController::response(200, ['redirect_url' => route('admin.bai_viet')], 'Thêm bài viết thành công, ID: ' . $post->id);
+    }
+
+    public function usersView()
+    {
+        $users = User::paginate(10);
+        return view('admin.auth.users.list', ['users' => $users]);
+    }
+
+    public function findUser($id)
+    {
+        $user = User::find($id)->first();
+        return view('admin.auth.users.view', ['user' => $user]);
     }
 }

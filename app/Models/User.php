@@ -85,7 +85,7 @@ class User extends Authenticatable
 
     public function getBank()
     {
-        return $this->hasOne(UserBank::class);
+        return UserBank::where('user_id', $this->id)->first();
     }
 
     public function getReact($type)
