@@ -103,16 +103,6 @@
         <script type="module">
             import {toast} from 'https://cdn.skypack.dev/wc-toast';
 
-            function updateCurrent(type) {
-                var rateDiv;
-                if (type == 1) {
-                    rateDiv = $(`#currentLike`)
-                } else {
-                    rateDiv = $(`#currentVote`)
-                }
-                rateDiv.html(parseInt(rateDiv.html()) - 1)
-            }
-
             $('.MuiRating-icon').click(function () {
                 const pid = $(this).parent().data('post')
                 const rating = $(this).data('rating')

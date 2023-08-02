@@ -132,14 +132,14 @@
             });
             let interactType = 0;
             $(document).ready(function () {
-                function updateCurrent(type) {
+                function updateCurrentPlus(type, amount) {
                     var rateDiv;
                     if (type == 1) {
-                        rateDiv = $(`#currentLike`)
-                    } else {
                         rateDiv = $(`#currentVote`)
+                    } else {
+                        rateDiv = $(`#currentLike`)
                     }
-                    rateDiv.html(parseInt(rateDiv.html()) - 1)
+                    rateDiv.html(parseInt(rateDiv.html()) + amount)
                 }
                 $('.css-yfb7ui').click(function () {
                     $('#interactTitle').html(($(this).data('type')).capitalize())
@@ -167,6 +167,7 @@
                         success: function (data) {
                             if (data.success) {
                                 toast.success(`${data.message}`)
+                                updateCurrentPlus(interactType, parseInt($('#amountRate').val()))
                             } else {
                                 clearStars()
                                 toast.error(`${data.message}`)

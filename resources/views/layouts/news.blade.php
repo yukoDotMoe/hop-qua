@@ -49,6 +49,17 @@
 @include('layouts.navigation')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function updateCurrent(type) {
+        var rateDiv;
+        if (type == 1) {
+            rateDiv = $(`#currentLike`)
+        } else {
+            rateDiv = $(`#currentVote`)
+        }
+        rateDiv.html(parseInt(rateDiv.html()) - 1)
+    }
+</script>
 @yield('js')
 </body>
 </html>
