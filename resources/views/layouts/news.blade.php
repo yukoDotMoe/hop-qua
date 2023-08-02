@@ -38,9 +38,9 @@
     <div class="MuiContainer-root MuiContainer-maxWidthXs flex justify-end fixed left-0 right-0 top-[unset] bottom-[68px] z-20 px-2 css-hltdia">
         <div class="w-max flex items-center gap-x-2 font-medium text-color-primary rounded-2xl">
             <div class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault bg-color-secondary text-white css-1l3bzoq">
-                <span class="MuiChip-label MuiChip-labelMedium css-9iedg7">Số lượt like có: <span id="currentLike">{{ Auth::user()->getReact(1) }}</span></span></div>
+                <span class="MuiChip-label MuiChip-labelMedium css-9iedg7">Số lượt like có: <span id="currentLike">{{ Auth::user()->getReact(2) }}</span></span></div>
             <div class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault bg-color-secondary text-white css-1l3bzoq">
-                <span class="MuiChip-label MuiChip-labelMedium css-9iedg7">Số lượt vote có: <span id="currentVote">{{ Auth::user()->getReact(2) }}</span></span></div>
+                <span class="MuiChip-label MuiChip-labelMedium css-9iedg7">Số lượt vote có: <span id="currentVote">{{ Auth::user()->getReact(1) }}</span></span></div>
         </div>
     </div>
 @endif

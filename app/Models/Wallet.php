@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class Wallet extends Model
 {
@@ -33,9 +34,11 @@ class Wallet extends Model
     {
         if ($interact == 1)
         {
+            Log::info('vote');
             $amountBefore = $this->vote;
             $this->vote = ($type == 0 ) ? $this->vote - $amount : $this->vote + $amount;
         }else{
+            Log::info('like');
             $amountBefore = $this->like;
             $this->like = ($type == 0 ) ? $this->like - $amount : $this->like + $amount;
         }

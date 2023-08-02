@@ -33,7 +33,7 @@
                                                          style="background-image: url(&quot;{{ asset($post->thumbnail) }}&quot;); width: 100%; display: inline-block;">
                                                         <div class="w-full text-center px-3 pb-6">
                                                             <div class="text-lg font-bold text-white"
-                                                                 style="text-shadow: rgb(0, 0, 0) 0px 0px 4px;">{{ $post->title }}</div>
+                                                                 style="text-shadow: rgb(0, 0, 0) 0px 0px 4px;">{{ mb_strimwidth($post->title, 0, 35, '...') }}</div>
                                                         </div>
                                                     </div>
                                                 </div>
