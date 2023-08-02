@@ -35,7 +35,6 @@
         </div>
     @endif
     {{ $slot }}
-@if(Route::current()->getName() == 'news')
     <div class="MuiContainer-root MuiContainer-maxWidthXs flex justify-end fixed left-0 right-0 top-[unset] bottom-[68px] z-20 px-2 css-hltdia">
         <div class="w-max flex items-center gap-x-2 font-medium text-color-primary rounded-2xl">
             <div class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault bg-color-secondary text-white css-1l3bzoq">
@@ -44,7 +43,6 @@
                 <span class="MuiChip-label MuiChip-labelMedium css-9iedg7">Số lượt vote có: <span id="currentVote">{{ Auth::user()->getReact(1) }}</span></span></div>
         </div>
     </div>
-@endif
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
