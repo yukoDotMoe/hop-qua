@@ -1,5 +1,5 @@
 <x-news-layout>
-    @section('header') {{ number_format($post->price , 0, '.', '.') }} @endsection
+    @section('header') {{ $post->title }} @endsection
     <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root rounded-none mb-3 bg-transparent css-s18byi mt-5">
         <div class="slick-slider w-full flex justify-center h-[240px] slick-initialized">
             <div class="slick-list">
@@ -33,13 +33,7 @@
                 </div>
             </div>
             <div class="flex items-center gap-1 text-primary-light">
-                <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium text-base css-vubbuv"
-                     style="fill: rgb(255 69 0/var(--tw-text-opacity))!important;" focusable="false"
-                     aria-hidden="true" viewBox="0 0 24 24" data-testid="AccessTimeIcon">
-                    <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path>
-                    <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"></path>
-                </svg>
-                <span class="text-sm">{{ $post->created_at->format('d/m/Y')  }}</span></div>
+                <span class="h5">{{ number_format($post->price , 0, '.', '.') }} đ</span></div>
             <div>{{ $post->content  }}
             </div>
         </div>
@@ -55,13 +49,11 @@
     <div class="px-3 flex justify-between">
         <div>
             <button class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeLarge MuiButton-outlinedSizeLarge MuiButton-disableElevation MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeLarge MuiButton-outlinedSizeLarge MuiButton-disableElevation px-6 css-yfb7ui"
-                    tabindex="0" type="button" data-toggle="modal"
-                    data-target="#exampleModal" data-type="like">Mua Like<span class="MuiTouchRipple-root css-w0pj6f"></span></button>
+                    tabindex="0" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" data-type="like">Mua Like<span class="MuiTouchRipple-root css-w0pj6f"></span></button>
         </div>
         <div>
             <button class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeLarge MuiButton-outlinedSizeLarge MuiButton-disableElevation MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeLarge MuiButton-outlinedSizeLarge MuiButton-disableElevation px-6 css-yfb7ui"
-                    tabindex="0" type="button" data-toggle="modal"
-                    data-target="#exampleModal" data-type="vote">Mua Vote<span class="MuiTouchRipple-root css-w0pj6f"></span></button>
+                    tabindex="0" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" data-type="vote">Mua Vote<span class="MuiTouchRipple-root css-w0pj6f"></span></button>
         </div>
     </div>
 
@@ -69,7 +61,7 @@
         <div class="modal-dialog modal-dialog-centered ">
             <div class="modal-content css-mbdu2s">
                 <div class="modal-body ">
-                    <button data-dismiss="modal"
+                    <button data-bs-dismiss="modal"
                             class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-o1bub9"
                             tabindex="0" type="button">
                         <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false"
@@ -170,6 +162,7 @@
                                 clearStars()
                                 toast.error(`${data.message}`)
                             }
+                            $("#exampleModal").modal('hide');
                         },
                         error: function (data) {
                             toast.error(data.responseJSON.message ?? data.message);
@@ -204,6 +197,7 @@
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify({
                             react: 1,
+                            rating: rating,
                             post_id: '{{ $post->post_id }}'
                         }),
                         headers: {

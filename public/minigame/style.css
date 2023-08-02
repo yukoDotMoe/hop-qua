@@ -3450,3 +3450,13 @@ slick-track {
     max-height: 600px;
     object-fit: contain;
 }
+
+.modal-open{
+    padding-right: unset !important;
+    overflow: unset !important;
+}
+
+.show
+{
+    padding-right: unset !important;
+}
