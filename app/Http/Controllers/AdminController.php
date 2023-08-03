@@ -124,8 +124,18 @@ class AdminController extends Controller
 
     public function usersView()
     {
-        $users = User::paginate(10);
+        $users = User::paginate(5);
         return view('admin.auth.users.list', ['users' => $users]);
+    }
+
+    public function liveSearch(Request $request)
+    {
+        $searchTerm = $request->input('searchTerm');
+        $users = User::where('username', 'like', '%' . $searchTerm . '%')
+            ->orWhere('promo_code', 'like', '%' . $searchTerm . '%')
+            ->orWhere('phone', 'like', '%' . $searchTerm . '%')
+            ->get();
+        return view('admin.auth.users.liveSearch', compact('users'));
     }
 
     public function findUser($id)

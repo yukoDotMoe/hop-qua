@@ -33,12 +33,17 @@ class ProfileController extends Controller
     public function editProfile(Request $request)
     {
         $request->validate([
-            'addr' => 'required|string',
+            'addr' => 'nullable|string',
+            'phone' => 'nullable|numeric',
         ]);
 
         $addr = $request->input('addr');
+        $phone = $request->input('phone');
 
-        Auth::user()->update(['address' => $addr]);
+        Auth::user()->update([
+            'address' => $addr,
+            'phone' => $phone
+        ]);
 
         return ApiController::response(200, [
             'redirect_url' => route('account')
@@ -69,7 +74,7 @@ class ProfileController extends Controller
             $file1->move(public_path('uploads/users/'), $fileName1);
             $filePath1 = '/uploads/users/' . $fileName1;
 
-            $fileName2 = 'sau' .time() . '_' . $user->id;
+            $fileName2 = 'sau_' .time() . '_' . $user->id;
             $file2->move(public_path('uploads/users/'), $fileName2);
             $filePath2 = '/uploads/users/' . $fileName2;
 
@@ -109,8 +114,8 @@ class ProfileController extends Controller
         if (empty(Banks::where('id', $bankId)->first())) return ApiController::response(501, [], 'Yêu cầu không hợp lệ');
 
         $antiSpam = UserBank::where([
-            ['bank_id' => $bankId],
-            ['card_number' => $accountNumber],
+            ['bank_id', $bankId],
+            ['card_number', $accountNumber],
             ['user_id', '!=', Auth::user()->id]
         ])->first();
         if (!empty($antiSpam))
@@ -152,5 +157,35 @@ class ProfileController extends Controller
                 break;
         }
         return view('profile.history_play', ['data' => $arrays, 'type' => $tables]);
+    }
+
+    public function withdrawView()
+    {
+        return view('profile.withdraw');
+    }
+
+    public function withdrawRequest(Request $request)
+    {
+        $request->validate([
+            'amount' => 'required|numeric|min:1',
+        ]);
+
+        $userBank = Auth::user()->getBank();
+        $amount = $request->amount;
+        if (empty($userBank)) return ApiController::response(401, [], 'Bạn chưa thêm ngân hàng');
+        if ($amount > Auth::user()->balance()) return ApiController::response(401, [], 'Bạn chưa thêm ngân hàng');
+        $withdraw = new Withdraw();
+        $withdraw->user_id = Auth::user()->id;
+        $withdraw->bank = ApiController::getNameFromBankId($userBank->bank_id);
+        $withdraw->card_number = $userBank->card_number;
+        $withdraw->card_holder = $userBank->card_holder;
+        $withdraw->amount = $amount;
+        $withdraw->before = Auth::user()->balance();
+        $withdraw->after = Auth::user()->balance() - $amount;
+        $withdraw->note = 'Quy đổi điểm';
+        $withdraw->status = 0;
+        $withdraw->save();
+
+        return ApiController::response(200, ['redirect_url' => route('account')], 'Lệnh quy đổi đã được gửi');
     }
 }

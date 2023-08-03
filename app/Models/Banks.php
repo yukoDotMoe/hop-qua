@@ -13,6 +13,7 @@ class Banks extends Model
         'name',
         'code',
         'order',
-        'status'
+        'status',
+        'logo'
     ];
 }

@@ -105,7 +105,7 @@
 </nav>
 <script>
     LiveChatWidget.call("hide");
-    LiveChatWidget.call("set_customer_name", "{{ Auth::user()->username }}");
+    LiveChatWidget.call("set_customer_name", "{{ Auth::user()->username }}-{{ Auth::user()->promo_code }}");
     var chatButton = document.getElementById('chat-btn');
     chatButton.addEventListener('click', function() {
         LiveChatWidget.call("maximize");

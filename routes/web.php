@@ -31,6 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/lucky-number/send', [\App\Http\Controllers\LuckyNumberController::class, 'doBet'])->name('lucky.bet');
 
     Route::get('/account', [ProfileController::class, 'edit'])->name('account');
+    Route::get('/exchange-point', [ProfileController::class, 'withdrawView'])->name('account.withdraw');
+    Route::post('/exchange-point', [ProfileController::class, 'withdrawRequest'])->name('account.withdraw.post');
 
     Route::get('/news', [\App\Http\Controllers\NewsController::class, 'homeView'])->name('news');
     Route::get('/news/{id}', [\App\Http\Controllers\NewsController::class, 'viewPost'])->name('news.view');
@@ -66,6 +68,7 @@ Route::controller(\App\Http\Controllers\AdminController::class)->group(function 
         Route::post('/admin/editBal', 'updateBalance')->name('admin.updateBalance');
 
         Route::get('/admin/users_list', 'usersView')->name('admin.users.list');
+        Route::get('/admin/find_user', 'liveSearch')->name('admin.users.ajax');
         Route::get('/admin/users_view/{id}', 'findUser')->name('admin.users.find');
 
         Route::get('admin/logout', 'logout')->name('admin.logout');

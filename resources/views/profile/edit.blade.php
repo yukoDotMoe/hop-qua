@@ -25,6 +25,17 @@
 {{--                </div>--}}
 {{--            </div>--}}
 {{--        </div>--}}
+        <div class="MuiFormControl-root MuiFormControl-fullWidth css-tzsjye mb-4"><label>Số điện thoại</label>
+            <div class="MuiFormControl-root MuiTextField-root css-6manqy">
+                <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorWarning MuiInputBase-formControl css-ntyc4g">
+                    <input aria-invalid="false" id=":ra:" name="phone" type="number"
+                           class="MuiInputBase-input MuiOutlinedInput-input css-1x5jdmq" value="{{ Auth::user()->phone ?? '' }}">
+                    <fieldset aria-hidden="true" class="MuiOutlinedInput-notchedOutline css-igs3ac">
+                        <legend class="css-ihdtdm"><span class="notranslate">&ZeroWidthSpace;</span></legend>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
         <div class="MuiFormControl-root MuiFormControl-fullWidth css-tzsjye"><label>Địa chỉ</label>
             <div class="MuiFormControl-root MuiTextField-root css-6manqy">
                 <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorWarning MuiInputBase-formControl css-ntyc4g">

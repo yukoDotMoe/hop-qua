@@ -2,9 +2,9 @@
     @section('header')
         <div class="-container sm:h-[180px] h-[140px] flex items-center justify-between pl-4 pr-6"
              style="background: url(&quot;{{asset('minigame/img/Cover.Account.bac6a38ebab2f92af570.png')}}&quot;) left top / cover no-repeat;">
-            <div class="text-base2" class="w-[200px] text-center sm:text-2xl text-xl font-bold whitespace-pre-line z-10">
+            <div class="justify-content-center text-base2 w-[200px] text-center sm:text-2xl text-xl font-bold whitespace-pre-line z-10">
                 <div style="text-shadow: rgb(255, 255, 136) 1px 0px 10px; color: rgba(255, 255, 255, 0.8);">
-                    <div class=" font-medium">ID của bạn</div><div><strong>{{ Auth::user()->username }}</strong></div>
+                    <div class=" font-medium">ID của bạn</div><div><strong>{{ Auth::user()->id }}</strong></div>
                 </div>
             </div>
         </div>
@@ -36,13 +36,14 @@
                 </svg>
                 <span>Nạp điểm</span><span class="MuiTouchRipple-root css-w0pj6f"></span></li>
             <li class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters w-full flex justify-center gap-2 css-17z60tr"
-                tabindex="-1" role="menuitem" data-toggle="modal"
-                data-target="#exampleModal">
-                <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false" aria-hidden="true"
-                     viewBox="0 0 24 24" data-testid="RemoveIcon">
-                    <path d="M19 13H5v-2h14v2z"></path>
-                </svg>
-                <span>Quy đổi</span><span class="MuiTouchRipple-root css-w0pj6f"></span></li>
+                tabindex="-1" role="menuitem">
+                <a href="{{ route('account.withdraw') }}">
+                    <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false" aria-hidden="true"
+                         viewBox="0 0 24 24" data-testid="RemoveIcon">
+                        <path d="M19 13H5v-2h14v2z"></path>
+                    </svg>
+                    <span>Quy đổi</span><span class="MuiTouchRipple-root css-w0pj6f"></span>
+                </a> </li>
         </div>
 
         <ul class="MuiList-root MuiList-padding flex flex-col space-y-2 mb-3 css-1ontqvh" role="menu" tabindex="-1">

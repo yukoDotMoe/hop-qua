@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banks;
 use App\Models\LuckyNumber;
 use App\Models\Settings;
 use App\Models\User;
@@ -66,5 +67,10 @@ class ApiController extends Controller
     public static function getSessionFromGameId(string $gameid)
     {
         return LuckyNumber::where('game_id', $gameid)->first();
+    }
+
+    public static function getNameFromBankId(string $bank)
+    {
+        return Banks::where('id', $bank)->first()->name;
     }
 }

@@ -18,7 +18,7 @@
 <wc-toast position="top-center"> </wc-toast>
 <div class="content-wrapper MuiContainer-root MuiContainer-maxWidthXs relative css-hltdia align-content-center" style="background: linear-gradient(to right, #17132c, #252144) center center / cover no-repeat; height: 108vh; display: flex; justify-content: center; align-items: center;">
     <div class="auth-screen md:pb-[24px] pb-[12px]">
-        <div class="flex justify-center items-center pt-[24px] mb-3"><img src="{{ asset('logo.png') }}"></div>
+        <div class="flex justify-center items-center pt-[24px] mb-4"><img src="{{ asset('logo.png') }}" style="    height: 4rem;"></div>
 
         {{ $slot }}
     </div>
