@@ -29,10 +29,13 @@
     @else
         <div class="slick -container">
             <div class="sm:h-[180px] h-[140px]"
-                 style="background: url('{{ asset('/headers/1.jpeg') }}') center top / contain no-repeat;">
+                 style="background: url('{{ asset('/headers/1.jpg') }}') center top / contain no-repeat;">
+            </div>
+            <div class="sm:h-[180px] h-[140px]"
+                 style="background: url('{{ asset('/headers/2.jpeg') }}') center top / contain no-repeat;">
             </div>
             <div class=" sm:h-[180px] h-[140px]"
-                 style="background: url('{{ asset('/headers/2.jpeg') }}') center top / contain no-repeat;">
+                 style="background: url('{{ asset('/headers/3.jpeg') }}') center top / contain no-repeat;">
             </div>
         </div>
         <div class="container-fluid moving-ann mt-3 p-0 justify-content-center  d-flex align-items-center">
