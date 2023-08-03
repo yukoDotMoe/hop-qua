@@ -12,6 +12,7 @@
                         <thead>
                         <tr>
                             <th scope="col">Phiên</th>
+                            <th scope="col">Kết quả phiên</th>
                             <th scope="col">Thời gian</th>
                             <th scope="col">Đánh giá</th>
                             <th scope="col">Số điểm</th>
@@ -21,7 +22,9 @@
                         <tbody>
                             @foreach($games as $game)
                                 <tr>
-                                    <td>{{ $game->id }}</td>
+                                    @php($sessionGame = \App\Http\Controllers\ApiController::getSessionFromGameId($game->game_id))
+                                    <td>{{ $sessionGame->id }}</td>
+                                    <td>{{ $sessionGame->gia_tri }}</td>
                                     <td>{{ \Carbon\Carbon::createFromFormat('YmdHis', $game->game_id)->format('Y-m-d H:i:s') }}</td>
                                     <td>@switch($game->thao_tac)
                                             @case(1)
@@ -107,6 +110,30 @@
             </div>
         </div>
 
+        <div class="card mt-2">
+            <div class="card-body">
+                <h5 class="card-title">XÁC THỰC TÀI KHOẢN</h5>
+                <div class="row gx-3">
+                    <div class="col-6">
+                        <div class="card">
+                            <img src="@if(empty($user->mat_truoc)) {{ asset('/noimage.png') }} @else {{ asset($user->mat_truoc) }} @endif" class="card-img-top" alt="...">
+                            <div class="card-body text-center">
+                                <p class="card-text">Mặt trước CMT</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card">
+                            <img src="@if(empty($user->mat_sau)) {{ asset('/noimage.png') }} @else {{ asset($user->mat_sau) }} @endif" class="card-img-top" alt="...">
+                            <div class="card-body text-center">
+                                <p class="card-text">Mặt sau CMT</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
     <div class="col-md-5 col-12">
         <div class="card mt-2">
@@ -159,29 +186,7 @@
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">XÁC THỰC TÀI KHOẢN</h5>
-                <div class="row gx-3">
-                    <div class="col-6">
-                        <div class="card">
-                            <img src="@if(empty($user->mat_truoc)) {{ asset('/noimage.png') }} @else {{ asset($user->mat_truoc) }} @endif" class="card-img-top" alt="...">
-                            <div class="card-body text-center">
-                                <p class="card-text">Mặt trước CMT</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="card">
-                            <img src="@if(empty($user->mat_sau)) {{ asset('/noimage.png') }} @else {{ asset($user->mat_sau) }} @endif" class="card-img-top" alt="...">
-                            <div class="card-body text-center">
-                                <p class="card-text">Mặt sau CMT</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
 

@@ -62,4 +62,9 @@ class ApiController extends Controller
         preg_match_all('/\d+/', $str, $matches);
         return implode('', $matches[0]);
     }
+
+    public static function getSessionFromGameId(string $gameid)
+    {
+        return LuckyNumber::where('game_id', $gameid)->first();
+    }
 }
