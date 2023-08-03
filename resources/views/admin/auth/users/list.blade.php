@@ -20,8 +20,8 @@
                 <td>
                     <div class="btn-group" role="group">
                         <a href="{{ route('admin.users.find', $user->id) }}" type="button" class="btn btn-outline-primary"><i class="fa-solid fa-magnifying-glass-arrow-right"></i></a>
-                        <a type="button" class="btn btn-outline-primary"><i class="fa-solid fa-key"></i></a>
-                        <a type="button" class="btn btn-outline-primary"><i class="fa-solid fa-user-pen"></i></a>
+{{--                        <a type="button" class="btn btn-outline-primary"><i class="fa-solid fa-key"></i></a>--}}
+{{--                        <a type="button" class="btn btn-outline-primary"><i class="fa-solid fa-user-pen"></i></a>--}}
                     </div>
                 </td>
             </tr>

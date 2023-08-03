@@ -60,29 +60,29 @@
                     <button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-disableElevation MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-disableElevation right-[0px] bottom-[0px] p-0 z-10 cursor-pointer hover:brightness-110 bg-transparent css-1n02ex7"
                             tabindex="0" type="button" data-toggle="modal"
                             data-target="#exampleModal" data-type="like"><img
-                                src="{{ asset('/minigame/img/Square.Red.db623f6ff5c842986208.png') }}"><span
-                                class="MuiTouchRipple-root css-w0pj6f"></span></button>
+                            src="{{ asset('/minigame/img/Square.Red.db623f6ff5c842986208.png') }}"><span
+                            class="MuiTouchRipple-root css-w0pj6f"></span></button>
                 </div>
                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 relative flex justify-start px-0.5 py-[2px] css-1s50f5r">
                     <button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-disableElevation MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-disableElevation left-[0px] bottom-[0px] p-0 z-10 cursor-pointer hover:brightness-110 bg-transparent css-1n02ex7"
                             tabindex="0" type="button" data-toggle="modal"
                             data-target="#exampleModal" data-type="vote"><img
-                                src="{{ asset('/minigame/img/Square.Green.4fb895cd423137759a2d.png') }}"><span
-                                class="MuiTouchRipple-root css-w0pj6f"></span></button>
+                            src="{{ asset('/minigame/img/Square.Green.4fb895cd423137759a2d.png') }}"><span
+                            class="MuiTouchRipple-root css-w0pj6f"></span></button>
                 </div>
                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 relative flex justify-end px-0.5 py-[2px] css-1s50f5r">
                     <button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-disableElevation MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-disableElevation right-[0px] top-[0px] p-0 z-10 cursor-pointer hover:brightness-110 bg-transparent css-1n02ex7"
                             tabindex="0" type="button" data-toggle="modal"
                             data-target="#exampleModal" data-type="5sao"><img
-                                src="{{ asset('/minigame/img/Square.Blue.2a704b07d5d229ec430a.png') }}"><span
-                                class="MuiTouchRipple-root css-w0pj6f"></span></button>
+                            src="{{ asset('/minigame/img/Square.Blue.2a704b07d5d229ec430a.png') }}"><span
+                            class="MuiTouchRipple-root css-w0pj6f"></span></button>
                 </div>
                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 relative flex justify-start px-0.5 py-[2px] css-1s50f5r">
                     <button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-disableElevation MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-disableElevation left-[0px] top-[0px] p-0 z-10 cursor-pointer hover:brightness-110 bg-transparent css-1n02ex7"
                             tabindex="0" type="button" data-toggle="modal"
                             data-target="#exampleModal" data-type="3sao"><img
-                                src="{{ asset('/minigame/img/Square.Purple.873252a3cd71c85f6584.png') }}"><span
-                                class="MuiTouchRipple-root css-w0pj6f"></span></button>
+                            src="{{ asset('/minigame/img/Square.Purple.873252a3cd71c85f6584.png') }}"><span
+                            class="MuiTouchRipple-root css-w0pj6f"></span></button>
                 </div>
             </div>
         </div>
@@ -92,9 +92,9 @@
 
     <div class="MuiContainer-root MuiContainer-maxWidthXs fixed inset-0 top-[unset] bottom-[68px] px-3 z-20 rounded-lg css-hltdia">
         <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 flex items-center justify-between bg-secondary-main border text-white border-none p-2 css-aoeo82">
-            <span>ID: <span class="text-lg">{{ Auth::user()->id }}</span></span>
+            <span>ID: <span class="text-lg">{{ Auth::user()->username }}</span></span>
             <div class="flex items-center"><span class="font-bold max-line-1"><span
-                            id="balanceSpan">{{ Auth::user()->balanceFormated() }}</span></span>
+                        id="balanceSpan">{{ Auth::user()->balanceFormated() }}</span></span>
                 <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium text-white css-1yxmbwk"
                         tabindex="0" type="button">
                     <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false"
@@ -112,11 +112,11 @@
             <div class="modal-content css-mbdu2s">
                 <div class="modal-body MuiDialog-paperFullScreen css-1hyl1h2">
                     <div class="absolute inset-0 top-[72px]"><img
-                                src="{{ asset('minigame/img/Frame.Tax.5918f4394b94358de880.png') }}" class="h-full">
+                            src="{{ asset('minigame/img/Frame.Tax.5918f4394b94358de880.png') }}" class="h-full">
                     </div>
                     <div class="fixed top-[30%] left-[50%] translate-x-[-50%] opacity-30"><img
-                                src="{{ asset('minigame/img/Frame.Star.51850350651321e35085.png') }}"
-                                class="rounded-full w-[180px]"></div>
+                            src="{{ asset('minigame/img/Frame.Star.51850350651321e35085.png') }}"
+                            class="rounded-full w-[180px]"></div>
                     <button data-dismiss="modal"
                             class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-o1bub9"
                             tabindex="0" type="button">
@@ -142,9 +142,9 @@
                             vị trí, ví dụ: Ô số cuối cùng hiển thị số 0-2-4-6-8 là 5 Sao, Ô số cuối cùng hiển thị số
                             1-3-5-7-9 là 3 Sao.
                         </p>
-                        <p class="text-justify mb-3">FATION MALL nghiêm cấm các hành vi gian lận có hành vi đặt số
+                        <p class="text-justify mb-3">COEX MALL nghiêm cấm các hành vi gian lận có hành vi đặt số
                             điểm cùng một lúc 2 ô sẽ được tính là vi phạm, và phải hoàn thành x5 tổng số điểm được
-                            tính trên mỗi lượt đặt điểm sẽ hoàn thành vòng cược. FATION MALL có quyền thu hồi tất cả
+                            tính trên mỗi lượt đặt điểm sẽ hoàn thành vòng cược. COEX MALL có quyền thu hồi tất cả
                             số điểm và tiền thưởng từ mã số ID của Quý khách khi có hành vi gian dối đặt điểm và sử
                             dụng phần mềm hỗ trợ.
                         </p>
@@ -152,25 +152,25 @@
                             được nhân viên kịp thời hỗ trợ tư vấn.
                         </p>
                         <p class="font-bold mb-3">Thuế:</p>
-                        <p class="text-justify mb-3">Để đảm bảo được FATION MALL hoạt động lâu dài, gắn bó cùng Quý
+                        <p class="text-justify mb-3">Để đảm bảo được COEX MALL hoạt động lâu dài, gắn bó cùng Quý
                             khách hàng cũng như đóng thuế cho Bộ Công Thương, đồng hành cùng các đơn vị tài trợ, khi
                             Quý khách được nhận hộp quà huyền bí từ hệ thống vui lòng thực hiện nghĩa vụ đóng thuế
                             như sau:
                         </p>
                         <p class="text-justify mb-3">- Đối với Quý khách hàng rút hạn mức từ <span
-                                    class="text-navbar">199.000 điểm tương ứng 199.000.000 VNĐ</span> vui lòng đóng
+                                class="text-navbar">199.000 điểm tương ứng 199.000.000 VNĐ</span> vui lòng đóng
                             mức thuế 15% / tổng số điểm Quý khách rút ra.
                         </p>
                         <p class="text-justify mb-3">- Đối với Quý khách hàng rút hạn mức từ <span
-                                    class="text-navbar">200.000 điểm - 399.000 điểm</span> vui lòng đóng mức thuế
+                                class="text-navbar">200.000 điểm - 399.000 điểm</span> vui lòng đóng mức thuế
                             20% / tổng số điểm Quý khách rút ra.
                         </p>
                         <p class="text-justify mb-3">- Đối với Quý khách hàng rút hạn mức trên <span
-                                    class="text-navbar">400.000 điểm tương ứng 400.000.000 VNĐ</span> vui lòng đóng
+                                class="text-navbar">400.000 điểm tương ứng 400.000.000 VNĐ</span> vui lòng đóng
                             mức thuế 30% / tổng số điểm Quý khách rút ra.
                         </p>
                         <p class="text-justify mb-3">- Đối với Quý khách hàng rút hạn mức trên <span
-                                    class="text-navbar">1.199.000 điểm tương ứng 1.199.000.000 VNĐ</span> cần đóng
+                                class="text-navbar">1.199.000 điểm tương ứng 1.199.000.000 VNĐ</span> cần đóng
                             thuế TNCN 7 - 10% / tổng số điểm Quý khách rút ra.
                         </p>
                         <p class="text-justify mb-3">Sau khi Quý khách hoàn thành nghĩa vụ đóng thuế cho Doanh
@@ -202,8 +202,8 @@
                         <div class="flex justify-center items-center space-x-2">
                             <button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-disableElevation MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-disableElevation hover:bg-black/5 css-4lk0i2"
                                     tabindex="0" type="button" data-type="minus"><img
-                                        src="{{ asset('/minigame/img/Icon.Minus.58bcf4aafc66e99fd86700eab74c4eb0.svg') }}"
-                                        class="scale-125"><span class="MuiTouchRipple-root css-w0pj6f"></span></button>
+                                    src="{{ asset('/minigame/img/Icon.Minus.58bcf4aafc66e99fd86700eab74c4eb0.svg') }}"
+                                    class="scale-125"><span class="MuiTouchRipple-root css-w0pj6f"></span></button>
                             <div class="MuiFormControl-root MuiTextField-root css-16zb4wv">
                                 <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-vb3fd7">
                                     <input aria-invalid="false" name="amount"
@@ -217,15 +217,15 @@
                             </div>
                             <button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-disableElevation MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-disableElevation hover:bg-black/5 css-4lk0i2"
                                     tabindex="0" type="button" data-type="plus"><img
-                                        src="{{ asset('/minigame/img/Icon.Add.9549a677521310efc807ccf43e191ac2.svg') }}"
-                                        class="scale-125"><span class="MuiTouchRipple-root css-w0pj6f"></span></button>
+                                    src="{{ asset('/minigame/img/Icon.Add.9549a677521310efc807ccf43e191ac2.svg') }}"
+                                    class="scale-125"><span class="MuiTouchRipple-root css-w0pj6f"></span></button>
                         </div>
                         <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1.2 mt-2 css-1ohpmkg">
                             @foreach(json_decode(\App\Http\Controllers\ApiController::getSetting('bet_limit'), true) as $step)
                                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4 css-1udb513">
                                     <button class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedInfo MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-disableElevation MuiButton-fullWidth MuiButton-root MuiButton-outlined MuiButton-outlinedInfo MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-disableElevation MuiButton-fullWidth h-[40px] rounded-[8px] text-[20px] css-bonpy3"
                                             tabindex="0" type="button" data-amount="{{ $step }}">{{ $step }}<span
-                                                class="MuiTouchRipple-root css-w0pj6f"></span></button>
+                                            class="MuiTouchRipple-root css-w0pj6f"></span></button>
                                 </div>
                             @endforeach
 
@@ -236,7 +236,7 @@
                 <div class="MuiDialogActions-root MuiDialogActions-spacing justify-center css-14b29qc ">
                     <button class="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-disableElevation MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-disableElevation w-[80%] css-1n8uu98"
                             tabindex="0" type="button" id=":rg:">Chốt<span
-                                class="MuiTouchRipple-root css-w0pj6f"></span></button>
+                            class="MuiTouchRipple-root css-w0pj6f"></span></button>
                 </div>
 
             </div>

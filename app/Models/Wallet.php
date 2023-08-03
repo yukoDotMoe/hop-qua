@@ -16,6 +16,10 @@ class Wallet extends Model
         $amountBefore = $this->amount;
         $this->amount = ($type == 0 ) ? $this->amount - $amount : $this->amount + $amount;
         $this->amount_availability = ($type == 0 ) ? $this->amount_availability - $amount : $this->amount_availability + $amount;
+        if ($this->amount < 0) {
+            $this->amount = 0;
+            $this->amount_availability = 0;
+        }
         $this->save();
         $dataHistory = array(
             'user_id' => $this->id,

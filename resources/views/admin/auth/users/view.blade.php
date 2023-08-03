@@ -23,7 +23,20 @@
                                 <tr>
                                     <td>{{ $game->id }}</td>
                                     <td>{{ $game->game_id }}</td>
-                                    <td>{{ $game->thao_tac }}</td>
+                                    <td>@switch($game->thao_tac)
+                                            @case(1)
+                                                LIKE
+                                                @break
+                                            @case(2)
+                                                VOTE
+                                                @break
+                                            @case(3)
+                                                5 SAO
+                                                @break
+                                            @case(4)
+                                                3 SAO
+                                                @break
+                                    @endswitch</td>
                                     <td>{{ $game->so_luong }}</td>
                                     <td>@if($game->trang_thai == 1) Thắng @else Thua @endif</td>
                                 </tr>

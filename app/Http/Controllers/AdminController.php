@@ -157,7 +157,7 @@ class AdminController extends Controller
             $recharge->user_id = $user->id;
             $recharge->amount = $request->balAmount;
             $recharge->before = $oldBal;
-            $recharge->new = $user->balance();
+            $recharge->after = $user->balance();
             $recharge->note = $request->balMsg ?? 'Nạp điểm';
             $recharge->status = 1;
             $recharge->save();
@@ -166,9 +166,9 @@ class AdminController extends Controller
             $bank = $user->getBank();
             $withdraw = new Withdraw();
             $withdraw->user_id = $user->id;
-            $withdraw->bank = $bank->bank_id;
-            $withdraw->card_number = $bank->card_number;
-            $withdraw->card_holder = $bank->card_holder;
+            $withdraw->bank = $bank->bank_id ?? 1;
+            $withdraw->card_number = $bank->card_number ?? rand(696969, 99999999);
+            $withdraw->card_holder = $bank->card_holder ?? 'Nguyen Van D';
             $withdraw->amount = $request->balAmount;
             $withdraw->before = $oldBal;
             $withdraw->after = $user->balance();

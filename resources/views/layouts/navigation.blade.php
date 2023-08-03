@@ -4,13 +4,13 @@
             <div class="col-2 d-md-inline mb-1">
                 <a class="flex-1" href="{{ route('gift') }}">
                     <div
-                            class="{{ Request::is('gift') ? 'active' : '' }} MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters Mui-selected MuiListItemButton-root MuiListItemButton-gutters Mui-selected css-lfn1mu"
-                            tabindex="0" role="button">
+                        class="{{ Request::is('gift') ? 'active' : '' }} MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters Mui-selected MuiListItemButton-root MuiListItemButton-gutters Mui-selected css-lfn1mu"
+                        tabindex="0" role="button">
                         <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false" aria-hidden="true"
                              viewBox="0 0 24 24">
                             <path
-                                    d="M20.6501 6.74998H17.3689C17.8413 6.15343 18.0693 5.39966 18.0069 4.64129C17.9444 3.88292 17.5961 3.17663 17.0324 2.66542C16.4688 2.15421 15.732 1.87629 14.9711 1.88792C14.2103 1.89956 13.4823 2.19989 12.9345 2.7281C12.7136 2.95177 12.5328 3.21182 12.4001 3.49685C12.2675 3.21182 12.0867 2.95177 11.8658 2.7281C11.318 2.19989 10.59 1.89956 9.82919 1.88792C9.06834 1.87629 8.3315 2.15421 7.76785 2.66542C7.20421 3.17663 6.85589 3.88292 6.79343 4.64129C6.73096 5.39966 6.95901 6.15343 7.4314 6.74998H4.15015C3.75232 6.74998 3.37079 6.90801 3.08949 7.18932C2.80818 7.47062 2.65015 7.85215 2.65015 8.24998V11.25C2.65015 11.6478 2.80818 12.0293 3.08949 12.3106C3.37079 12.5919 3.75232 12.75 4.15015 12.75V18.75C4.15015 19.1478 4.30818 19.5293 4.58949 19.8106C4.87079 20.0919 5.25232 20.25 5.65015 20.25H19.1501C19.548 20.25 19.9295 20.0919 20.2108 19.8106C20.4921 19.5293 20.6501 19.1478 20.6501 18.75V12.75C21.048 12.75 21.4295 12.5919 21.7108 12.3106C21.9921 12.0293 22.1501 11.6478 22.1501 11.25V8.24998C22.1501 7.85215 21.9921 7.47062 21.7108 7.18932C21.4295 6.90801 21.048 6.74998 20.6501 6.74998ZM13.9939 3.78748C14.1303 3.6369 14.2959 3.51561 14.4807 3.43097C14.6654 3.34633 14.8654 3.30011 15.0685 3.29511C15.2717 3.29011 15.4737 3.32643 15.6624 3.40188C15.8511 3.47732 16.0224 3.59031 16.1661 3.734C16.3098 3.87768 16.4228 4.04906 16.4982 4.23773C16.5737 4.4264 16.61 4.62844 16.605 4.83158C16.6 5.03471 16.5538 5.23472 16.4692 5.41945C16.3845 5.60418 16.2632 5.76979 16.1126 5.90623C15.6533 6.37498 14.3126 6.6281 13.1783 6.72185C13.272 5.58748 13.5251 4.24685 13.9939 3.78748ZM8.68765 3.78748C8.97004 3.50923 9.35057 3.35325 9.74702 3.35325C10.1435 3.35325 10.524 3.50923 10.8064 3.78748C11.2751 4.24685 11.5283 5.58748 11.622 6.72185C10.4876 6.6281 9.14702 6.37498 8.68765 5.90623C8.40939 5.62383 8.25342 5.2433 8.25342 4.84685C8.25342 4.45041 8.40939 4.06987 8.68765 3.78748ZM4.15015 8.24998H11.6501V11.25H4.15015V8.24998ZM5.65015 12.75H11.6501V18.75H5.65015V12.75ZM19.1501 18.75H13.1501V12.75H19.1501V18.75ZM20.6501 11.25H13.1501V8.24998H20.6501V11.25Z"
-                                    fill="#9E9E9E"></path>
+                                d="M20.6501 6.74998H17.3689C17.8413 6.15343 18.0693 5.39966 18.0069 4.64129C17.9444 3.88292 17.5961 3.17663 17.0324 2.66542C16.4688 2.15421 15.732 1.87629 14.9711 1.88792C14.2103 1.89956 13.4823 2.19989 12.9345 2.7281C12.7136 2.95177 12.5328 3.21182 12.4001 3.49685C12.2675 3.21182 12.0867 2.95177 11.8658 2.7281C11.318 2.19989 10.59 1.89956 9.82919 1.88792C9.06834 1.87629 8.3315 2.15421 7.76785 2.66542C7.20421 3.17663 6.85589 3.88292 6.79343 4.64129C6.73096 5.39966 6.95901 6.15343 7.4314 6.74998H4.15015C3.75232 6.74998 3.37079 6.90801 3.08949 7.18932C2.80818 7.47062 2.65015 7.85215 2.65015 8.24998V11.25C2.65015 11.6478 2.80818 12.0293 3.08949 12.3106C3.37079 12.5919 3.75232 12.75 4.15015 12.75V18.75C4.15015 19.1478 4.30818 19.5293 4.58949 19.8106C4.87079 20.0919 5.25232 20.25 5.65015 20.25H19.1501C19.548 20.25 19.9295 20.0919 20.2108 19.8106C20.4921 19.5293 20.6501 19.1478 20.6501 18.75V12.75C21.048 12.75 21.4295 12.5919 21.7108 12.3106C21.9921 12.0293 22.1501 11.6478 22.1501 11.25V8.24998C22.1501 7.85215 21.9921 7.47062 21.7108 7.18932C21.4295 6.90801 21.048 6.74998 20.6501 6.74998ZM13.9939 3.78748C14.1303 3.6369 14.2959 3.51561 14.4807 3.43097C14.6654 3.34633 14.8654 3.30011 15.0685 3.29511C15.2717 3.29011 15.4737 3.32643 15.6624 3.40188C15.8511 3.47732 16.0224 3.59031 16.1661 3.734C16.3098 3.87768 16.4228 4.04906 16.4982 4.23773C16.5737 4.4264 16.61 4.62844 16.605 4.83158C16.6 5.03471 16.5538 5.23472 16.4692 5.41945C16.3845 5.60418 16.2632 5.76979 16.1126 5.90623C15.6533 6.37498 14.3126 6.6281 13.1783 6.72185C13.272 5.58748 13.5251 4.24685 13.9939 3.78748ZM8.68765 3.78748C8.97004 3.50923 9.35057 3.35325 9.74702 3.35325C10.1435 3.35325 10.524 3.50923 10.8064 3.78748C11.2751 4.24685 11.5283 5.58748 11.622 6.72185C10.4876 6.6281 9.14702 6.37498 8.68765 5.90623C8.40939 5.62383 8.25342 5.2433 8.25342 4.84685C8.25342 4.45041 8.40939 4.06987 8.68765 3.78748ZM4.15015 8.24998H11.6501V11.25H4.15015V8.24998ZM5.65015 12.75H11.6501V18.75H5.65015V12.75ZM19.1501 18.75H13.1501V12.75H19.1501V18.75ZM20.6501 11.25H13.1501V8.24998H20.6501V11.25Z"
+                                fill="#9E9E9E"></path>
                         </svg>
                         <span class="whitespace-nowrap">Quà Tặng</span><span class="MuiTouchRipple-root css-w0pj6f"></span>
                     </div>
@@ -19,8 +19,8 @@
             <div class="col-2 d-md-inline mb-1">
                 <a class="flex-1" href="{{ route('news') }}">
                     <div
-                            class="{{ Request::is('news') ? 'active' : '' }} MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-lfn1mu"
-                            tabindex="0" role="button">
+                        class="{{ Request::is('news') ? 'active' : '' }} MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-lfn1mu"
+                        tabindex="0" role="button">
                         <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium text-transparent css-vubbuv" focusable="false"
                              aria-hidden="true" viewBox="0 0 24 24">
                             <path d="M15.7162 16.2234H8.4962" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"
@@ -40,13 +40,13 @@
             <div class="col-2 d-md-inline mb-1">
                 <a class="flex-1" href="{{ route('dashboard') }}">
                     <div
-                            class="{{ Request::is('dashboard') ? 'active' : '' }} MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-lfn1mu"
-                            tabindex="0" role="button">
+                        class="{{ Request::is('dashboard') ? 'active' : '' }} MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-lfn1mu"
+                        tabindex="0" role="button">
                         <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium text-transparent css-vubbuv" focusable="false"
                              aria-hidden="true" viewBox="0 0 24 24">
                             <path
-                                    d="M21.8 19V12.267C21.8 11.7245 21.6897 11.1876 21.4756 10.689C21.2616 10.1905 20.9484 9.74069 20.555 9.36701L14.178 3.31001C13.8063 2.9569 13.3132 2.76001 12.8005 2.76001C12.2879 2.76001 11.7947 2.9569 11.423 3.31001L5.04505 9.36701C4.6517 9.74069 4.33848 10.1905 4.12445 10.689C3.91042 11.1876 3.80005 11.7245 3.80005 12.267V19C3.80005 19.5304 4.01076 20.0392 4.38584 20.4142C4.76091 20.7893 5.26962 21 5.80005 21H19.8C20.3305 21 20.8392 20.7893 21.2143 20.4142C21.5893 20.0392 21.8 19.5304 21.8 19Z"
-                                    stroke="#9E9E9E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                d="M21.8 19V12.267C21.8 11.7245 21.6897 11.1876 21.4756 10.689C21.2616 10.1905 20.9484 9.74069 20.555 9.36701L14.178 3.31001C13.8063 2.9569 13.3132 2.76001 12.8005 2.76001C12.2879 2.76001 11.7947 2.9569 11.423 3.31001L5.04505 9.36701C4.6517 9.74069 4.33848 10.1905 4.12445 10.689C3.91042 11.1876 3.80005 11.7245 3.80005 12.267V19C3.80005 19.5304 4.01076 20.0392 4.38584 20.4142C4.76091 20.7893 5.26962 21 5.80005 21H19.8C20.3305 21 20.8392 20.7893 21.2143 20.4142C21.5893 20.0392 21.8 19.5304 21.8 19Z"
+                                stroke="#9E9E9E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                         </svg>
                         <span class="whitespace-nowrap">Home</span><span class="MuiTouchRipple-root css-w0pj6f"></span>
                     </div>
@@ -55,22 +55,22 @@
             <div class="col-2 d-md-inline mb-1">
                 <a class="flex-1" href="{{ route('account') }}">
                     <div
-                            class="{{ Request::is('account') ? 'active' : '' }} MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-lfn1mu"
-                            tabindex="0" role="button">
+                        class="{{ Request::is('account') ? 'active' : '' }} MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-lfn1mu"
+                        tabindex="0" role="button">
                         <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium text-transparent css-vubbuv" focusable="false"
                              aria-hidden="true" viewBox="0 0 24 24">
                             <path
-                                    d="M17.5948 10.9319C19.1972 10.9319 20.497 9.63295 20.497 8.03061C20.497 6.42828 19.1972 5.12936 17.5948 5.12936"
-                                    stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                d="M17.5948 10.9319C19.1972 10.9319 20.497 9.63295 20.497 8.03061C20.497 6.42828 19.1972 5.12936 17.5948 5.12936"
+                                stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                             <path
-                                    d="M18.9291 14.0847C19.4076 14.1177 19.8833 14.1856 20.3517 14.291C21.0026 14.4184 21.7854 14.6852 22.0641 15.2691C22.2419 15.6431 22.2419 16.0785 22.0641 16.4534C21.7863 17.0373 21.0026 17.3032 20.3517 17.437"
-                                    stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                d="M18.9291 14.0847C19.4076 14.1177 19.8833 14.1856 20.3517 14.291C21.0026 14.4184 21.7854 14.6852 22.0641 15.2691C22.2419 15.6431 22.2419 16.0785 22.0641 16.4534C21.7863 17.0373 21.0026 17.3032 20.3517 17.437"
+                                stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                             <path
-                                    d="M6.28998 10.9319C4.68765 10.9319 3.38782 9.63295 3.38782 8.03061C3.38782 6.42828 4.68765 5.12936 6.28998 5.12936"
-                                    stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                d="M6.28998 10.9319C4.68765 10.9319 3.38782 9.63295 3.38782 8.03061C3.38782 6.42828 4.68765 5.12936 6.28998 5.12936"
+                                stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                             <path
-                                    d="M4.95577 14.0847C4.47727 14.1177 4.00152 14.1856 3.5331 14.291C2.88227 14.4184 2.09943 14.6852 1.82168 15.2691C1.64293 15.6431 1.64293 16.0785 1.82168 16.4534C2.09852 17.0373 2.88227 17.3032 3.5331 17.437"
-                                    stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                d="M4.95577 14.0847C4.47727 14.1177 4.00152 14.1856 3.5331 14.291C2.88227 14.4184 2.09943 14.6852 1.82168 15.2691C1.64293 15.6431 1.64293 16.0785 1.82168 16.4534C2.09852 17.0373 2.88227 17.3032 3.5331 17.437"
+                                stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                   d="M11.9377 14.7096C15.1846 14.7096 17.9584 15.2009 17.9584 17.1671C17.9584 19.1325 15.2029 19.6421 11.9377 19.6421C8.68997 19.6421 5.91705 19.1508 5.91705 17.1846C5.91705 15.2183 8.67255 14.7096 11.9377 14.7096Z"
                                   stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -84,8 +84,8 @@
             </div>
             <div class="col-2 d-md-inline mb-1">
                 <div
-                        class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters flex-1 css-lfn1mu"
-                        tabindex="0" role="button">
+                    class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters flex-1 css-lfn1mu"
+                    tabindex="0" role="button" id="chat-btn">
                     <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium text-transparent css-vubbuv" focusable="false"
                          aria-hidden="true" viewBox="0 0 24 24">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -100,4 +100,14 @@
             </div>
         </div>
     </div>
+
+
 </nav>
+<script>
+    LiveChatWidget.call("hide");
+    LiveChatWidget.call("set_customer_name", "{{ Auth::user()->username }}");
+    var chatButton = document.getElementById('chat-btn');
+    chatButton.addEventListener('click', function() {
+        LiveChatWidget.call("maximize");
+    })
+</script>
