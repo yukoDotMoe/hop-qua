@@ -305,24 +305,43 @@
                     wsReady = false;
                 }
             });
-            let formattedDuration;
+
+            let _next_id = 0;
+            let time_hold_s = 0;
 
             function handleGame(data) {
-                const format = 'YYYYMMDDHHmmss';
-                const next = moment(data.next_game_id, format);
-                const currentTime = moment(data.current, format);
-                const duration = moment.duration(next.diff(currentTime));
-                const minutes = duration.minutes();
-                const seconds = (duration.seconds() < 0) ? 0 : duration.seconds();
+
+                time_hold_s = data.time_hold_s;
+
+
+
+                if(_next_id != data.next_id){
+
+                    _next_id =  data.next_id;
+                    $('#nextId').html(data.next_id)
+                    $('#game_id').val(data.next_game_id)
+                    const numbersArr = (data.old_value).split('-')
+                    $('#firstDigit').html(numbersArr[0])
+                    $('#secondDigit').html(numbersArr[1])
+                    $('#thirdDigit').html(numbersArr[2])
+                }
+            }
+
+
+            let t = 0 ;
+            // To call defined fuction every second
+            setInterval(function () {
+
+                if (t < 0) {
+                    t = time_hold_s;
+                }
+                let minutes = (t - (t % 60))/60;
+                let seconds = t%60;
                 const formattedDuration = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
                 $('#timer').html(formattedDuration)
-                $('#nextId').html(data.next_id)
-                $('#game_id').val(data.next_game_id)
-                const numbersArr = (data.old_value).split('-')
-                $('#firstDigit').html(numbersArr[0])
-                $('#secondDigit').html(numbersArr[1])
-                $('#thirdDigit').html(numbersArr[2])
-            }
+                t--;
+
+            }, 1000);
 
             $('.css-1n02ex7').click(function () {
                 const type = $(this).attr('data-type')

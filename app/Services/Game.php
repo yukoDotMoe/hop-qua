@@ -140,13 +140,13 @@ class Game implements MessageComponentInterface
 
             $nextGame = LuckyNumber::where('id', $oldGame->id + 1)->first();
 
-            $current_time = Carbon::now()->format('YmdHis');
+            $time_hold_s = Carbon::now()->DiffInSeconds( Carbon::createFromFormat('YmdHis',  $nextGame->game_id));
 
             return [
-                'old_game_id' => $oldGame->game_id,
+                //'old_game_id' => $oldGame->game_id,
                 'next_game_id' => $nextGame->game_id,
                 'next_id' => $oldGame->id + 1,
-                'current' => $current_time,
+                'time_hold_s' => $time_hold_s,
                 'old_value' => $oldGame->gia_tri
             ];
         });

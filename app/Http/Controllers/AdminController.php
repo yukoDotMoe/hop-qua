@@ -131,9 +131,9 @@ class AdminController extends Controller
     public function findUser($id)
     {
         $user = User::where('id', $id)->first();
-        $trans = UserBet::where('user_id', $user->id)->paginate(5);
-        $recharge = Recharge::where('user_id', $user->id)->paginate(5);
-        $withdraw = Withdraw::where('user_id', $user->id)->paginate(5);
+        $trans = UserBet::where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(5);
+        $recharge = Recharge::where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(5);
+        $withdraw = Withdraw::where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(5);
         return view('admin.auth.users.view', ['user' => $user, 'games' => $trans, 'recharge' => $recharge, 'withdraw' => $withdraw]);
     }
 

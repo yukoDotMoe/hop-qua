@@ -13,7 +13,7 @@
                         <tr>
                             <th scope="col">Phiên</th>
                             <th scope="col">Kết quả phiên</th>
-                            <th scope="col">Thời gian</th>
+                            <th scope="col">Thời gian phiên</th>
                             <th scope="col">Đánh giá</th>
                             <th scope="col">Số điểm</th>
                             <th scope="col">Trạng thái</th>
@@ -41,7 +41,17 @@
                                                 @break
                                     @endswitch</td>
                                     <td>{{ $game->so_luong }}</td>
-                                    <td>@if($game->trang_thai == 1) Thắng @else Thua @endif</td>
+                                    <td>@switch($game->trang_thai)
+                                            @case(0)
+                                                *Chờ*
+                                                @break
+                                            @case(1)
+                                                Thắng
+                                                @break
+                                            @case(2)
+                                                Thua
+                                                @break
+                                        @endswitch</td>
                                 </tr>
                             @endforeach
                         </tbody>
