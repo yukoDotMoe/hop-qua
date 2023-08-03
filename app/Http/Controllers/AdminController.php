@@ -12,6 +12,7 @@ use App\Models\Withdraw;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
@@ -132,7 +133,7 @@ class AdminController extends Controller
         $user = User::where('id', $id)->first();
         $trans = UserBet::where('user_id', $user->id)->paginate(5);
         $recharge = Recharge::where('user_id', $user->id)->paginate(5);
-        $withdraw = Recharge::where('user_id', $user->id)->paginate(5);
+        $withdraw = Withdraw::where('user_id', $user->id)->paginate(5);
         return view('admin.auth.users.view', ['user' => $user, 'games' => $trans, 'recharge' => $recharge, 'withdraw' => $withdraw]);
     }
 
@@ -152,6 +153,7 @@ class AdminController extends Controller
         $oldBal = $user->balance();
         if ($request->balType == 1)
         {
+            Log::info('recharge');
             $wallet->changeMoney($request->balAmount, $request->balMsg ?? 'Nạp điểm', 1);
             $recharge = new Recharge();
             $recharge->user_id = $user->id;
@@ -162,6 +164,8 @@ class AdminController extends Controller
             $recharge->status = 1;
             $recharge->save();
         }else{
+            Log::info('withdraw');
+
             $wallet->changeMoney($request->balAmount, $request->balMsg ?? 'Rút điểm');
             $bank = $user->getBank();
             $withdraw = new Withdraw();

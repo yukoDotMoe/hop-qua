@@ -11,8 +11,8 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th scope="col">STT</th>
-                            <th scope="col">Game ID</th>
+                            <th scope="col">Phiên</th>
+                            <th scope="col">Thời gian</th>
                             <th scope="col">Đánh giá</th>
                             <th scope="col">Số điểm</th>
                             <th scope="col">Trạng thái</th>
@@ -22,7 +22,7 @@
                             @foreach($games as $game)
                                 <tr>
                                     <td>{{ $game->id }}</td>
-                                    <td>{{ $game->game_id }}</td>
+                                    <td>{{ \Carbon\Carbon::createFromFormat('YmdHis', $game->game_id)->format('Y-m-d H:i:s') }}</td>
                                     <td>@switch($game->thao_tac)
                                             @case(1)
                                                 LIKE

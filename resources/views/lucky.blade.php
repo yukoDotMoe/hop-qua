@@ -310,7 +310,7 @@
             function handleGame(data) {
                 const format = 'YYYYMMDDHHmmss';
                 const next = moment(data.next_game_id, format);
-                const currentTime = moment();
+                const currentTime = moment(data.current, format);
                 const duration = moment.duration(next.diff(currentTime));
                 const minutes = duration.minutes();
                 const seconds = (duration.seconds() < 0) ? 0 : duration.seconds();
