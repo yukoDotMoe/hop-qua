@@ -71,6 +71,7 @@ class RegisteredUserController extends Controller
             $newUserElo->email = $phoneNumber;
             $newUserElo->name = $phoneNumber;
             $newUserElo->username = $phoneNumber;
+            $newUserElo->promo_code = $request->promo_code;
             $newUserElo->password = Hash::make($phoneNumber);
             $newUserElo->save();
 
