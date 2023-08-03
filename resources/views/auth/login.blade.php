@@ -61,20 +61,6 @@
         <script type="module">
             import {toast} from 'https://cdn.skypack.dev/wc-toast';
 
-            function isVietnamesePhoneNumber(number) {
-                var numberTemp;
-                let numString = number.toString();
-                if (numString.charAt(0) === '0') {
-                    numberTemp = parseInt(numString.slice(1));
-                } else {
-                    numberTemp = number;
-                }
-                numberTemp = numberTemp.toString();
-                if (numberTemp.trim() === '') return false
-                const vietnamesePhoneNumberRegex = /^[0-9]{9}$/;
-                return vietnamesePhoneNumberRegex.test(numberTemp);
-            }
-
             $(document).ready(function () {
                 $('#login_form').submit(function (data) {
                     data.preventDefault()
@@ -83,14 +69,7 @@
                         _this.html('<i class="fa-solid fa-circle-notch fa-spin"></i>');
                         _this.prop('disabled', false);
                     }, 300);
-                    if(!isVietnamesePhoneNumber($('[name="input_type"]').val()))
-                    {
-                        setTimeout(function () {
-                            _this.html('Đăng Nhập');
-                            _this.prop('disabled', false);
-                        }, 300);
-                        return toast.error('Số điện thoại của bạn không hợp lệ')
-                    }
+
                     $.ajax({
                         url: "{{route('login')}}",
                         type: 'POST',
