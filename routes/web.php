@@ -59,17 +59,23 @@ Route::controller(\App\Http\Controllers\AdminController::class)->group(function 
 
     Route::middleware(['auth:admin'])->group(function () {
         Route::get('/admin/dashboard', 'dashboard')->name('admin.dashboard');
+
         Route::get('/admin/settings', 'settingsView')->name('admin.settings');
-        Route::post('/admin/settings', 'saveSettings')->name('admin.settings.post');
+        Route::post('/admin/settings', 'saveSettings')->name('admin.settings.post
+        ');
         Route::get('/admin/lucky_game', 'luckyGameView')->name('admin.lucky_game');
         Route::post('/admin/lucky_game', 'luckyUpdate')->name('admin.lucky_game.post');
+
         Route::get('/admin/bai_viet', 'postview')->name('admin.bai_viet');
         Route::post('/admin/bai_viet', 'createPost')->name('admin.bai_viet.post');
-        Route::post('/admin/editBal', 'updateBalance')->name('admin.updateBalance');
 
+        Route::post('/admin/editBal', 'updateBalance')->name('admin.updateBalance');
         Route::get('/admin/users_list', 'usersView')->name('admin.users.list');
         Route::get('/admin/find_user', 'liveSearch')->name('admin.users.ajax');
         Route::get('/admin/users_view/{id}', 'findUser')->name('admin.users.find');
+
+        Route::get('/admin/banks', 'bankView')->name('admin.bank');
+        Route::post('/admin/banks', 'bankRequest')->name('admin.bank.post');
 
         Route::get('admin/logout', 'logout')->name('admin.logout');
     });

@@ -93,7 +93,7 @@
                             </svg>
                         </div>
                         <?php $ref = request()->input('ref', ''); ?>
-                        <input aria-invalid="false" id=":r6:" name="promote_code" placeholder="Mã giới thiệu"
+                        <input aria-invalid="false" id=":r6:" name="promo_code" placeholder="Mã giới thiệu"
                                type="text"
                                class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart css-1ixds2g"
                                value="{{$ref}}">

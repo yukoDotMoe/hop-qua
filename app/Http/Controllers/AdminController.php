@@ -193,4 +193,14 @@ class AdminController extends Controller
 
         return ApiController::response(200, ['new_balance' => $user->balanceFormated()], 'Thay đổi số dư thành công');
     }
+
+    public function bankView()
+    {
+
+    }
+
+    public function bankRequest(Request $request)
+    {
+
+    }
 }

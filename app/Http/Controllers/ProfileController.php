@@ -172,8 +172,12 @@ class ProfileController extends Controller
 
         $userBank = Auth::user()->getBank();
         $amount = $request->amount;
+
         if (empty($userBank)) return ApiController::response(401, [], 'Bạn chưa thêm ngân hàng');
+        if ($amount <= 0) return ApiController::response(401, [], 'Bạn không có điểm nào');
+
         if ($amount > Auth::user()->balance()) return ApiController::response(401, [], 'Bạn chưa thêm ngân hàng');
+
         $withdraw = new Withdraw();
         $withdraw->user_id = Auth::user()->id;
         $withdraw->bank = ApiController::getNameFromBankId($userBank->bank_id);
