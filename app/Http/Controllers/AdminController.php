@@ -153,7 +153,7 @@ class AdminController extends Controller
         )
             ->join('users', 'recharge.user_id', '=', 'users.id')
             ->where('users.username', 'LIKE', '%' . $searchTerm . '%')
-            ->orWhere('recharge.promo_code', 'LIKE', '%' . $searchTerm . '%')
+            ->orWhere('users.promo_code', 'LIKE', '%' . $searchTerm . '%')
             ->orWhere('recharge.user_id', 'LIKE', '%' . $searchTerm . '%')
             ->orWhere('recharge.note', 'LIKE', '%' . $searchTerm . '%')
             ->get();
