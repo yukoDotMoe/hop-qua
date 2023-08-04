@@ -73,7 +73,6 @@
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script>
     $(document).ready(function(){
-
         $('.slick').slick({
             slidesToShow: 1,
             slidesToScroll: 1,

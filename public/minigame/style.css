@@ -1812,7 +1812,7 @@ a {
     flex-direction: column !important;
 }
 
-.css-1n8uu98 {
+.css-1n8uu98, .css-1n8uu97 {
     display: inline-flex;
     -webkit-box-align: center;
     align-items: center;
@@ -1843,6 +1843,8 @@ a {
     min-width: 40px;
     transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
+
+
 
 .w-\[80\%\] {
     width: 80% !important;

@@ -17,14 +17,6 @@
         </div>
 
         <div class="mb-3">
-            <label for="typeselect" class="form-label">Kiểu hiển thị</label>
-            <select class="form-select" name="modalType" id="typeselect" aria-label="Default select example">
-                <option value="1" selected>Kiểu 1</option>
-                <option value="2">Kiểu 2</option>
-            </select>
-        </div>
-
-        <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Giá trị</label>
             <input type="number" class="form-control" id="exampleFormControlInput1" name="amount" min="1" required>
         </div>

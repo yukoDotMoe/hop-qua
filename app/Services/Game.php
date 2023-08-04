@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Controllers\ApiController;
 use App\Models\LuckyNumber;
+use App\Models\Recharge;
 use App\Models\User;
 use App\Models\UserBet;
 use Illuminate\Support\Facades\Auth;
@@ -119,17 +120,46 @@ class Game implements MessageComponentInterface
             }
         }
 
-        switch ($msg)
-        {
-            case 'game_information':
-                $dataGameItemValue = $this->game_round();
-                $from->send($this->buildMessage('game_information', $dataGameItemValue));
-                break;
-            case 'balance':
-                $userShowAmount = $this->user_balance($from);
-                $from->send($this->buildMessage('user_info', $userShowAmount));
-                break;
+        $data = json_decode($msg, true);
+        if (!empty($data['action'])) {
+            switch ($data['action']) {
+                case 'game_information':
+                    $dataGameItemValue = $this->game_round();
+                    $from->send($this->buildMessage('game_information', $dataGameItemValue));
+                    break;
+                case 'balance':
+                    $userShowAmount = $this->user_balance($from);
+                    $from->send($this->buildMessage('user_info', $userShowAmount));
+                    break;
+                case 'promote':
+                    $thongBao = $this->checkPromote($from);
+                    $from->send($this->buildMessage('thong_bao', $thongBao));
+                    break;
+                case 'mark_seen':
+                    $this->handleSeen($data);
+                    break;
+            }
         }
+    }
+
+    protected function handleSeen($data)
+    {
+        Recharge::where('id', $data['rid'])->update(['show' => 1]);
+    }
+
+    protected function checkPromote($from)
+    {
+        $user = $this->userList[$from->resourceId]['user'];
+        if (!$user) return 0;
+        return Cache::remember('thongbao' . $user->id, 2, function () use ($user) {
+            $promote = Recharge::where([
+                ['bill', 0],
+                ['show', 0],
+                ['note', '!=', '.']
+            ])->orderBy('created_at', 'desc')->first();
+
+            return $promote;
+        });
     }
 
     protected function game_round()

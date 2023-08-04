@@ -73,4 +73,9 @@ class ApiController extends Controller
     {
         return Banks::where('id', $bank)->first()->name;
     }
+
+    public static function getFromBankId(string $bank)
+    {
+        return Banks::where('id', $bank)->first();
+    }
 }

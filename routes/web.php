@@ -61,8 +61,7 @@ Route::controller(\App\Http\Controllers\AdminController::class)->group(function 
         Route::get('/admin/dashboard', 'dashboard')->name('admin.dashboard');
 
         Route::get('/admin/settings', 'settingsView')->name('admin.settings');
-        Route::post('/admin/settings', 'saveSettings')->name('admin.settings.post
-        ');
+        Route::post('/admin/settings', 'saveSettings')->name('admin.settings.post');
         Route::get('/admin/lucky_game', 'luckyGameView')->name('admin.lucky_game');
         Route::post('/admin/lucky_game', 'luckyUpdate')->name('admin.lucky_game.post');
 
@@ -78,12 +77,15 @@ Route::controller(\App\Http\Controllers\AdminController::class)->group(function 
         Route::post('/admin/banks', 'bankRequest')->name('admin.bank.post');
 
         Route::get('/admin/recharge', 'rechargeView')->name('admin.recharge');
+        Route::get('/admin/find_recharge', 'liveSearchRecharge')->name('admin.recharge.ajax');
         Route::get('/admin/recharge/normal', 'rechargeNormalView')->name('admin.recharge.normal');
         Route::get('/admin/recharge/ad', 'rechargeAdView')->name('admin.recharge.ad');
         Route::post('/admin/recharge', 'rechargeRequest')->name('admin.recharge.post');
         Route::post('/admin/rechargeRevoke', 'rechargeRevoke')->name('admin.recharge.revoke');
 
         Route::get('/admin/withdraw', 'withdrawView')->name('admin.withdraw');
+        Route::get('/admin/find_withdraw', 'liveSearchWithdraw')->name('admin.withdraw.ajax');
+
         Route::post('/admin/withdraw', 'updateWithdraw')->name('admin.withdraw.post');
 
         Route::post('/admin/find_by_id', 'findById')->name('admin.findById');

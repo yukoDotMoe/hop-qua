@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use DB;
 
 class AdminController extends Controller
 {
@@ -138,6 +139,56 @@ class AdminController extends Controller
         return view('admin.auth.users.liveSearch', compact('users'));
     }
 
+    public function liveSearchRecharge(Request $request)
+    {
+        $searchTerm = $request->input('searchTerm');
+        $users = Recharge::select(
+            'recharge.user_id',
+            'users.username',
+            'users.promo_code',
+            'recharge.amount',
+            'recharge.bill',
+            'recharge.created_time',
+            'recharge.note'
+        )
+            ->join('users', 'recharge.user_id', '=', 'users.id')
+            ->where('users.username', 'LIKE', '%' . $searchTerm . '%')
+            ->orWhere('recharge.promo_code', 'LIKE', '%' . $searchTerm . '%')
+            ->orWhere('recharge.user_id', 'LIKE', '%' . $searchTerm . '%')
+            ->orWhere('recharge.note', 'LIKE', '%' . $searchTerm . '%')
+            ->get();
+        return view('admin.auth.liveRecharge', compact('users'));
+    }
+    public function liveSearchWithdraw(Request $request)
+    {
+        $searchTerm = $request->input('searchTerm');
+        $withdraws = Withdraw::select(
+            'withdraw.user_id',
+            'users.username',
+            'users.promo_code',
+            'withdraw.amount',
+            'withdraw.created_at',
+            'withdraw.note',
+            'withdraw.status',
+            'withdraw.card_number',
+            'withdraw.card_holder',
+            'user_bank.bank_id'
+        )
+            ->join('users', 'withdraw.user_id', '=', 'users.id')
+            ->leftJoin('user_bank', 'withdraw.user_id', '=', 'user_bank.user_id')
+            ->where('users.username', 'LIKE', '%' . $searchTerm . '%')
+            ->orWhere('users.promo_code', 'LIKE', '%' . $searchTerm . '%')
+            ->orWhere('withdraw.note', 'LIKE', '%' . $searchTerm . '%')
+            ->orWhere('withdraw.amount', 'LIKE', '%' . $searchTerm . '%')
+            ->orWhere('withdraw.card_number', 'LIKE', '%' . $searchTerm . '%')
+            ->orWhere('withdraw.card_holder', 'LIKE', '%' . $searchTerm . '%')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('admin.auth.liveWithdraw', compact('withdraws'));
+    }
+
+
+
     public function findUser($id)
     {
         $user = User::where('id', $id)->first();
@@ -206,7 +257,18 @@ class AdminController extends Controller
 
     public function rechargeView()
     {
-        $recharges = Recharge::orderBy('created_at', 'desc')->paginate(10);
+        $recharges = Recharge::select(
+            'recharge.user_id',
+            'users.username',
+            'users.promo_code',
+            'recharge.amount',
+            'recharge.bill',
+            'recharge.created_at',
+            'recharge.note',
+            'recharge.status',
+        )
+            ->join('users', 'recharge.user_id', '=', 'users.id')
+            ->orderBy('created_at', 'desc')->paginate(10);
         return view('admin.auth.recharge', ['recharges' => $recharges]);
     }
 
@@ -222,7 +284,7 @@ class AdminController extends Controller
 
     public function rechargeRequest(Request $request)
     {
-        $user = User::where('id', $request->user_id)->first();
+        $user = User::where('id', $request->user_id ?? $request->user_id1)->first();
         $wallet = $user->getWallet();
         $beforeBal = $user->balance();
         if ($request->type == 'normal')
@@ -240,22 +302,17 @@ class AdminController extends Controller
 
             return ApiController::response(200, ['redirect_url' => route('admin.recharge')], 'Nạp thành công');
         } else {
-            $wallet->changeMoney($request->amount, $request->reason ?? '.', 1);
+            $wallet->changeMoney($request->amount1, $request->reason ?? '.', 1);
             $recharge = new Recharge();
             $recharge->user_id = $user->id;
             $recharge->bill = false;
-            $recharge->amount = $request->amount;
+            $recharge->show = false;
+            $recharge->amount = $request->amount1;
             $recharge->before = $beforeBal;
-            $recharge->after = $beforeBal - $request->amount;
-            $recharge->note = $request->reason ?? '.';
+            $recharge->after = $beforeBal - $request->amount1;
+            $recharge->note = $request->reason1 ?? '.';
             $recharge->status = 1;
             $recharge->save();
-
-            DB::table('thong_bao')->insert([
-                'user_id' => $user->id,
-                'content' => $request->reason,
-                'type' => $request->modalType
-            ]);
 
             return ApiController::response(200, ['redirect_url' => route('admin.recharge')], 'Tạo thông báo nạp thành công');
         }
@@ -276,12 +333,27 @@ class AdminController extends Controller
     {
         $user = User::where('id', $request->input('idUser'))->first();
         if (empty($user)) return response('không tìm thấy người dùng');
-        return response()->json($user->toArray());
+        return response()->json(['user' => $user->toArray(), 'balance' => $user->balanceFormated()]);
     }
 
     public function withdrawView()
     {
-        $withdraw = Withdraw::orderBy('created_at', 'desc')->paginate(10);
+//        $withdraw = Withdraw::orderBy('created_at', 'desc')->paginate(10);
+        $withdraw = Withdraw::select(
+            'withdraw.user_id',
+            'users.username',
+            'users.promo_code',
+            'withdraw.amount',
+            'withdraw.created_at',
+            'withdraw.note',
+            'withdraw.status',
+            'withdraw.card_number',
+            'withdraw.card_holder',
+            'user_bank.bank_id'
+        )
+            ->join('users', 'withdraw.user_id', '=', 'users.id')
+            ->leftJoin('user_bank', 'withdraw.user_id', '=', 'user_bank.user_id')
+            ->orderBy('created_at', 'desc')->get();
         return view('admin.auth.withdraw', ['withdraws' => $withdraw]);
     }
 

@@ -248,6 +248,58 @@
     <input id="amount" value="" hidden>
     <input id="game_id" value="" hidden>
     <input type="hidden" id="auth_token" value="{{App\Services\Game::getTokenUserKey()}}">
+    <style>
+        .modal-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('{{ asset('minigame/img/chucmung.png') }}'); /* Replace 'path/to/your/image.jpg' with your image file path */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    </style>
+    <div class="modal fade" id="thongbaokhuyenmai" tabindex="-1" aria-labelledby="thongbaokhuyenmai" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-background"></div>
+
+            <div class="modal-content css-mbdu2s">
+                <div class="modal-body">
+                    <button data-dismiss="modal"
+                            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-o1bub9"
+                            tabindex="0" type="button">
+                        <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false"
+                             style="fill: white !important;"
+                             aria-hidden="true" viewBox="0 0 24 24" data-testid="CloseIcon">
+                            <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                        </svg>
+                        <span class="MuiTouchRipple-root css-w0pj6f"></span>
+                    </button>
+                    <h2 class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-3cs75a" id=":rf:">Thông báo</h2>
+
+                    <div class="MuiDialogContent-root css-1ty026z">
+                        <div class="MuiCardMedia-root h-[160px] bg-contain my-6 css-pqdqbj" role="img"
+                             style="background-image: url('{{ asset('/minigame/img/Image.Gift.43c8ffee00f9394c61bf.png') }}');">
+                            <div></div>
+                        </div>
+                        <div class="text-center" id="thongbaokhuyenmai_content"></div>
+                    </div>
+
+                    <div class="MuiDialogActions-root MuiDialogActions-spacing flex-col justify-center css-14b29qc">
+                        <button id="open_gift"
+                                class="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-disableElevation MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-disableElevation w-[80%] css-1n8uu97"
+                                data-dismiss="modal">Đồng ý<span
+                                class="MuiTouchRipple-root css-w0pj6f"></span></button>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     {{--    <div role="tooltip" id=":r4:"--}}
     {{--         class="MuiTooltip-popper MuiTooltip-popperInteractive MuiTooltip-popperArrow css-1woa8fr MuiPopper-root"--}}
@@ -268,6 +320,7 @@
     {{--            L<span class="MuiTooltip-arrow css-1urvb1y"--}}
     {{--                   style="position: absolute; left: 0px; transform: translate(5px, 0px);"></span></div>--}}
     {{--    </div>--}}
+    <audio id="audioElement" src="{{ asset('minigame/img/chucmung.mp3') }}" autoplay></audio>
     @section('js')
         <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 
@@ -276,14 +329,16 @@
             import {toast} from 'https://cdn.skypack.dev/wc-toast';
 
             let wsReady = false;
+            let thongbao;
             let connectTion;
             window.addEventListener('DOMContentLoaded', function () {
                 connectTion = new WebSocket('{{ env('APP_DEBUG') ? 'ws' : 'wss' }}://' + window.location.hostname + '{{ env('APP_DEBUG') ? ':' . env('GAME_PORT') : ''}}/wsstrade/?auth_token=' + $('#auth_token').val());
                 connectTion.onopen = function (e) {
                     wsReady = true;
                     setInterval(function () {
-                        connectTion.send('game_information');
-                        connectTion.send('balance');
+                        // connectTion.send(JSON.stringify({action: 'game_information', message: ''}));
+                        connectTion.send(JSON.stringify({action: 'balance', message: ''}));
+                        connectTion.send(JSON.stringify({action: 'promote', message: ''}));
                     }, 1000);
                 };
                 connectTion.onmessage = function (e) {
@@ -291,6 +346,9 @@
                     switch (info.type) {
                         case 'game_information':
                             handleGame(info.data)
+                            break;
+                        case 'thong_bao':
+                            handlethongbao(info.data)
                             break;
                         case 'user_info':
                             $('#balanceSpan').html(info.data)
@@ -308,6 +366,52 @@
 
             let _next_id = 0;
             let time_hold_s = 0;
+
+            function canAutoplay(audioElement) {
+                return new Promise((resolve, reject) => {
+                    // Attempt to play the audio
+                    const playPromise = audioElement.play();
+
+                    if (playPromise !== undefined) {
+                        playPromise
+                            .then(() => {
+                                // Audio can be autoplayed
+                                resolve(true);
+                            })
+                            .catch((error) => {
+                                // Autoplay is not allowed
+                                reject(error);
+                            });
+                    } else {
+                        // Autoplay is not allowed
+                        reject(new Error('Autoplay not allowed.'));
+                    }
+                });
+            }
+
+            function handlethongbao(data)
+            {
+                if(thongbao == data.id) return false
+                thongbao = data.id
+                $('#thongbaokhuyenmai_content').html(data.note)
+                $('#open_gift').attr('data-id', data.id)
+                $('#thongbaokhuyenmai').modal('show')
+                const audioElement = document.getElementById('audioElement');
+
+                canAutoplay(audioElement)
+                    .then(() => {
+                        console.log('Sound autoplayed successfully.');
+                    })
+                    .catch((error) => {
+                        console.error('Autoplay not allowed:', error.message);
+                    });
+            }
+
+            $('#open_gift').click(function (e) {
+                e.preventDefault()
+                const ann_id = $(this).data('id')
+                connectTion.send(JSON.stringify({action: 'mark_seen', rid: ann_id}));
+            })
 
             function handleGame(data) {
 

@@ -9,6 +9,8 @@
         <thead>
         <tr>
             <th scope="col">ID User</th>
+            <th scope="col">Username</th>
+            <th scope="col">Đại lí</th>
             <th scope="col">Giá trị</th>
             <th scope="col">Trạng thái</th>
             <th scope="col">Ngân hàng</th>
@@ -23,6 +25,8 @@
         @foreach($withdraws as $wd)
             <tr>
                 <th>{{ $wd->user_id }}</th>
+                <th>{{ $wd->username }}</th>
+                <th>{{ $wd->promo_code }}</th>
                 <th>{{ $wd->amount }}</th>
                 <th>
                     @switch($wd->status)
@@ -39,7 +43,8 @@
                             @break
                     @endswitch
                 </th>
-                <th>{{ $wd->bank }}</th>
+                @php($bankinfo = \App\Http\Controllers\ApiController::getFromBankId($wd->bank_id))
+                <th>{{ $bankinfo->code }}</th>
                 <th>{{ $wd->card_number }}</th>
                 <th>{{ $wd->card_holder }}</th>
                 <th>{{ $wd->created_at->format('Y-m-d H:i:s') }}</th>
@@ -61,6 +66,24 @@
     <script type="module">
         import {toast} from 'https://cdn.skypack.dev/wc-toast'
         window.addEventListener('DOMContentLoaded', function () {
+            $('#searchInput').on('keyup', function() {
+                let searchTerm = $(this).val().toLowerCase();
+                if (searchTerm.length >= 2) {
+                    $.ajax({
+                        url: "{{ route('admin.withdraw.ajax') }}",
+                        method: 'GET',
+                        data: {
+                            searchTerm: searchTerm
+                        },
+                        success: function(data) {
+                            $('#myTable tbody').html(data);
+                        }
+                    });
+                } else {
+                    // If the search term is less than 2 characters, clear the table
+                    $('#myTable tbody').empty();
+                }
+            });
             $('.action').click(function (e) {
                 e.preventDefault()
                 const chargeId = $(this).data('id')

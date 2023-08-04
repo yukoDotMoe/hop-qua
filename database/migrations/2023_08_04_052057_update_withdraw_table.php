@@ -12,16 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('recharge', function (Blueprint $table) {
-            $table->boolean('bill');
-        });
-
-        Schema::create('thong_bao', function (Blueprint $table) {
-            $table->id();
-            $table->string('user_id');
-            $table->text('content');
-            $table->integer('type');
-            $table->boolean('read')->default(false);
-            $table->timestamps();
+            $table->boolean('bill')->nullable();
+            $table->boolean('show')->nullable();
         });
     }
 
@@ -32,8 +24,7 @@ return new class extends Migration
     {
         Schema::table('recharge', function (Blueprint $table) {
             $table->dropColumn('bill');
+            $table->dropColumn('read');
         });
-        Schema::dropIfExists('thong_bao');
-
     }
 };
