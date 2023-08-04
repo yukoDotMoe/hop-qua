@@ -259,6 +259,7 @@ class AdminController extends Controller
     public function rechargeView()
     {
         $recharges = Recharge::select(
+            'recharge.id',
             'recharge.user_id',
             'users.username',
             'users.promo_code',
@@ -341,6 +342,7 @@ class AdminController extends Controller
     {
 //        $withdraw = Withdraw::orderBy('created_at', 'desc')->paginate(10);
         $withdraw = Withdraw::select(
+            'withdraw.id',
             'withdraw.user_id',
             'users.username',
             'users.promo_code',
