@@ -142,13 +142,13 @@ class AdminController extends Controller
     public function liveSearchRecharge(Request $request)
     {
         $searchTerm = $request->input('searchTerm');
-        $users = Recharge::select(
+        $recharges = Recharge::select(
             'recharge.user_id',
             'users.username',
             'users.promo_code',
             'recharge.amount',
             'recharge.bill',
-            'recharge.created_time',
+            'recharge.created_at',
             'recharge.note'
         )
             ->join('users', 'recharge.user_id', '=', 'users.id')
@@ -157,7 +157,7 @@ class AdminController extends Controller
             ->orWhere('recharge.user_id', 'LIKE', '%' . $searchTerm . '%')
             ->orWhere('recharge.note', 'LIKE', '%' . $searchTerm . '%')
             ->get();
-        return view('admin.auth.liveRecharge', compact('users'));
+        return view('admin.auth.liveRecharge', compact('recharges'));
     }
     public function liveSearchWithdraw(Request $request)
     {
