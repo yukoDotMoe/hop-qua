@@ -1,6 +1,8 @@
 @foreach($recharges as $rc)
     <tr>
         <th>{{ $rc->user_id }}</th>
+        <th>{{ $rc->username }}</th>
+        <th>{{ $rc->promo_code ?? '-' }}</th>
         <th>{{ $rc->amount }}</th>
         <th>@switch($rc->status)
                 @case(0)
