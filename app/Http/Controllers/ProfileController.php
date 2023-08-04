@@ -178,7 +178,7 @@ class ProfileController extends Controller
 
         $withdraw = new Withdraw();
         $withdraw->user_id = Auth::user()->id;
-        $withdraw->bank = ApiController::getNameFromBankId($userBank->bank_id);
+        $withdraw->bank = $userBank->bank_id;
         $withdraw->card_number = $userBank->card_number;
         $withdraw->card_holder = $userBank->card_holder;
         $withdraw->amount = $amount;

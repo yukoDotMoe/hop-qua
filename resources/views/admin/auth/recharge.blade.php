@@ -157,17 +157,29 @@
         window.addEventListener('DOMContentLoaded', function () {
             function formatNumber(n, dp)
             {
-                var w = n.toFixed(dp), k = w|0, b = n < 0 ? 1 : 0,
-                    u = Math.abs(w-k), d = (''+u.toFixed(dp)).substr(2, dp),
-                    s = ''+k, i = s.length, r = '';
-                while ( (i-=3) > b ) { r = ',' + s.substr(i, 3) + r; }
-                return s.substr(0, i + 3) + r + (d ? '.'+d: '');
+                var w = n.toFixed(dp),
+                    k = w | 0,
+                    b = n < 0 ? 1 : 0,
+                    u = Math.abs(w - k),
+                    d = ('' + u.toFixed(dp)).substr(2, dp),
+                    s = '' + k,
+                    i = s.length,
+                    r = '';
+
+                while ((i -= 3) > b) {
+                    r = ',' + s.substr(i, 3) + r;
+                }
+
+                // Check if the decimal part is zero, if yes, don't include it
+                var decimalPart = d ? '.' + d : '';
+
+                return s.substr(0, i + 3) + r + decimalPart;
             }
             $('#genFake').click(function (e) {
                 e.preventDefault()
                 if($('#exampleFormControlInput11').val() == '') return false;
                 const amount = $('#exampleFormControlInput11').val()
-                var content = `★★★Chúc mừng quý khách nhận được phần quà may mắn ngẫu nhiên từ •{{ \App\Http\Controllers\ApiController::getSetting('page_title') }}• trị giá ${formatNumber(parseInt(amount) * 10000, 2)} VND. Quý khách vui lòng liên hệ CSKH để xác minh chủ sở hữu phần quà.`
+                var content = `★★★Chúc mừng quý khách nhận được phần quà may mắn ngẫu nhiên từ •{{ \App\Http\Controllers\ApiController::getSetting('page_title') }}• trị giá ${formatNumber(parseInt(amount) * 1000, 2)} VND. Quý khách vui lòng liên hệ CSKH để xác minh chủ sở hữu phần quà.`
                 console.log(content)
                 $('#exampleFormControlTextarea1').val(content)
             })
