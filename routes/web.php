@@ -77,6 +77,17 @@ Route::controller(\App\Http\Controllers\AdminController::class)->group(function 
         Route::get('/admin/banks', 'bankView')->name('admin.bank');
         Route::post('/admin/banks', 'bankRequest')->name('admin.bank.post');
 
+        Route::get('/admin/recharge', 'rechargeView')->name('admin.recharge');
+        Route::get('/admin/recharge/normal', 'rechargeNormalView')->name('admin.recharge.normal');
+        Route::get('/admin/recharge/ad', 'rechargeAdView')->name('admin.recharge.ad');
+        Route::post('/admin/recharge', 'rechargeRequest')->name('admin.recharge.post');
+        Route::post('/admin/rechargeRevoke', 'rechargeRevoke')->name('admin.recharge.revoke');
+
+        Route::get('/admin/withdraw', 'withdrawView')->name('admin.withdraw');
+        Route::post('/admin/withdraw', 'updateWithdraw')->name('admin.withdraw.post');
+
+        Route::post('/admin/find_by_id', 'findById')->name('admin.findById');
+
         Route::get('admin/logout', 'logout')->name('admin.logout');
     });
 });

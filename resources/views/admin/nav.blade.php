@@ -1,33 +1,23 @@
 <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
     <div class="sidebar-brand d-none d-md-flex">
-        <svg class="sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
-            <use xlink:href="assets/brand/coreui.svg#full"></use>
-        </svg>
-        <svg class="sidebar-brand-narrow" width="46" height="46" alt="CoreUI Logo">
-            <use xlink:href="assets/brand/coreui.svg#signet"></use>
-        </svg>
+        <img class="sidebar-brand-full" src="{{ asset('logo.png') }}" alt="" srcset="">
+        <i class="sidebar-brand-narrow"><i class="fa-solid fa-cart-arrow-down"></i></i>
     </div>
     <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
         <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}">
-                <svg class="nav-icon">
-                    <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
-                </svg> Dashboard</a></li>
+                <i class="nav-icon fa-solid fa-house-crack"></i> Dashboard</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('admin.settings') }}">
-                <svg class="nav-icon">
-                    <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-drop"></use>
-                </svg> Cài đặt</a></li>
+                <i class="nav-icon fa-solid fa-sliders"></i> Cài đặt</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('admin.lucky_game') }}">
-                <svg class="nav-icon">
-                    <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-drop"></use>
-                </svg> Game</a></li>
+                <i class="nav-icon fa-solid fa-gamepad"></i> Game</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('admin.bai_viet') }}">
-                <svg class="nav-icon">
-                    <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-drop"></use>
-                </svg> Thêm bài viết</a></li>
+                <i class="nav-icon fa-regular fa-newspaper"></i> Thêm bài viết</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('admin.users.list') }}">
-                <svg class="nav-icon">
-                    <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-drop"></use>
-                </svg> Danh sách người dùng</a></li>
+                <i class="nav-icon fa-solid fa-users"></i> Quản lý người dùng</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('admin.recharge') }}">
+                <i class="nav-icon fa-solid fa-cash-register"></i> Quản lý nạp tiền</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('admin.withdraw') }}">
+                <i class="nav-icon fa-solid fa-money-bill-wave"></i> Quản lý rút tiền</a></li>
 
     </ul>
     <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>

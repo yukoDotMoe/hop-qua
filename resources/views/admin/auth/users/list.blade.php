@@ -33,7 +33,7 @@
     @endforeach
     </tbody>
 </table>
-    {{ $users->links() }}
+{{ $users->links() }}
 @endsection
 
 @section('js')

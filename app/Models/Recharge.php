@@ -9,5 +9,5 @@ class Recharge extends Model
 {
     use HasFactory;
     protected $table = 'recharge';
-    protected $fillable = ['user_id', 'amount', 'before', 'after', 'note', 'status'];
+    protected $fillable = ['user_id', 'amount', 'before', 'after', 'note', 'status', 'bill'];
 }

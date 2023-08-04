@@ -92,7 +92,7 @@
 
     <div class="MuiContainer-root MuiContainer-maxWidthXs fixed inset-0 top-[unset] bottom-[68px] px-3 z-20 rounded-lg css-hltdia">
         <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 flex items-center justify-between bg-secondary-main border text-white border-none p-2 css-aoeo82">
-            <span>ID: <span class="text-lg">{{ Auth::user()->username }}</span></span>
+            <span>ID: <span class="text-lg">{{ Auth::user()->id }}</span></span>
             <div class="flex items-center"><span class="font-bold max-line-1"><span
                         id="balanceSpan">{{ Auth::user()->balanceFormated() }}</span></span>
                 <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium text-white css-1yxmbwk"

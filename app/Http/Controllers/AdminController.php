@@ -203,4 +203,102 @@ class AdminController extends Controller
     {
 
     }
+
+    public function rechargeView()
+    {
+        $recharges = Recharge::orderBy('created_at', 'desc')->paginate(10);
+        return view('admin.auth.recharge', ['recharges' => $recharges]);
+    }
+
+    public function rechargeNormalView()
+    {
+        return view('admin.auth.recharge.normal');
+    }
+
+    public function rechargeAdView()
+    {
+        return view('admin.auth.recharge.ad');
+    }
+
+    public function rechargeRequest(Request $request)
+    {
+        $user = User::where('id', $request->user_id)->first();
+        $wallet = $user->getWallet();
+        $beforeBal = $user->balance();
+        if ($request->type == 'normal')
+        {
+            $wallet->changeMoney($request->amount, $request->reason ?? '.', 1);
+            $recharge = new Recharge();
+            $recharge->user_id = $user->id;
+            $recharge->bill = false;
+            $recharge->amount = $request->amount;
+            $recharge->before = $beforeBal;
+            $recharge->after = $beforeBal - $request->amount;
+            $recharge->note = $request->reason ?? '.';
+            $recharge->status = 1;
+            $recharge->save();
+
+            return ApiController::response(200, ['redirect_url' => route('admin.recharge')], 'Nạp thành công');
+        } else {
+            $wallet->changeMoney($request->amount, $request->reason ?? '.', 1);
+            $recharge = new Recharge();
+            $recharge->user_id = $user->id;
+            $recharge->bill = true;
+            $recharge->amount = $request->amount;
+            $recharge->before = $beforeBal;
+            $recharge->after = $beforeBal - $request->amount;
+            $recharge->note = $request->reason ?? '.';
+            $recharge->status = 1;
+            $recharge->save();
+
+            DB::table('thong_bao')->insert([
+                'user_id' => $user->id,
+                'content' => $request->reason,
+                'type' => $request->modalType
+            ]);
+
+            return ApiController::response(200, ['redirect_url' => route('admin.recharge')], 'Tạo thông báo nạp thành công');
+        }
+    }
+
+    public function rechargeRevoke(Request $request)
+    {
+        $id = $request->input('chargeId');
+        $recharge = Recharge::where('id', $id)->first();
+        $user = User::where('id', $recharge->user_id)->first();
+        $wallet = $user->getWallet();
+        $recharge->update(['status' => 2]);
+        $wallet->changeMoney($recharge->amount, 'Thu hồi lệnh nạp tiền ' . $recharge->id);
+        return ApiController::response(200, [], 'Thu hồi thành công');
+    }
+
+    public function findById(Request $request)
+    {
+        $user = User::where('id', $request->input('idUser'))->first();
+        if (empty($user)) return response('không tìm thấy người dùng');
+        return response()->json($user->toArray());
+    }
+
+    public function withdrawView()
+    {
+        $withdraw = Withdraw::orderBy('created_at', 'desc')->paginate(10);
+        return view('admin.auth.withdraw', ['withdraws' => $withdraw]);
+    }
+
+    public function updateWithdraw(Request $request)
+    {
+        $withdraw = Withdraw::where('id', $request->input('wid'))->first();
+        if ($request->input('action') == '1')
+        {
+            // approve
+            $withdraw->update(['status' => 1]);
+        }else{
+            // denied
+            $withdraw->update(['status' => 2]);
+            $wallet = User::where('id', $withdraw->user_id)->first()->getWallet();
+            $wallet->changeMoney($withdraw->amount, 'Từ chối lệnh rút tiền ' . $withdraw->id, 1);
+        }
+
+        return ApiController::response(200, [], 'Cập nhật thành công');
+    }
 }

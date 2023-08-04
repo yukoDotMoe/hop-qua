@@ -174,9 +174,7 @@ class ProfileController extends Controller
         $amount = $request->amount;
 
         if (empty($userBank)) return ApiController::response(401, [], 'Bạn chưa thêm ngân hàng');
-        if ($amount <= 0) return ApiController::response(401, [], 'Bạn không có điểm nào');
-
-        if ($amount > Auth::user()->balance()) return ApiController::response(401, [], 'Bạn chưa thêm ngân hàng');
+        if ($amount > Auth::user()->balance()) return ApiController::response(401, [], 'Số dư không đủ');
 
         $withdraw = new Withdraw();
         $withdraw->user_id = Auth::user()->id;
@@ -186,9 +184,12 @@ class ProfileController extends Controller
         $withdraw->amount = $amount;
         $withdraw->before = Auth::user()->balance();
         $withdraw->after = Auth::user()->balance() - $amount;
-        $withdraw->note = 'Quy đổi điểm';
+        $withdraw->note = '.';
         $withdraw->status = 0;
         $withdraw->save();
+
+        $wallet = Auth::user()->getWallet();
+        $wallet->changeMoney($amount, '.');
 
         return ApiController::response(200, ['redirect_url' => route('account')], 'Lệnh quy đổi đã được gửi');
     }
