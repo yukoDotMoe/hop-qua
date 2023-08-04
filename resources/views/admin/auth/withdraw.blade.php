@@ -43,7 +43,7 @@
                             @break
                     @endswitch
                 </th>
-                @php($bankinfo = \App\Http\Controllers\ApiController::getFromBankId($wd->bank_id))
+                @php($bankinfo = \App\Http\Controllers\ApiController::getFromBankId($wd->bank_id ?? 1))
                 <th>{{ $bankinfo->code }}</th>
                 <th>{{ $wd->card_number }}</th>
                 <th>{{ $wd->card_holder }}</th>

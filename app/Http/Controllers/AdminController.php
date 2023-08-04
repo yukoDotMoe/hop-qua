@@ -220,6 +220,7 @@ class AdminController extends Controller
             $recharge->user_id = $user->id;
             $recharge->amount = $request->balAmount;
             $recharge->before = $oldBal;
+            $recharge->bill = true;
             $recharge->after = $user->balance();
             $recharge->note = $request->balMsg ?? 'Nạp điểm';
             $recharge->status = 1;
