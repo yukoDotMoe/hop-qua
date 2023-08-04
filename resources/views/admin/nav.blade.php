@@ -1,6 +1,6 @@
 <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
     <div class="sidebar-brand d-none d-md-flex">
-        <img class="sidebar-brand-full" src="{{ asset('logo.png') }}" alt="" srcset="">
+        <img class="sidebar-brand-full" src="{{ asset('logo.png') }}" style="    height: 2rem !important;" alt="" srcset="">
         <i class="sidebar-brand-narrow"><i class="fa-solid fa-cart-arrow-down"></i></i>
     </div>
     <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">

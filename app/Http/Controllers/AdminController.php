@@ -230,7 +230,7 @@ class AdminController extends Controller
             $wallet->changeMoney($request->amount, $request->reason ?? '.', 1);
             $recharge = new Recharge();
             $recharge->user_id = $user->id;
-            $recharge->bill = false;
+            $recharge->bill = true;
             $recharge->amount = $request->amount;
             $recharge->before = $beforeBal;
             $recharge->after = $beforeBal - $request->amount;
@@ -243,7 +243,7 @@ class AdminController extends Controller
             $wallet->changeMoney($request->amount, $request->reason ?? '.', 1);
             $recharge = new Recharge();
             $recharge->user_id = $user->id;
-            $recharge->bill = true;
+            $recharge->bill = false;
             $recharge->amount = $request->amount;
             $recharge->before = $beforeBal;
             $recharge->after = $beforeBal - $request->amount;
