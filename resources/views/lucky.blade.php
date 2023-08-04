@@ -336,7 +336,7 @@
                 connectTion.onopen = function (e) {
                     wsReady = true;
                     setInterval(function () {
-                        // connectTion.send(JSON.stringify({action: 'game_information', message: ''}));
+                        connectTion.send(JSON.stringify({action: 'game_information', message: ''}));
                         connectTion.send(JSON.stringify({action: 'balance', message: ''}));
                         connectTion.send(JSON.stringify({action: 'promote', message: ''}));
                     }, 1000);
